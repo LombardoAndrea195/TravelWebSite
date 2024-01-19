@@ -101,15 +101,20 @@ section .content a{
   color: #fff;
   width: 70px;
   margin-top: 50px;
+  display: none;
 }
-.home .content h1 {
+.home .content.active {
+ 
+  display: block;
+}
+.home .content h2 {
   font-size: 4em;
   font-weight: 900;
   text-transform: uppercase;
   line-height: 75px;
   letter-spacing: 5px;
 }
-.home .content h1 span{
+.home .content h2 span{
   font-weight: 600;
   font-size: 1.2em;
 }
@@ -173,17 +178,27 @@ section .content a{
   background: #fff;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow:  0 0 2px rgba(255,255,255,1);
+  box-shadow:  0 0 2px rgba(0,0,0,1);
   transition: 0.3s ease;
 }
 .slider-navigation .nav-btn.active{
-  background:#fff;
+  background:grey;
 }
 .slider-navigation .nav-btn:not(:last-child){
   margin-right: 20px;
 }
 .slider-navigation .nav-btn:hover{
   transform: scale(1.2);
+}
+.video-slide{
+  position: absolute;
+  width: 100px;
+  clip-path: circle(0.3% at 0 50%);
+}
+.video-slide.active{
+  clip-path: circle(150% at 0 50%);
+  transition: 2s ease;
+  transition-property: clip-path;
 }
 @media  (max-width: 1040px) {
   header {
