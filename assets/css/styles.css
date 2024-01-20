@@ -62,6 +62,10 @@ header .navigation .navigation-items a:hover:before {
   width: 100%;
   
 }
+.home h1{
+ padding-left: 0cm;
+ top: 20px;
+}
 section{
     padding: 100px 150px;
 
