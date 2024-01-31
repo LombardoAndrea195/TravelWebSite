@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="assets/css/styles_gallery.css">
+  <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="#" class="logo">Travel</a>
+    <div class="menu-btn"></div>
+    <div class="navigation">
+        <div class="navigation-items">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Explore</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    
+    </div>
+  </header>
+  <section class="container">
+
+  
+  <script>
+    // Un esempio di array
+    const myArray = [
+    { element: 'Element 1', src: 'assets/img/cile/IMG-20230814-WA0086.jpg' },
+    { element: 'Element 2', src: 'assets/img/cile/IMG-20230817-WA0078.jpg' },
+    { element: 'Element 3', src: 'assets/img/cile/IMG-20230818-WA0130.jpg' },
+    { element: 'Element 4', src: 'assets/img/cile/IMG-20230818-WA0147.jpg' },
+    { element: 'Element 5', src: 'assets/img/cile/IMG-20230821-WA0023.jpg' },
+    { element: 'Element 6', src: 'assets/img/cile/PXL_20230822_145535733.MP.jpg' },
+    { element: 'Element 7', src: 'assets/img/thailandia/PXL_20231227_052410908.MP.jpg' },
+    { element: 'Element 8', src: 'assets/img/thailandia/PXL_20231227_100553777.MP.jpg' },
+    { element: 'Element 9', src: 'assets/img/thailandia/PXL_20231227_102233805.MP.jpg' },
+    { element: 'Element 10', src: 'assets/img/thailandia/PXL_20240106_173819317.NIGHT.jpg' },
+    { element: 'Element 11', src: 'assets/img/thailandia/PXL_20231228_041044181.MP~2.jpg' },
+    { element: 'Element 12', src: 'assets/img/thailandia/PXL_20231229_100234358.PORTRAIT.jpg' },
+    { element: 'Element 13', src: 'assets/img/thailandia/PXL_20231230_022450915.MP.jpg' },
+    { element: 'Element 14', src: 'assets/img/thailandia/PXL_20231230_030740053.MP.jpg' },
+    { element: 'Element 15', src: 'assets/img/thailandia/PXL_20231230_104316392.LONG_EXPOSURE-02.ORIGINAL.jpg' },
+    { element: 'Element 16', src: 'assets/img/thailandia/PXL_20240103_103529606.MP.jpg' },
+    { element: 'Element 17', src: 'assets/img/thailandia/PXL_20240102_034410501.MP~2.jpg' },
+    { element: 'Element 18', src: 'assets/img/usa/GUDN2770.JPG' },   
+    { element: 'Element 19', src: 'assets/img/usa/IMG_0833.JPG' },
+    { element: 'Element 20', src: 'assets/img/usa/IMG_0912.JPG' },
+    { element: 'Element 21', src: 'assets/img/usa/IMG_1018.JPG' },
+    { element: 'Element 22', src: 'assets/img/usa/IMG_1251.JPG' },
+    { element: 'Element 23', src: 'assets/img/usa/IMG_1271.JPG' },
+    { element: 'Element 24', src: 'assets/img/usa/IMG_1466.JPG' },
+    { element: 'Element 25', src: 'assets/img/usa/IMG_1558.JPG' },
+    { element: 'Element 26', src: 'assets/img/usa/IMG_1731.JPG' },
+    { element: 'Element 27', src: 'assets/img/usa/IMG_1735.JPG' },
+    { element: 'Element 28', src: 'assets/img/usa/IMG_1763.JPG' },
+    { element: 'Element 29', src: 'assets/img/usa/IMG_2101.JPG' },
+
+    ];
+    // Funzione per creare dinamicamente div in base alla lunghezza dell'array
+    function createDivsFromArray(array) {
+      const container = document.querySelector('.container') // Modifica questo se vuoi aggiungere i div a un altro elemento
+
+      array.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('grid-item');
+        div.classList.add('box');
+
+        //div.textContent = `${element} - ${index + 1}`;
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.element;
+
+        div.appendChild(img);
+        container.appendChild(div);
+       
+      });
+    }
+  
+    // Chiamare la funzione con l'array specifico
+    createDivsFromArray(myArray);
+    myArray.forEach((item, index) => {
+    // Creare un nuovo div
+
+    // Aggiungere un evento di click al div
+    item.addEventListener('click', () => {
+        // Aprire l'immagine in una nuova finestra
+        console.log("TEST",item, index);
+
+        window.open(item.src);
+    });
+
+    // Aggiungere il div al container
+    document.querySelector('.container').appendChild(newDiv);
+});
+  </script>
+  
+
+</body>
+</html>

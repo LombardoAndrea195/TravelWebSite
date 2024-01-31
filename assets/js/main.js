@@ -1,10 +1,11 @@
 // Code JavaScript for responsive menu
+
 document.addEventListener('DOMContentLoaded', function() {
     var menuBtn = document.querySelector('.menu-btn');
     var slides = document.querySelectorAll('.video-slide');
     var navigation = document.querySelector('.navigation');
     var btns = document.querySelectorAll('.nav-btn');
-    var contents = document.querySelectorAll('.content ');
+    var contents = document.querySelectorAll('.content');
     var sliderNav = function(manual){
         btns.forEach((btn)=>{
             btn.classList.remove('active');
@@ -30,3 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
       navigation.classList.toggle('active');
     });
   });
+
+  
+
