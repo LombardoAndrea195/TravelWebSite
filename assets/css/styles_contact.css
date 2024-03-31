@@ -10,7 +10,7 @@
     padding: 100px 180px 0px 180px;
 }
 body{
-    background: rgb(155 155 155);
+    background: #f5f5f5;
 
 }
 .tb_hc_post_container > .a  {
@@ -22,8 +22,8 @@ body{
     flex-wrap: wrap;
     padding:10px;
     border-radius: 10px;
-    background: rgb(155 155 155);
-    box-shadow: 0px 0px 0px 0px #666;
+    background: #f5f5f5;
+    box-shadow: 0px 0px 0px 0px #f5f5f5;
 
 }
 
@@ -49,10 +49,10 @@ body{
 .contact-info{
     width: 100%;
     top: 0;
-    left: 0;  
+    left: 0;
     border-radius: 10px;
-    background: rgb(155 155 155);
-    box-shadow: 0px 0px 0px 0px #666;
+    background: #f5f5f5;
+    box-shadow: 0px 0px 0px 0px #f5f5f5;
     border:black;
 }
 
@@ -119,15 +119,15 @@ body{
 
 .contact-form h1{
     margin-bottom: 10px;
-    
+
 }
 
 
 @media (max-width: 900px) {
-    
+
         .Social{
             padding: 100px 30px 0px 30px;
         }
-    
-  
+
+
     }

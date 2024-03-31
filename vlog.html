@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Blog| Vlog </title>
+  <link rel="stylesheet" href="assets/css/styles_vlog.css">
+  <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="#" class="logo">Travel</a>
+    <div class="menu-btn"></div>
+    <div class="navigation">
+        <div class="navigation-items">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="explore.html">Explore</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+    </div>
+  </header>
+
+    <section class="viaggio">
+        <img src=assets/img/cile/IMG-20230817-WA0078.jpg alt="Descrizione Immagine 1">
+        <div class="descrizione">
+            <h2>Titolo Step 1</h2>
+            <p>Descrizione del Step 1...</p>
+        </div>
+        <img src=assets/img/cile/IMG-20230817-WA0078.jpg alt="Descrizione Immagine 1">
+
+    </section>
+
+    <!-- Aggiungi altre sezioni per ogni step del viaggio -->
+</body>
+<script>
+function populateAmerica() {
+    console.log(' Verrà caricata la sezione america!');
+    let viaggio = document.querySelector('.viaggio');
+    viaggio.innerHTML = `
+        <img src=assets/img/usa/IMG_0833.JPG alt="Descrizione Immagine 1">
+        <div class="descrizione">
+            <h2>Titolo Step 1</h2>
+            <p>Descrizione del Step 1...</p>
+        </div>
+        <img src=assets/img/usa/IMG_0833.JPG alt="Descrizione Immagine 1">
+    `;
+}
+function populateBolivia() {
+    console.log(' Verrà caricata la sezione bolivia!');
+    let viaggio = document.querySelector('.viaggio');
+    viaggio.innerHTML = `
+        <img src=assets/img/cile/IMG-20230817-WA0078.jpg alt="Descrizione Immagine 1">
+        <div class="descrizione">
+            <h2>Bolivia</h2>
+            <p>Descrizione del Step 1...</p>
+        </div>
+        <img src=assets/img/cile/IMG-20230817-WA0078.jpg alt="Descrizione Immagine 1">
+
+    `;
+}
+
+
+let params = new URLSearchParams(window.location.search);
+let trip = params.get('trip');
+switch(trip){
+    case 'Bolivia':
+        populateBolivia();
+        break;
+    case 'Thailandia':
+        populateThailandia();
+        break;
+    case 'America':
+        populateAmerica();
+        break;
+    default:
+        populateBolivia();
+        break
+}
+
+</script>
+</html>

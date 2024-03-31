@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Blog| About</title>
+  <link rel="stylesheet" href="assets/css/styles_vlog.css">
+  <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+  <style>
+        .profilo {
+            display: flex;
+            align-items: center;
+            margin: 200px 300px ;
+
+        }
+
+
+
+        .profilo img {
+            border-radius: 50%; /* Rende l'immagine circolare */
+            width: 250px; /* Modifica la larghezza dell'immagine */
+            height: 250px; /* Modifica l'altezza dell'immagine */
+            margin-right: 20px;
+            margin-top: -20px;
+            transition: transform 0.3s ease; /* Aggiungi transizione per rendere il movimento più fluido */
+
+        }
+
+        .descrizione {
+            line-height: 1.6;
+        }
+
+        .profilo:hover img {
+            transform: rotateY(360deg); /* Ruota l'immagine di 360 gradi */
+        }
+        @media only screen and (max-width: 600px) {
+            .profilo {
+                flex-direction: column;
+                margin: 150px;
+
+            }
+            .descrizione {
+                text-align: center;
+                margin-top: 100px;
+            }
+
+        }
+        @media only screen and (max-width: 1200px) {
+            .profilo {
+                flex-direction: column;
+                margin: 150px;
+
+            }
+            .descrizione {
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+
+
+
+    </style>
+</head>
+
+
+  <header class="header">
+    <a href="#" class="logo">Travel</a>
+    <div class="menu-btn"></div>
+    <div class="navigation">
+        <div class="navigation-items">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="explore.html">Explore</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+    </div>
+  </header>
+
+</head>
+<body>
+    <div class="profilo">
+        <img id="profile-img" src="assets/img/other/me.jpg" alt="Foto di me">
+        <div class="descrizione">
+            <h2 >Sono Andrea Lombardo, classe ’95, romano doc amante della tecnologia oltre che dei viaggi.</h2>
+            <p>Ho deciso quindi di unire entrambe queste passioni che attualmente fanno parte della mia vita a 360 gradi
+                (tecnologia e viaggi) creando quindi questo spazio virtuale. </p>
+            <h5>Quando la bussola interiore è sballata: prenota un viaggio, ti aiuterà a ritrovare la tua strada.</h5>
+            <p>Viaggiare è la piu potente forma di psicoterapia.</p>
+        </div>
+    </div>
+    <script>
+        var originalSrc = document.getElementById("profile-img").src; // Memorizza la fonte originale dell'immagine
+
+
+        document.getElementById("profile-img").addEventListener("mouseenter", function() {
+            this.src = "assets/img/other/me2.jpg"; // Cambia la fonte dell'immagine quando si entra con il mouse
+        });
+
+        document.getElementById("profile-img").addEventListener("mouseleave", function() {
+            this.src = originalSrc; // Ripristina la fonte originale dell'immagine quando si esce con il mouse
+        });
+    </script>
+</body>
+</html>

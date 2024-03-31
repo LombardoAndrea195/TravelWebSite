@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery</title>
+  <title>Travel Blog | Gallery</title>
   <link rel="stylesheet" href="assets/css/styles_gallery.css">
   <script src="assets/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -12,22 +12,22 @@
 <body>
 
   <header class="header">
-    <a href="#" class="logo">Travel</a>
+    <a href="index.html" class="logo">Travel</a>
     <div class="menu-btn"></div>
     <div class="navigation">
         <div class="navigation-items">
             <a href="index.html">Home</a>
-            <a href="#">About</a>
-            <a href="#">Explore</a>
+            <a href="about.html">About</a>
+            <a href="explore.html">Explore</a>
             <a href="gallery.html">Gallery</a>
             <a href="contact.html">Contact</a>
         </div>
-    
+
     </div>
   </header>
   <section class="container">
 
-  
+
   <script>
     // Un esempio di array
     const myArray = [
@@ -48,7 +48,7 @@
     { element: 'Element 15', src: 'assets/img/thailandia/PXL_20231230_104316392.LONG_EXPOSURE-02.ORIGINAL.jpg' },
     { element: 'Element 16', src: 'assets/img/thailandia/PXL_20240103_103529606.MP.jpg' },
     { element: 'Element 17', src: 'assets/img/thailandia/PXL_20240102_034410501.MP~2.jpg' },
-    { element: 'Element 18', src: 'assets/img/usa/GUDN2770.JPG' },   
+    { element: 'Element 18', src: 'assets/img/usa/GUDN2770.JPG' },
     { element: 'Element 19', src: 'assets/img/usa/IMG_0833.JPG' },
     { element: 'Element 20', src: 'assets/img/usa/IMG_0912.JPG' },
     { element: 'Element 21', src: 'assets/img/usa/IMG_1018.JPG' },
@@ -78,10 +78,10 @@
 
         div.appendChild(img);
         container.appendChild(div);
-       
+
       });
     }
-  
+
     // Chiamare la funzione con l'array specifico
     createDivsFromArray(myArray);
     myArray.forEach((item, index) => {
@@ -90,8 +90,6 @@
     // Aggiungere un evento di click al div
     item.addEventListener('click', () => {
         // Aprire l'immagine in una nuova finestra
-        console.log("TEST",item, index);
-
         window.open(item.src);
     });
 
@@ -99,7 +97,7 @@
     document.querySelector('.container').appendChild(newDiv);
 });
   </script>
-  
+
 
 </body>
 </html>
