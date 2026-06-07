@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog | Vlog</title>
+    <meta name="description"
+        content="Vlog dettagliati giorno per giorno con tappe, immagini e mappa del viaggio per ogni destinazione.">
+    <meta name="robots" content="index, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#d97706">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:title" content="Travel Blog | Vlog">
+    <meta property="og:description"
+        content="Leggi il diario di viaggio completo con mappa e contenuti multimediali ottimizzati.">
+    <meta property="og:image" content="assets/img/optimized/thailandia/PXL_20231230_104316392-1200.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Travel Blog | Vlog">
+    <meta name="twitter:description"
+        content="Leggi il diario di viaggio completo con mappa e contenuti multimediali ottimizzati.">
+    <meta name="twitter:image" content="assets/img/optimized/thailandia/PXL_20231230_104316392-1200.jpg">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; upgrade-insecure-requests">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles_vlog.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="assets/js/gallery-images.js" defer></script>
+    <script src="assets/js/mega-links.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Travel</a>
+        <div class="menu-btn" aria-label="Apri menu"></div>
+        <div class="navigation">
+            <div class="navigation-items">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="explore.html">Explore</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="viaggi-container"></main>
+
+    <section id="mappa-trip" class="trip-map-section" hidden>
+        <h2>Mappa del viaggio</h2>
+        <p id="trip-map-caption"></p>
+        <div id="trip-map"></div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        const localizedVlogData = {
+            it: {
+                labels: {
+                    mapTitle: 'Mappa del viaggio',
+                    emptyTitle: 'Vlog non disponibile',
+                    emptyText: 'Seleziona una destinazione dalla pagina Explore.',
+                    days: 'Giorno',
+                    tripNames: {
+                        Thailandia: 'Thailandia',
+                        America: 'America',
+                        Bolivia: 'Bolivia & Cile',
+                        China: 'Cina',
+                        Scotland: 'Scozia',
+                        SriLanka: 'Sri Lanka'
+                    }
+                },
+                trips: {
+                    Thailandia: [
+                        {
+                            "giorni": "1",
+                            "titolo": "Bangkok, primo impatto",
+                            "testo": [
+                                "Arrivo a Bangkok e attraversamento della città tra traffico intenso e moto ovunque.",
+                                "Prima corsa in tuk tuk nel centro tra strade affollate e insegne luminose.",
+                                "Primo contatto con lo street food: pad thai cucinato al momento e frutta tropicale tagliata al volo.",
+                                "Passeggiata tra mercati serali e vie piene di vita fino a tarda sera."
+                            ],
+                            "immagine": "assets/img/thailandia/20231228_175526-13c1.jpg"
+                        },
+                        {
+                            "giorni": "2",
+                            "titolo": "Bangkok tra templi e fiume",
+                            "testo": [
+                                "Navigazione sul Chao Phraya tra barche locali e traffico d’acqua continuo.",
+                                "Ingresso al Wat Arun e osservazione dei dettagli in ceramica lungo le torri.",
+                                "Visita al Wat Pho davanti al Buddha sdraiato e ai cortili interni del complesso.",
+                                "Sosta al mercato ferroviario durante il passaggio del treno tra le bancarelle.",
+                                "Attraversamento della città al tramonto con traffico intenso e luci della sera."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231227_100553777.MP.jpg"
+                        },
+                        {
+                            "giorni": "3",
+                            "titolo": "Vita sui canali",
+                            "testo": [
+                                "Partenza verso il mercato galleggiante all’alba.",
+                                "Navigazione tra barche cariche di cibo, frutta e prodotti locali.",
+                                "Osservazione della vita lungo i canali tra case su palafitte e piccoli moli.",
+                                "Assaggi di piatti preparati direttamente sulle imbarcazioni.",
+                                "Rientro verso Bangkok attraversando zone rurali fuori città."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231227_052410908.MP.jpg"
+                        },
+                        {
+                            "giorni": "4",
+                            "titolo": "Chiang Mai, ritmo più lento",
+                            "testo": [
+                                "Volo verso il nord e arrivo a Chiang Mai.",
+                                "Passeggiata nella città vecchia tra templi, caffè e botteghe artigiane.",
+                                "Esplorazione del Night Bazaar tra cibo di strada e prodotti locali.",
+                                "Assaggio di cucina del nord come khao soi e grigliate serali.",
+                                "Contatto con la vita locale nei vicoli del centro."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231227_104201964.MP.jpg"
+                        },
+                        {
+                            "giorni": "5",
+                            "titolo": "Doi Suthep e spiritualità",
+                            "testo": [
+                                "Visita al Wat Phra Singh nel centro storico.",
+                                "Salita al Doi Suthep attraverso strada di montagna immersa nella vegetazione.",
+                                "Vista su Chiang Mai dalla terrazza del tempio.",
+                                "Osservazione dei rituali dei monaci nel complesso religioso.",
+                                "Esperienza di cena khantoke con piatti locali e spettacoli tradizionali."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231229_100234358.PORTRAIT.jpg"
+                        },
+                        {
+                            "giorni": "6",
+                            "titolo": "Chiang Rai e Tempio Bianco",
+                            "testo": [
+                                "Partenza da Chiang Mai attraversando paesaggi montani e villaggi del nord.",
+                                "Arrivo al Wat Rong Khun, noto come Tempio Bianco, con struttura completamente bianca e dettagli artistici moderni.",
+                                "Percorso tra ponti e installazioni simboliche che rappresentano concetti spirituali e contemporanei.",
+                                "Osservazione dei dettagli architettonici e delle sculture dell’intero complesso.",
+                                "Rientro verso Chiang Mai attraverso strade panoramiche del nord Thailandia."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231228_041044181.MP~2.jpg"
+                        }, {
+                            "giorni": "7",
+                            "titolo": "Incontro con gli elefanti",
+                            "testo": [
+                                "Trasferimento verso le colline fuori Chiang Mai attraverso strade immerse nel verde.",
+                                "Arrivo al santuario etico e primo contatto con gli elefanti salvati.",
+                                "Preparazione del cibo e alimentazione diretta degli animali.",
+                                "Camminata nella giungla insieme agli elefanti lungo sentieri naturali e corsi d’acqua.",
+                                "Bagno sotto una cascata naturale insieme al gruppo.",
+                                "Rientro nel pomeriggio con esperienza di massaggio tradizionale thailandese."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231230_030740053.MP.jpg"
+                        },
+                        {
+                            "giorni": "8",
+                            "titolo": "Cucina e vita locale e volo verso Phuket",
+                            "testo": [
+                                "Visita a un mercato locale tra spezie, erbe fresche e ingredienti tipici.",
+                                "Preparazione di piatti thailandesi con uno chef del posto.",
+                                "Cottura di pad thai, curry e zuppe tradizionali.",
+                                "Degustazione dei piatti preparati insieme.",
+                                "Spettacolo culturale serale tra musica e danza."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231230_104316392.jpg"
+                        },
+
+                        {
+                            "giorni": "9",
+                            "titolo": "Phuket tra mare e vita locale",
+                            "testo": [
+                                "Mattinata tra le spiagge di Kata e Karon.",
+                                "Nuotate e tempo in mare aperto.",
+                                "Passeggiata tra mercati locali e street food serale.",
+                                "Attività lungo la costa tra locali e musica serale."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20231231_050210713.MP.jpg"
+                        },
+                        {
+                            "giorni": "10",
+                            "titolo": "Isole e snorkeling",
+                            "testo": [
+                                "Partenza in longtail boat verso le isole vicine.",
+                                "Snorkeling tra pesci tropicali e barriere coralline.",
+                                "Soste in baie isolate lontane dalle zone turistiche.",
+                                "Pranzo su una spiaggia durante l’escursione.",
+                                "Rientro tra isole e scogliere nel pomeriggio."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20240103_103529606.jpg"
+                        },
+                        {
+                            "giorni": "11",
+                            "titolo": "Krabi e le scogliere",
+                            "testo": [
+                                "Navigazione verso Krabi tra coste e formazioni rocciose.",
+                                "Arrivo ad Ao Nang e passeggiata lungo la zona costiera.",
+                                "Osservazione delle scogliere sullo sfondo della spiaggia.",
+                                "Street food e cucina locale nei chioschi sul mare."
+                            ],
+                            "immagine": "assets/img/thailandia/20240106_111347-12ef.jpg"
+                        },
+                        {
+                            "giorni": "12",
+                            "titolo": "Railay Beach",
+                            "testo": [
+                                "Accesso via mare a Railay Beach.",
+                                "Giornata tra mare, sabbia e scogliere calcaree.",
+                                "Kayak tra grotte e pareti rocciose.",
+                                "Esplorazione della penisola a piedi.",
+                                "Nuoto in acque calme tra le scogliere."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20240102_045132262.MP.jpg"
+                        },
+                        {
+                            "giorni": "13",
+                            "titolo": "Hong Islands",
+                            "testo": [
+                                "Escursione in motoscafo tra isole e lagune turchesi.",
+                                "Snorkeling in acque trasparenti con fauna marina visibile.",
+                                "Soste su spiagge isolate raggiungibili solo via mare.",
+                                "Navigazione tra canali naturali e formazioni rocciose.",
+                                "Rientro al tramonto sul mare aperto."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20240102_034410501.MP~2.jpg"
+                        },
+                        {
+                            "giorni": "14",
+                            "titolo": "Ultime ore sul mare",
+                            "testo": [
+                                "Mattinata tra mare e attività libere in spiaggia.",
+                                "Pesce fresco cucinato sulla spiaggia.",
+                                "Ultimo bagno nelle ore centrali della giornata.",
+                                "Passeggiata lungo la costa tra mercati e locali."
+                            ],
+                            "immagine": "assets/img/thailandia/20240105_222355-581d.jpg"
+                        },
+                        {
+                            "giorni": "15",
+                            "titolo": "Rientro",
+                            "testo": [
+                                "Ultima mattina in Thailandia.",
+                                "Trasferimento lungo la costa verso l’aeroporto.",
+                                "Volo di ritorno."
+                            ],
+                            "immagine": "assets/img/thailandia/PXL_20240106_104155552.MP.jpg"
+                        }
+
+                    ],
+                    America: [
+                        {
+                            giorni: '1',
+                            titolo: 'Los Angeles, tra cinema e prime emozioni',
+                            testo: [
+                                'Tra deserti infiniti, città leggendarie e alcuni dei paesaggi più iconici del West americano, questo itinerario attraversa il cuore dell’America occidentale.',
+                                'Dalle luci di Los Angeles ai casinò di Las Vegas, dalle foreste di sequoie millenarie ai canyon scolpiti dal tempo, fino alle strade polverose della Route 66 e ai tramonti rossi dell’Arizona.',
+                                'È un viaggio fatto di chilometri, panorami immensi e quella sensazione unica di libertà che solo un road trip americano riesce a dare.',
+                                'L’America inizia di sera.',
+                                'Dopo l’atterraggio a Los Angeles c’è giusto il tempo di recuperare l’auto, vera protagonista del viaggio, prendere un panino al volo e partire subito verso Hollywood Boulevard.',
+                                'Le stelle sul marciapiede, le insegne luminose e l’atmosfera cinematografica fanno capire immediatamente di essere entrati in uno dei luoghi più iconici al mondo.',
+                                'E poi c’è lei, la scritta Hollywood, da osservare da lontano mentre domina la città dall’alto delle colline: una scena che sembra già un film.',
+                                'Pernottamento: Los Angeles'
+                            ],
+                            immagine: 'assets/img/usa/Screenshot.png'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Lusso californiano e giganti della natura',
+                            testo: [
+                                'La mattina cambia completamente atmosfera.',
+                                'Beverly Hills è fatta di viali ordinati, palme perfette e ville nascoste dietro cancelli imponenti.',
+                                'Passeggiare qui significa entrare per un attimo nell’immaginario hollywoodiano, tra boutique eleganti e strade che sembrano costruite per il cinema.',
+                                'Poi arriva il contrasto più incredibile del viaggio: la strada verso il Sequoia National Park.',
+                                'Qui tutto diventa silenzioso e improvvisamente minuscolo. Le sequoie giganti non sono semplicemente alberi: sono monumenti naturali millenari capaci di far perdere la percezione delle dimensioni.',
+                                'Camminare tra questi colossi lascia una sensazione difficile da spiegare, quasi irreale.',
+                                'Pernottamento: Bakersfield'
+                            ],
+                            immagine: 'assets/img/usa/IMG_0833.JPG'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Death Valley e la notte di Las Vegas',
+                            testo: [
+                                'Dal verde delle montagne al deserto più estremo.',
+                                'La Death Valley è un paesaggio quasi alieno, fatto di distese infinite, calore e colori che cambiano continuamente. Qui la natura mostra il suo lato più duro e affascinante.',
+                                'Nel pomeriggio, come un miraggio nel nulla, compaiono le luci di Las Vegas.',
+                                'Las Vegas è eccesso, spettacolo e divertimento puro. Passeggiare lungo la Strip significa passare in pochi minuti da Venezia a Parigi, tra hotel giganteschi e scenografie impossibili.',
+                                'Tra gli hotel più iconici da vedere: Venetian, Bellagio e Caesars Palace.',
+                                'La notte è fatta per lasciarsi trasportare: casinò, spettacoli e quell’energia surreale che rende la città diversa da qualsiasi altra.',
+                                'Pernottamento: Las Vegas'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1006.JPG'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Valley of Fire e l’ingresso nello Utah',
+                            testo: [
+                                'Lasciata Vegas alle spalle, la natura torna protagonista.',
+                                'La Valley of Fire sembra appartenere a un altro pianeta. Le rocce rosse e arancioni si accendono alla luce del sole creando contrasti incredibili.',
+                                'I colori di questo parco sono quasi impossibili da raccontare: intensi, surreali, vivi.',
+                                'Nel pomeriggio si entra nello Utah raggiungendo Zion Canyon, dove pareti di roccia gigantesche si alzano verticalmente sopra la valle.',
+                                'È il primo grande canyon del viaggio e l’impatto visivo è immediato.',
+                                'Pernottamento: zona Zion'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1251.JPG'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Bryce Canyon all’alba, il momento più magico',
+                            testo: [
+                                'Ci sono luoghi che meritano la sveglia prima dell’alba. Bryce Canyon è uno di questi.',
+                                'Dal Sunrise Point il paesaggio si illumina lentamente, rivelando migliaia di pinnacoli di roccia, gli hoodoos, che sembrano scolpiti da un artista.',
+                                'Le sfumature passano dal rosso all’arancione fino al dorato.',
+                                'Per molti questo è uno dei momenti più emozionanti di tutto il viaggio, un luogo quasi irreale che rimane impresso molto più delle fotografie.',
+                                'Dopo l’alba si riparte attraversando gli spettacolari paesaggi dello Utah.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1466.JPG'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Horseshoe Bend e il tramonto della Monument Valley',
+                            testo: [
+                                'La giornata inizia con uno dei panorami più famosi del West.',
+                                'Horseshoe Bend appare all’improvviso: una curva perfetta del fiume Colorado scavata nella roccia, vista dall’alto.',
+                                'Poi si prosegue verso la Monument Valley. Qui l’America cambia volto ancora una volta.',
+                                'Le grandi formazioni rocciose emergono dal deserto e riportano immediatamente ai film western e alle immagini del vecchio West.',
+                                'Arrivare al tramonto è qualcosa di speciale.',
+                                'Un consiglio prezioso è affidarsi a una guida Navajo locale: oltre a scoprire luoghi meno accessibili e storie del territorio, si evitano problemi nei tratti sabbiosi dove è facile rimanere impantanati.',
+                                'Pernottamento: Tuba City'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1735.JPG'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Canyon scolpiti dal tempo',
+                            testo: [
+                                'La mattina regala panorami immensi sul Glen Canyon e sulle acque blu di Lake Powell.',
+                                'L’incontro tra roccia rossa e acqua crea uno dei contrasti più belli dell’Arizona.',
+                                'Nel pomeriggio arriva uno dei luoghi più sorprendenti del viaggio: Antelope Canyon.',
+                                'Qui vento e acqua hanno modellato la pietra per migliaia di anni creando pareti sinuose e giochi di luce incredibili.',
+                                'Camminare all’interno del canyon è quasi ipnotico: le forme sembrano onde congelate nella roccia.',
+                                'Un posto difficile da descrivere e impossibile da dimenticare.',
+                                'Pernottamento: Page'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1763.JPG'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Grand Canyon e Route 66',
+                            testo: [
+                                'Il Grand Canyon non ha bisogno di presentazioni. Ma nessuna fotografia prepara davvero alla sua immensità.',
+                                'Guardarlo per la prima volta significa rendersi conto di quanto la natura possa essere enorme e silenziosa.',
+                                'Dopo la visita si cambia atmosfera ancora una volta, entrando nella leggenda americana della Route 66.',
+                                'Stazioni di servizio vintage, insegne retrò e piccole città sospese nel tempo accompagnano la strada fino a Williams.',
+                                'Qui sembra di essere rimasti in un’America d’altri tempi.',
+                                'Pernottamento: Williams'
+                            ],
+                            immagine: 'assets/img/usa/IMG_2106.JPG'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Un nuovo volto del Grand Canyon e Lake Watson',
+                            testo: [
+                                'Il Grand Canyon cambia continuamente volto a seconda della prospettiva.',
+                                'Una seconda visita permette di osservarlo in modo diverso, con nuove luci e punti panoramici che raccontano un paesaggio mai identico a sé stesso.',
+                                'Più tardi la strada conduce verso Watson Lake.',
+                                'Le grandi rocce granitiche che circondano il lago creano uno scenario inatteso, quasi lunare.',
+                                'Un luogo meno famoso ma sorprendente.',
+                                'Pernottamento: zona Prescott'
+                            ],
+                            immagine: 'assets/img/usa/IMG_E2241.JPG'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'Prescott e Jerome, tra storia e atmosfera western',
+                            testo: [
+                                'Prescott conserva ancora l’anima del vecchio West.',
+                                'Saloon storici, edifici d’epoca e strade tranquille raccontano una parte diversa dell’Arizona.',
+                                'Poco distante si trova Jerome, antica città mineraria arroccata sulla montagna.',
+                                'Un luogo sospeso nel tempo, con un fascino quasi misterioso fatto di vicoli, panorami e vecchi edifici che ricordano il passato del Far West.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1763.JPG'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Sedona e le montagne rosse dell’Arizona',
+                            testo: [
+                                'Sedona è energia e paesaggio.',
+                                'Le sue montagne rosse emergono dal deserto creando uno degli scenari più fotografati degli Stati Uniti.',
+                                'Molti la visitano per i trekking, altri per l’atmosfera spirituale che la circonda.',
+                                'In ogni caso, Sedona conquista con la sua bellezza semplice e potente.',
+                                'È uno di quei posti in cui fermarsi, respirare e osservare il paesaggio diventa già parte dell’esperienza.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_2339.JPG'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Arrivo a Phoenix',
+                            testo: [
+                                'L’ultima tappa porta a Phoenix, grande città del deserto e conclusione naturale del viaggio.',
+                                'Dopo giorni passati tra canyon, deserti e strade infinite, qui si chiude il road trip con la sensazione di aver attraversato alcune delle immagini più iconiche d’America.',
+                                'Perché il West non è solo una destinazione.',
+                                'È un viaggio che rimane addosso molto tempo dopo essere finito.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_2346.JPG'
+                        }
+                    ],
+                    Bolivia: [
+                        {
+                            giorni: '1',
+                            titolo: 'Benvenuti in Cile: Santiago',
+                            testo: [
+                                'La nostra avventura inizia a Santiago, vibrante capitale del Cile e una delle città più dinamiche del Sud America. Dopo le formalità d\'ingresso, siamo pronti a immergerci nella cultura locale.',
+                                'In base all\'orario di arrivo, scegliamo come inaugurare l\'esperienza: passeggiare tra i murales del quartiere Bellavista, visitare una delle case di Pablo Neruda oppure salire al Cerro Santa Lucía per ammirare il primo tramonto cileno.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230812_180205672.MP.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Valparaíso, la città dai mille colori',
+                            testo: [
+                                'Raggiungiamo in meno di due ore di bus la costa pacifica e Valparaíso, Patrimonio UNESCO. Con un walking tour scopriamo una città fatta di case colorate, arte urbana e storici ascensori che collegano i suoi celebri cerros.',
+                                'Visitiamo La Sebastiana, l\'eccentrica casa-museo di Pablo Neruda, con pranzo tra ristoranti vista oceano e tipiche empanadas cilene. Nel pomeriggio il Cerro Concepción e il Parque Cultural de Valparaíso, centro artistico nato in un ex carcere.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230812_213446424.MP.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'San Pedro de Atacama e la Valle della Luna',
+                            testo: [
+                                'Volo interno verso Calama, poi trasferimento di un\'ora a San Pedro de Atacama, porta d\'accesso a uno dei deserti più spettacolari del pianeta.',
+                                'Nel pomeriggio la Valle della Luna: dune gigantesche, canyon e formazioni rocciose scolpite dal vento. Il tramonto tinge tutto di sfumature rosa e dorate — con aperitivo cileno e un bicchiere di Pisco. Di notte, tour astronomico con telescopi nel buio assoluto del deserto.'
+                            ],
+                            immagine: 'assets/img/cile/IMG-20230814-WA0086.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Alba ai Geyser del Tatio e bagno nella Laguna Cejar',
+                            testo: [
+                                'Partenza nel cuore della notte per i Geyser del Tatio, terza area geotermica più estesa del mondo. A oltre 4.200 metri lo spettacolo dell\'alba tra fumarole e colonne di vapore è indimenticabile. Colazione nel silenzio del deserto.',
+                                'Nel pomeriggio la Laguna Cejar: acque dalla salinità altissima che permettono di galleggiare senza sforzo come nel Mar Morto, circondate da vulcani, montagne innevate e distese di sale scintillanti.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230815_193640955.MP.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Dalle Ande cilene alla Bolivia: lagune e deserti surreali',
+                            testo: [
+                                'Salutiamo il Cile e attraversiamo il confine boliviano. Le jeep 4x4 ci portano nella Riserva Nazionale Eduardo Avaroa: Laguna Blanca, Laguna Verde, il Deserto Salvador Dalí con i suoi paesaggi surreali.',
+                                'Proseguiamo alle terme di Polques sopra i 4.000 metri, all\'area geotermica del Sol de Mañana con fumarole e fanghi ribollenti, e alla spettacolare Laguna Colorada rossa di fenicotteri andini. Notte in lodge nel deserto.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230813_200234195.MP.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Fenicotteri, canyon e il fascino di Uyuni',
+                            testo: [
+                                'Formazioni rocciose dell\'Italia Perdida, Laguna Vinto e le lagune Catal o Escondida, habitat di fenicotteri, lama e viscacha. Attraversiamo la Valle de las Rocas e il Cañón de la Anaconda.',
+                                'Sosta nel villaggio di San Cristóbal, poi il Cimitero dei Treni a quasi 4.000 metri: locomotive a vapore abbandonate del XIX secolo, perfette per fotografie indimenticabili. La notte ci aspetta un hotel costruito quasi interamente di sale.'
+                            ],
+                            immagine: 'assets/img/cile/IMG-20230817-WA0031.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Il Salar de Uyuni: il grande spettacolo della Bolivia',
+                            testo: [
+                                'Dopo Colchani, villaggio dell\'estrazione del sale, l\'intera giornata è dedicata al Salar de Uyuni, la più grande distesa salata del pianeta con oltre 10.000 km². Ojos de Sal, fotografie prospettiche e illusioni ottiche.',
+                                'Pranzo nel cuore del Salar tra un silenzio quasi irreale, poi l\'isola Incahuasi con i suoi cactus oltre dieci metri. Al tramonto aperitivo locale mentre il cielo si trasforma sopra l\'infinito paesaggio bianco.'
+                            ],
+                            immagine: 'assets/img/cile/IMG-20230818-WA0130.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Potosí: storia, miniere e memoria',
+                            testo: [
+                                'Lasciamo l\'hotel di sale per Potosí, Patrimonio UNESCO e una delle città più alte del mondo a oltre 4.000 metri. La sua storia è legata alle immense miniere d\'argento che arricchirono l\'impero spagnolo.',
+                                'Visitiamo l\'interno della miniera del Cerro Rico, dove i minatori lavorano ancora con tradizioni antiche. Poi il centro storico tra piazze coloniali e le panetterie con i tipici chambergos.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230817_232303921.LONG_EXPOSURE-01.COVER.jpg'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Sucre, la Città Bianca',
+                            testo: [
+                                'Scendiamo di quota verso Sucre, prima capitale della Bolivia e Patrimonio UNESCO. La Ciudad Blanca conserva intatto il fascino coloniale degli edifici candidi. Da Plaza 25 de Mayo alla Cattedrale di Nostra Signora di Guadalupe.',
+                                'Sucre è anche la capitale del cioccolato boliviano: degustazione nelle cioccolaterie più celebri. Poi la tipica fritanga e una serata su una terrazza panoramica ad ammirare la città illuminata.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230823_185951625.MP~2.jpg'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'La Paz e il cuore pulsante della Bolivia',
+                            testo: [
+                                'Volo interno verso La Paz. Iniziamo dal centro storico, il Mercado de las Brujas con tradizioni Aymara e erbe medicinali, Plaza San Francisco e Plaza Murillo.',
+                                'Nel tardo pomeriggio saliamo sul teleférico, la rete di funivie urbane più grande del mondo, che collega La Paz con El Alto regalando prospettive spettacolari sulla città. Salteñas locali al tramonto dall\'alto.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230817_224458096.MP.jpg'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Adrenalina o natura? La Paz a modo tuo',
+                            testo: [
+                                'Giornata libera. Per gli amanti dell\'adrenalina la leggendaria Death Road: da La Cumbre a 4.650 metri fino a Yolosa, 3.500 metri più in basso in mountain bike tra montagne, foreste e vallate.',
+                                'Per chi preferisce la natura: Valle della Luna, Valle de las Ánimas o il Canyon de Palca tra gole e pareti modellate dall\'acqua. Cena finale insieme e brindisi con i ricordi più belli del viaggio.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230822_145535733.MP.jpg'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Arrivederci Bolivia',
+                            testo: [
+                                'Tra deserti infiniti, città coloniali, lagune colorate e tramonti impossibili da dimenticare, questo viaggio ci ha portati nel cuore più autentico di Cile e Bolivia.',
+                                'Dopo colazione ci dirigiamo verso l\'aeroporto di La Paz per il rientro. Porteremo a casa fotografie spettacolari, ma soprattutto storie, incontri e ricordi destinati a rimanere con noi molto più a lungo del viaggio stesso.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230821_183504468.MP.jpg'
+                        }
+                    ],
+                    China: [
+                        {
+                            giorni: '1',
+                            titolo: 'Arrivo a Pechino e primo impatto con la citta',
+                            testo: [
+                                'Atterrare a Pechino significa essere travolti da un’energia difficile da spiegare. Dopo il check-in siamo andati subito al Tempio del Cielo, un luogo che trasmette una calma quasi irreale in contrasto con il caos della metropoli. La sera ci siamo persi tra gli hutong, assaggiando i nostri primi piatti tipici e osservando la vita quotidiana scorrere tra vicoli illuminati da lanterne rosse. È stato il modo perfetto per capire fin da subito quanto questa città sappia sorprendere.'
+                            ],
+                            immagine: 'assets/img/optimized/china/tempio_cielo-768.avif'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Grande muraglia cinese',
+                            testo: [
+                                'Sveglia all’alba per raggiungere la sezione di Simatai della Grande Muraglia. Camminare su queste pietre, con le torri che si perdono tra le montagne, regala una sensazione difficile da descrivere: ti senti minuscolo davanti a qualcosa di così immenso e carico di storia. Tornati in città, la visita alla Città Proibita è stata il perfetto completamento della giornata, un tuffo nel cuore imperiale della Cina.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240803_130024-5f3f-768.avif'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Piazza Tiananmen e night market',
+                            testo: [
+                                'La mattina a Piazza Tiananmen ha un’atmosfera solenne e quasi sospesa. Visitare il Mausoleo di Mao significa entrare in uno dei luoghi simbolo della storia cinese. Nel pomeriggio abbiamo esplorato il lato più moderno di Pechino, tra quartieri futuristici e grattacieli, per poi chiudere la giornata al night market: profumi intensi, luci ovunque e il coraggio di provare street food che probabilmente non dimenticheremo mai.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240804_114816-8049-768.avif'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Girare per Pechino e partenza per Xi an',
+                            testo: [
+                                'L’ultimo giorno a Pechino lo abbiamo dedicato a perderci senza meta tra hutong e stradine meno battute, quelle dove la città mostra il suo volto più autentico. Qui non trovi folle di turisti, ma anziani che giocano a carte e piccoli negozi che sembrano fermi nel tempo. La sera, salire sul treno notturno per Xi’an ha dato al viaggio quel sapore d’avventura che solo i lunghi spostamenti in Asia riescono a regalare.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240805_132416-2de0-768.avif'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Xi an - Tang Paradise e quartiere musulmano',
+                            testo: [
+                                'Xi’an ha un fascino completamente diverso da Pechino. La Pagoda della Grande Oca racconta una Cina antica e spirituale, mentre le mura della città regalano una vista incredibile soprattutto al tramonto. Ma il vero colpo al cuore è arrivato nel quartiere musulmano: un mix travolgente di profumi, colori e street food che rende impossibile non fermarsi ad assaggiare qualcosa.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240805_205002-cddf-768.avif'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Esercito di Terracotta',
+                            testo: [
+                                'Davanti all’Esercito di Terracotta si rimane senza parole. Vederlo dal vivo è completamente diverso da qualsiasi foto: migliaia di guerrieri, ognuno con dettagli unici, schierati da oltre duemila anni. È uno di quei luoghi che fanno capire quanto la storia cinese sia immensa. Dopo questa immersione nel passato, il viaggio è proseguito verso Chengdu.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240807_164244-ec41-768.avif'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Chengdu - Leshan e Jinli Street',
+                            testo: [
+                                'Il Buddha Gigante di Leshan lascia davvero senza fiato. La sua imponenza vista dal vivo è qualcosa che nessuna fotografia riesce a rendere. Tornati a Chengdu, Jinli Street ci ha accolto con le sue lanterne accese, i profumi speziati e quell’atmosfera quasi cinematografica che rende la serata indimenticabile.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240807_164007-ba68-768.avif'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Escursione al Monte Emei',
+                            testo: [
+                                'Il Monte Emei è uno di quei posti che ti riconnettono completamente con la natura. Tra templi nascosti nella nebbia, sentieri immersi nel verde e panorami che si aprono all’improvviso, ogni passo sembra portarti in un’altra dimensione. Arrivare in vetta e vedere le nuvole sotto di noi è stato uno dei momenti più belli di tutto il viaggio.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240810_014622-5086-768.avif'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Centro Panda e volo per Zhangjiajie per poi arrivare direttamente a Furong Village',
+                            testo: [
+                                'Incontrare i panda nel centro di ricerca di Chengdu è una di quelle esperienze che ti fanno tornare un po’ bambini. Dopo ci siamo ritrovati a Furong Village, un luogo surreale costruito sopra una cascata, illuminato di sera come se fosse uscito da un film.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240809_100436-2b41-768.avif'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'Parco Nazionale di Zhangjiajie',
+                            testo: [
+                                'Ritorno da Furong verso Zhangjiajie citta. Da qui visita al Parco Nazionale.. è semplicemente irreale. Camminare tra queste colonne di roccia sospese nella nebbia dà davvero la sensazione di essere entrati nel mondo di Avatar. Ogni punto panoramico supera il precedente, e per quanto si provi a fotografarlo, dal vivo ha un impatto che lascia senza parole.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240811_224713-46c8-768.avif'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Monte Tianmen',
+                            testo: [
+                                'La lunghissima funivia che sale al Monte Tianmen è già di per sé un’esperienza memorabile. Sorvolare la montagna mentre la strada delle 99 curve si snoda sotto di te mette i brividi. Poi arrivi in cima, davanti alla Porta del Paradiso, e capisci perché questo luogo venga considerato uno dei più spettacolari di tutta la Cina.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240820_192932-66b9-768.avif'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Wangxian Valley',
+                            testo: [
+                                'Wangxian Valley sembra un set cinematografico. Le costruzioni sospese sulla montagna, le luci che si accendono al tramonto e l’atmosfera quasi mistica rendono questo posto unico. È uno di quei luoghi ancora poco conosciuti fuori dalla Cina, e forse proprio per questo conserva una magia autentica.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240813_155253-d91a-768.avif'
+                        },
+                        {
+                            giorni: '13',
+                            titolo: 'Arrivo a Shanghai',
+                            testo: [
+                                'Shanghai è l’impatto con il futuro. Dopo giorni tra montagne e città storiche, ritrovarsi davanti allo skyline del Bund è quasi spiazzante. Il contrasto tra i grattacieli di Pudong e il fascino classico del lungofiume crea uno scenario unico, soprattutto quando la città si illumina di notte.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240816_124253-f5ba-1200.avif'
+                        },
+                        {
+                            giorni: '14',
+                            titolo: 'Escursione a Zhujiajiao',
+                            testo: [
+                                'A meno di un’ora da Shanghai, Zhujiajiao sembra appartenere a un’altra epoca. Canali tranquilli, ponticelli in pietra e piccole botteghe rendono questo villaggio sull’acqua il luogo perfetto per rallentare e respirare un’atmosfera completamente diversa dalla frenesia della metropoli.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240811_224946-81d7-768.avif'
+                        },
+                        {
+                            giorni: '15',
+                            titolo: 'Rientro in Italia',
+                            testo: [
+                                'Le ultime ore a Shanghai.. Guardando per l’ultima volta lo skyline, abbiamo realizzato quanto la Cina sia uno di quei paesi capaci di cambiarti il modo di vedere il mondo.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240805_205012-f611-768.avif'
+                        }
+                    ],
+                    Scotland: [
+                        {
+                            giorni: '1',
+                            titolo: 'Edimburgo → Pitlochry e Blair Atholl',
+                            testo: [
+                                'Dopo il ritiro dell\'auto all\'aeroporto di Edimburgo, si lascia rapidamente la città per dirigersi verso nord, entrando gradualmente nelle Highlands.',
+                                'La strada attraversa paesaggi sempre più verdi e ondulati, dove i villaggi diventano piccoli e il traffico lascia spazio a pecore, boschi e colline.',
+                                'Prima tappa a Pitlochry, graziosa cittadina vittoriana con facciate in pietra chiara: una passeggiata lungo la via principale con una sosta in un pub o tea room.',
+                                'Nel pomeriggio, Blair Atholl e il suggestivo Blair Castle, circondato da giardini e boschi: un\'introduzione rilassata, verde e scenografica alla Scozia.',
+
+                            ],
+                            immagine: 'assets/img/scotland/117098157_3247529865311196_5801436778031535398_n.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Attraversando il Cairngorms National Park',
+                            testo: [
+                                'Lasciata Pitlochry, la strada entra nel Cairngorms National Park, uno dei parchi nazionali più grandi del Regno Unito.',
+                                'Il paesaggio cambia visibilmente: montagne arrotondate, foreste di pini, brughiere e grandi spazi aperti.',
+                                'Aviemore è la sosta perfetta per un caffè e viste panoramiche sulle montagne, prima di riprendere la strada verso nord.',
+                                'Si percepisce quella sensazione tipicamente scozzese di spazio e isolamento, con strade panoramiche che sembrano attraversare territori senza fine.',
+                                'Nel pomeriggio si raggiunge Inverness, capitale delle Highlands: passeggiata sul fiume Ness, centro storico e Inverness Castle visto dall\'esterno.'
+                            ],
+                            immagine: 'assets/img/scotland/117213345_3247531978644318_838794384861616124_n.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Loch Ness, Eilean Donan e l\'arrivo a Skye',
+                            testo: [
+                                'Lasciata Inverness, la strada segue le rive del leggendario Loch Ness, lungo e misterioso, spesso avvolto da nuvole basse e atmosfere cinematografiche.',
+                                'Sosta principale a Urquhart Castle, arroccato sul lago: rovine che raccontano secoli di battaglie e uno dei panorami più famosi della Scozia.',
+                                'Proseguendo verso ovest si arriva a Eilean Donan Castle, su un piccolo isolotto collegato alla terraferma da un ponte di pietra: sembra uscito da un film.',
+                                'Attraversando il ponte verso Skye si ha la sensazione di entrare in una Scozia diversa: più remota, drammatica, quasi nordica.',
+                                'Arrivo a Portree: passeggiata sul porto colorato e cena sulla parte del porto '
+                            ],
+                            immagine: 'assets/img/scotland/117098137_3247529688644547_698138920925420111_n.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Isle of Skye: Quiraing e Fairy Pools',
+                            testo: [
+                                'Una delle giornate più spettacolari del viaggio, da vivere con lentezza partendo presto per il nord dell\'isola.',
+                                'Il Quiraing è il paesaggio più surreale di Skye: strada tra pendii verdi e formazioni rocciose con pinnacoli, vallate immense e scogliere verso il mare.',
+                                'Lungo il percorso: Old Man of Storr, Kilt Rock e panorami sulla penisola di Trotternish.',
+                                'Nel pomeriggio le Fairy Pools, a sud-ovest dell\'isola: torrenti cristallini, piccole cascate e piscine naturali dai riflessi turchesi incorniciate dai Cuillin.',
+                                'Se resta tempo: Talisker Bay oppure Neist Point per un tramonto indimenticabile.'
+                            ],
+                            immagine: 'assets/img/scotland/20200729_162057.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Da Skye a Glen Coe passando per Glenfinnan',
+                            testo: [
+                                'Si torna sulla terraferma con la prima grande sosta a Glenfinnan, famosa per il viadotto del Jacobite Steam Train reso celebre dai film di Harry Potter.',
+                                'Proseguendo si raggiunge Fort William, dominata dal profilo del Ben Nevis.',
+                                'Nel pomeriggio uno dei momenti più intensi: Glen Coe, valle drammatica e silenziosa dove le montagne sembrano chiudersi attorno alla strada.',
+                                'Fermate consigliate: Three Sisters viewpoint, Lagangarbh Cottage e brevi passeggiate panoramiche.',
+                                'La sera in questa zona ha un\'atmosfera speciale, soprattutto in un piccolo lodge o pub tradizionale.'
+                            ],
+                            immagine: 'assets/img/scotland/20200731_093809.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Loch Lomond e arrivo a Stirling',
+                            testo: [
+                                'Lasciando Glen Coe si attraversa Rannoch Moor, una distesa selvaggia di torbiere e colline: uno dei tratti stradali più scenografici della Scozia.',
+                                'Scendendo verso sud il paesaggio diventa più dolce fino al Loch Lomond & The Trossachs National Park, con villaggi sul lago e passeggiate sul lungolago.',
+                                'Nel pomeriggio si raggiunge Stirling, città storica con un castello che domina dall\'alto e regala viste magnifiche sulla campagna circostante.',
+                                'Passeggiare nel centro medievale al tramonto è il modo migliore per chiudere la parte on the road del viaggio.'
+                            ],
+                            immagine: 'assets/img/scotland/117178313_3247530961977753_1948291222183113686_n.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Stirling → Edimburgo senza macchina',
+                            testo: [
+                                'Dopo colazione visita con calma a Stirling Castle oppure al vicino Wallace Monument.',
+                                'Poi si parte verso Edimburgo: prima di entrare in città, riconsegna dell\'auto all\'aeroporto, poi tram o Airlink Bus portano rapidamente in centro.',
+                                'Il pomeriggio è dedicato al primo incontro con Edimburgo a piedi: Royal Mile, Victoria Street, Grassmarket e vicoli medievali.',
+                                'Al tramonto salita a Calton Hill per una delle viste più belle sulla città.'
+                            ],
+                            immagine: 'assets/img/scotland/116711203_3247530158644500_4529323423419914076_n.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Edimburgo tra castello e quartieri eleganti',
+                            testo: [
+                                'Giornata piena dedicata alla capitale: mattina all\'Edinburgh Castle, St Giles Cathedral e Royal Mile.',
+                                'Nel pomeriggio Dean Village, Water of Leith, Stockbridge e la New Town georgiana.',
+                                'La città alterna continuamente atmosfera medievale e quartieri eleganti del XVIII secolo.',
+                                'Per chi ha energie: salita ad Arthur\'s Seat con vista panoramica su tutta Edimburgo.',
+                                'Cena finale in pub storico o ristorante scozzese.'
+                            ],
+                            immagine: 'assets/img/scotland/117120682_3247530418644474_6710467366426574251_n.jpg'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Ultime ore a Edimburgo e rientro',
+                            testo: [
+                                'Ultima mattina senza fretta: National Museum of Scotland, shopping, caffetterie, Circus Lane e brunch finale.',
+                                'Poi tram per l\'aeroporto e volo di rientro.'
+                            ],
+                            immagine: 'assets/img/scotland/117263481_3247532985310884_6242079767007254526_n.jpg'
+                        }
+                    ],
+                    SriLanka: [
+                        {
+                            giorni: '1',
+                            titolo: 'Prime luci tra Colombo, Negombo e la costa est',
+                            testo: [
+                                'L’arrivo in Sri Lanka ha un sapore particolare: l’aria umida, il profumo di spezie e il caos gentile delle prime ore del mattino.',
+                                'Dopo l’atterraggio, la prima tappa e Negombo, cittadina di pescatori lontana dal traffico di Colombo.',
+                                'Il viaggio inizia lentamente tra riposo e una passeggiata nel celebre mercato del pesce, dove barche colorate e reti appena rientrate raccontano la vita quotidiana dell’isola.',
+                                'Nel pomeriggio si attraversa il Paese verso Nilaveli, sulla costa orientale, con una strada lunga ma panoramica che viene ripagata dall’arrivo al mare.',
+                                'Pernottamento: Nilaveli'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250825_014654984.MP.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Pigeon Island e il mare dello Sri Lanka',
+                            testo: [
+                                'Una giornata dedicata completamente all’oceano davanti a Nilaveli.',
+                                'Pigeon Island e uno dei luoghi migliori dello Sri Lanka per fare snorkeling, tra acque trasparenti, coralli e pesci tropicali.',
+                                'La giornata scorre senza fretta tra nuotate, sole e sabbia bianca.',
+                                'Basta poco per capire perché questa parte dello Sri Lanka sia considerata un piccolo paradiso tropicale.',
+                                'Pernottamento: Nilaveli'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250825_015843462.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Dal mare ai templi di Dambulla',
+                            testo: [
+                                'L’ultima mattina sulla costa est scorre lenta tra spiaggia e mare.',
+                                'Nel pomeriggio si lascia l’oceano per entrare nel cuore culturale dello Sri Lanka, raggiungendo Dambulla.',
+                                'Al tramonto, il Tempio d’Oro regala il primo vero incontro con la spiritualita dell’isola.',
+                                'Statue dorate, grotte affrescate e panorami silenziosi sembrano sospesi nel tempo.',
+                                'Pernottamento: Dambulla'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250827-WA0083.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Sigiriya, la roccia del re, e il viaggio verso Kandy',
+                            testo: [
+                                'La sveglia e prima dell’alba, ma per Sigiriya ne vale la pena.',
+                                'La salita alla celebre Lion Rock e uno dei momenti piu memorabili del viaggio, tra giungla che si illumina e viste immense dall’alto.',
+                                'Antica fortezza reale e sito UNESCO, Sigiriya mescola storia, leggenda e paesaggi incredibili.',
+                                'Dopo la visita, il ritmo cambia con un’esperienza nei villaggi e nelle risaie circostanti tra cucina locale, vita rurale e tradizioni autentiche.',
+                                'Nel pomeriggio si prosegue verso Kandy. Pernottamento: Kandy'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250828-WA0035.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Kandy, cuore spirituale dello Sri Lanka',
+                            testo: [
+                                'Kandy ha un’atmosfera piu raccolta, spirituale e profondamente legata alla tradizione.',
+                                'La giornata inizia al Tempio del Dente, uno dei luoghi piu sacri del buddhismo, dove il suono dei tamburi accompagna le cerimonie religiose.',
+                                'Poi arriva un momento piu intimo e locale: una cooking class per imparare i sapori dello Sri Lanka, tra curry speziati, cocco fresco e ricette tramandate da generazioni.',
+                                'La sera si conclude con le danze tradizionali kandyan e una cena con vista sulla citta.',
+                                'Pernottamento: Kandy'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250829-WA0129.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Il treno panoramico verso Ella',
+                            testo: [
+                                'Per molti e il viaggio in treno piu bello dell’Asia.',
+                                'La tratta Kandy-Ella attraversa montagne, piantagioni di te e piccoli villaggi sospesi nel verde.',
+                                'Le porte aperte del treno, la nebbia sulle colline e il ritmo lento dei vagoni rendono questa esperienza molto piu di un semplice spostamento.',
+                                'Arrivati a Ella, la giornata continua con Little Adam’s Peak e il Nine Arches Bridge, soprattutto al tramonto.',
+                                'Pernottamento: Ella'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250830-WA0223.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Te, cascate e strada verso la natura selvaggia',
+                            testo: [
+                                'Le colline di Ella raccontano la storia del te di Ceylon.',
+                                'Tra piantagioni e fabbriche storiche si scopre come nasce una delle esportazioni piu celebri del Paese.',
+                                'La tappa prosegue verso le spettacolari Diyaluma Falls, dove l’acqua scolpisce piscine naturali e panorami aperti sulle montagne.',
+                                'Nel pomeriggio il paesaggio cambia ancora e si scende verso Yala, porta d’ingresso della natura piu selvaggia.',
+                                'Pernottamento: Yala'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250828-WA0019.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Safari a Yala e tramonto sull’oceano',
+                            testo: [
+                                'La giornata inizia molto presto nel Parco Nazionale di Yala.',
+                                'Si entra in un mondo fatto di elefanti, bufali, coccodrilli e, con un po’ di fortuna, leopardi.',
+                                'Il safari regala una prospettiva completamente diversa dello Sri Lanka, lontana dalle spiagge e dalle citta.',
+                                'Dopo l’avventura nella savana tropicale, il viaggio prosegue verso Mirissa, dove il rumore dell’oceano sostituisce quello della giungla.',
+                                'Pernottamento: Mirissa'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG_20250901_183416_332.jpg'
+                        },
+                        {
+                            giorni: '9-10',
+                            titolo: 'Mirissa, surf e vita lenta',
+                            testo: [
+                                'Mirissa e il momento di rallentare davvero.',
+                                'Le giornate non hanno bisogno di programmi rigidi: surf, spiagge dorate, tramonti e piccoli cafe sul mare.',
+                                'E anche il luogo ideale per avvistare le balene e visitare i centri di protezione delle tartarughe marine.',
+                                'Sono giorni dedicati al relax, quelli in cui il viaggio smette di essere una corsa e diventa semplicemente esperienza.',
+                                'Pernottamento: Mirissa'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250902-WA0053~2.jpg'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Verso Galle, tra oceano e storia coloniale',
+                            testo: [
+                                'Dopo un’ultima giornata sul mare, si raggiunge Galle.',
+                                'La citta conserva un’anima diversa dal resto dello Sri Lanka: mura coloniali, edifici olandesi, strade acciottolate e un’atmosfera elegante.',
+                                'Il passato mercantile dell’isola si sente in ogni angolo del forte.',
+                                'La sera e perfetta per passeggiare lungo le mura mentre il sole scompare nell’oceano.',
+                                'Pernottamento: Galle'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250828_125626642.MP.jpg'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Galle e l’ultima notte a Colombo',
+                            testo: [
+                                'L’ultimo giorno e un mix di nostalgia e scoperta.',
+                                'Si visita con calma il Forte di Galle, patrimonio UNESCO, prima di tornare verso Colombo per l’ultima serata in Sri Lanka.',
+                                'Il viaggio si chiude con una cena speciale che celebra il mare della costa est, i templi, il treno tra le montagne e la natura di Yala.',
+                                'Ogni tappa riporta alla mente un’isola capace di cambiare volto continuamente.',
+                                'Pernottamento: Colombo'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250904_110607292.jpg'
+                        },
+                        {
+                            giorni: '13',
+                            titolo: 'Arrivederci Sri Lanka',
+                            testo: [
+                                'Prima dell’alba si parte per l’aeroporto.',
+                                'Lo Sri Lanka resta alle spalle, ma con la sensazione di aver attraversato molti Paesi in uno solo: spirituale, selvaggio, tropicale e incredibilmente accogliente.',
+                                'Un’isola piccola sulla mappa, ma enorme nei ricordi.',
+                                'Il viaggio finisce, ma il ritmo dell’isola continua a rimanere addosso.',
+                                'Trasferimento finale verso l’aeroporto di Colombo'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250830-WA0167.jpg'
+                        }
+                    ]
+                },
+                maps: {
+                    Thailandia: {
+                        caption: 'Bangkok, Chiang Mai, Chiang Rai, Phuket, Krabi, Railay e Hong Islands',
+                        points: [
+                            { name: 'Bangkok', lat: 13.7563, lng: 100.5018 },
+                            { name: 'Chiang Mai', lat: 18.7883, lng: 98.9853 },
+                            { name: 'Chiang Rai', lat: 19.9105, lng: 99.8406 },
+                            { name: 'Phuket', lat: 7.8804, lng: 98.3923 },
+                            { name: 'Krabi', lat: 8.0863, lng: 98.9063 },
+                            { name: 'Railay Beach', lat: 8.0059, lng: 98.8370 },
+                            { name: 'Hong Islands', lat: 8.0725, lng: 98.7025 }
+                        ]
+                    },
+                    America: {
+                        caption: 'Los Angeles, Sequoia, Death Valley, Las Vegas, Zion, Bryce Canyon, Page, Monument Valley, Grand Canyon, Prescott, Sedona e Phoenix',
+                        points: [
+                            { name: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
+                            { name: 'Sequoia National Park', lat: 36.4864, lng: -118.5658 },
+                            { name: 'Death Valley', lat: 36.5323, lng: -116.9325 },
+                            { name: 'Las Vegas', lat: 36.1699, lng: -115.1398 },
+                            { name: 'Valley of Fire', lat: 36.4247, lng: -114.5176 },
+                            { name: 'Zion Canyon', lat: 37.2982, lng: -113.0263 },
+                            { name: 'Bryce Canyon', lat: 37.5930, lng: -112.1871 },
+                            { name: 'Horseshoe Bend', lat: 36.8790, lng: -111.5103 },
+                            { name: 'Monument Valley', lat: 36.9980, lng: -110.0985 },
+                            { name: 'Page', lat: 36.9147, lng: -111.4558 },
+                            { name: 'Grand Canyon', lat: 36.1069, lng: -112.1129 },
+                            { name: 'Watson Lake', lat: 34.5858, lng: -112.4296 },
+                            { name: 'Prescott', lat: 34.5400, lng: -112.4685 },
+                            { name: 'Jerome', lat: 34.7486, lng: -112.1138 },
+                            { name: 'Sedona', lat: 34.8697, lng: -111.7610 },
+                            { name: 'Phoenix', lat: 33.4484, lng: -112.0740 }
+                        ]
+                    },
+                    Bolivia: {
+                        caption: 'Santiago, Valparaíso, Atacama, Salar de Uyuni, Potosí, Sucre e La Paz',
+                        points: [
+                            { name: 'Santiago', lat: -33.4489, lng: -70.6693 },
+                            { name: 'Valparaíso', lat: -33.0472, lng: -71.6127 },
+                            { name: 'San Pedro de Atacama', lat: -22.9111, lng: -68.2011 },
+                            { name: 'Valle della Luna', lat: -22.9411, lng: -68.2581 },
+                            { name: 'Geyser del Tatio', lat: -22.3268, lng: -67.9236 },
+                            { name: 'Laguna Colorada', lat: -22.1700, lng: -67.7833 },
+                            { name: 'Uyuni', lat: -20.4633, lng: -66.8268 },
+                            { name: 'Salar de Uyuni', lat: -20.1338, lng: -67.4891 },
+                            { name: 'Potosí', lat: -19.5836, lng: -65.7531 },
+                            { name: 'Sucre', lat: -19.0478, lng: -65.2597 },
+                            { name: 'La Paz', lat: -16.5000, lng: -68.1500 }
+                        ]
+                    },
+                    China: {
+                        caption: 'Pechino e tratte iconiche del viaggio in Cina',
+                        points: [
+                            { name: 'Pechino', lat: 39.9042, lng: 116.4074 },
+                            { name: 'Xi an', lat: 34.3416, lng: 108.9398 },
+                            { name: 'Chengdu', lat: 30.5728, lng: 104.0668 },
+                            { name: 'Zhangjiajie', lat: 29.1171, lng: 110.4792 },
+                            { name: 'Furong Village', lat: 28.6827, lng: 110.9792 },
+                            { name: 'Wangxiangu Scenic Area', lat: 28.6827, lng: 117.8120 },
+                            { name: 'Shanghai', lat: 31.2304, lng: 121.4737 }
+                        ]
+                    },
+                    Scotland: {
+                        caption: 'Edimburgo, Pitlochry, Cairngorms, Inverness, Loch Ness, Skye e Glen Coe',
+                        points: [
+                            { name: 'Edimburgo', lat: 55.9533, lng: -3.1883 },
+                            { name: 'Pitlochry', lat: 56.7066, lng: -3.7348 },
+                            { name: 'Blair Atholl', lat: 56.7685, lng: -3.8430 },
+                            { name: 'Cairngorms', lat: 57.1000, lng: -3.8000 },
+                            { name: 'Inverness', lat: 57.4778, lng: -4.2247 },
+                            { name: 'Loch Ness', lat: 57.2667, lng: -4.5000 },
+                            { name: 'Eilean Donan Castle', lat: 57.2739, lng: -5.5155 },
+                            { name: 'Portree - Isle of Skye', lat: 57.4122, lng: -6.1968 },
+                            { name: 'Quiraing', lat: 57.6410, lng: -6.2908 },
+                            { name: 'Fairy Pools', lat: 57.2542, lng: -6.2981 },
+                            { name: 'Glenfinnan', lat: 56.8724, lng: -5.4394 },
+                            { name: 'Fort William', lat: 56.8198, lng: -5.1052 },
+                            { name: 'Glen Coe', lat: 56.6779, lng: -5.0992 },
+                            { name: 'Loch Lomond', lat: 56.0837, lng: -4.6033 },
+                            { name: 'Stirling', lat: 56.1165, lng: -3.9369 }
+                        ]
+                    },
+                    SriLanka: {
+                        caption: 'Colombo, Negombo, Nilaveli, Dambulla, Sigiriya, Kandy, Ella, Yala, Mirissa e Galle',
+                        points: [
+                            { name: 'Colombo', lat: 6.9271, lng: 79.8612 },
+                            { name: 'Negombo', lat: 7.2083, lng: 79.8358 },
+                            { name: 'Nilaveli', lat: 8.6950, lng: 81.1882 },
+                            { name: 'Dambulla', lat: 7.8567, lng: 80.6517 },
+                            { name: 'Sigiriya', lat: 7.9570, lng: 80.7603 },
+                            { name: 'Kandy', lat: 7.2906, lng: 80.6337 },
+                            { name: 'Ella', lat: 6.8667, lng: 81.0466 },
+                            { name: 'Diyaluma Falls', lat: 6.7358, lng: 81.0307 },
+                            { name: 'Yala', lat: 6.3725, lng: 81.5185 },
+                            { name: 'Mirissa', lat: 5.9483, lng: 80.4716 },
+                            { name: 'Galle', lat: 6.0329, lng: 80.2168 },
+                            { name: 'Colombo', lat: 6.9271, lng: 79.8612 }
+                        ]
+                    }
+                }
+            },
+            en: {
+                labels: {
+                    mapTitle: 'Trip map',
+                    emptyTitle: 'Vlog unavailable',
+                    emptyText: 'Choose a destination from the Explore page.',
+                    days: 'Days',
+                    tripNames: {
+                        Thailandia: 'Thailand',
+                        America: 'America',
+                        Bolivia: 'Bolivia & Chile',
+                        China: 'China',
+                        Scotland: 'Scotland',
+                        SriLanka: 'Sri Lanka'
+                    }
+                },
+                trips: {
+                    Thailandia: [
+                        {
+                            giorni: '1',
+                            titolo: 'Bangkok, first impact',
+                            testo: [
+                                'Arrival in Bangkok and crossing the city among intense traffic and motorbikes everywhere.',
+                                'First tuk tuk ride downtown through crowded streets and bright signs.',
+                                'First contact with street food: freshly cooked pad thai and tropical fruit cut on the spot.',
+                                'Evening walk through lively markets and streets full of life.'
+                            ],
+                            immagine: 'assets/img/thailandia/20231228_175526-13c1.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Bangkok between temples and river',
+                            testo: [
+                                'Boat navigation on the Chao Phraya among local boats and constant river traffic.',
+                                'Visit to Wat Arun and its ceramic-covered towers.',
+                                'Stop at Wat Pho to see the Reclining Buddha and inner courtyards.',
+                                'Short stop at the railway market during train passage.',
+                                'Crossing the city at sunset among traffic and evening lights.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231227_100553777.MP.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Life on the canals',
+                            testo: [
+                                'Early departure toward the floating market.',
+                                'Navigation among boats loaded with food, fruit and local products.',
+                                'Observation of canal life among stilt houses and small docks.',
+                                'Tasting dishes prepared directly on boats.',
+                                'Return toward Bangkok through rural areas outside the city.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231227_052410908.MP.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Chiang Mai, a slower rhythm',
+                            testo: [
+                                'Flight north and arrival in Chiang Mai.',
+                                'Walk through the old city among temples, cafes and artisan shops.',
+                                'Night Bazaar exploration with street food and local products.',
+                                'Tasting northern cuisine like khao soi and grilled specialties.',
+                                'Contact with local evening life in the city lanes.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231227_104201964.MP.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Doi Suthep and spirituality',
+                            testo: [
+                                'Visit to Wat Phra Singh in the historic center.',
+                                'Climb to Doi Suthep through mountain roads surrounded by vegetation.',
+                                'Panoramic view over Chiang Mai from the temple terrace.',
+                                'Observation of monks and daily rituals inside the complex.',
+                                'Khantoke dinner with local dishes and traditional performances.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231229_100234358.PORTRAIT.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Chiang Rai and the White Temple',
+                            testo: [
+                                'Departure from Chiang Mai through mountain landscapes and northern villages.',
+                                'Arrival at Wat Rong Khun, known as the White Temple, with modern artistic details.',
+                                'Walk among symbolic bridges and installations with spiritual themes.',
+                                'Observation of architecture and sculptures throughout the complex.',
+                                'Return to Chiang Mai via panoramic northern roads.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231228_041044181.MP~2.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Elephant sanctuary experience',
+                            testo: [
+                                'Transfer to the hills outside Chiang Mai through green landscapes.',
+                                'Arrival at an ethical sanctuary and first contact with rescued elephants.',
+                                'Food preparation and direct feeding of the animals.',
+                                'Jungle walk with elephants along natural trails and streams.',
+                                'Waterfall stop and return with a traditional Thai massage experience.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231230_030740053.MP.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Cooking, local life, and flight to Phuket',
+                            testo: [
+                                'Visit to a local market among spices, fresh herbs and typical ingredients.',
+                                'Thai cooking session with a local chef.',
+                                'Preparation of pad thai, curry and traditional soups.',
+                                'Tasting of dishes prepared together.',
+                                'Evening cultural show with music and dance.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231230_104316392.jpg'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Phuket between sea and local life',
+                            testo: [
+                                'Morning on Kata and Karon beaches.',
+                                'Swimming and time in open water.',
+                                'Walk through local markets and evening street food.',
+                                'Coastal nightlife with music and local venues.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20231231_050210713.MP.jpg'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'Islands and snorkeling',
+                            testo: [
+                                'Departure by longtail boat toward nearby islands.',
+                                'Snorkeling among tropical fish and coral reefs.',
+                                'Stops in quiet bays away from the busiest areas.',
+                                'Lunch on the beach during the excursion.',
+                                'Return among islands and cliffs in the afternoon.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20240103_103529606.jpg'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Krabi and limestone cliffs',
+                            testo: [
+                                'Navigation to Krabi between coastlines and rocky formations.',
+                                'Arrival in Ao Nang and walk along the seaside area.',
+                                'Observation of limestone cliffs from the beach.',
+                                'Street food tasting at seafront stalls.'
+                            ],
+                            immagine: 'assets/img/thailandia/20240106_111347-12ef.jpg'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Railay Beach',
+                            testo: [
+                                'Boat access to Railay Beach.',
+                                'Day between sea, sand and limestone cliffs.',
+                                'Kayaking through caves and rock walls.',
+                                'Exploration of the peninsula on foot.',
+                                'Swimming in calm waters between cliffs.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20240102_045132262.MP.jpg'
+                        },
+                        {
+                            giorni: '13',
+                            titolo: 'Hong Islands',
+                            testo: [
+                                'Speedboat excursion among islands and turquoise lagoons.',
+                                'Snorkeling in clear waters with visible marine life.',
+                                'Stops on secluded beaches reachable only by sea.',
+                                'Navigation through natural channels and rocky formations.',
+                                'Return at sunset across open sea.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20240102_034410501.MP~2.jpg'
+                        },
+                        {
+                            giorni: '14',
+                            titolo: 'Last hours by the sea',
+                            testo: [
+                                'Morning with free beach and sea activities.',
+                                'Fresh fish cooked directly on the beach.',
+                                'Final swim in the warm central hours of the day.',
+                                'Walk along the coast among markets and local spots.'
+                            ],
+                            immagine: 'assets/img/thailandia/20240105_222355-581d.jpg'
+                        },
+                        {
+                            giorni: '15',
+                            titolo: 'Return',
+                            testo: [
+                                'Last morning in Thailand.',
+                                'Transfer along the coast toward the airport.',
+                                'Flight back home.'
+                            ],
+                            immagine: 'assets/img/thailandia/PXL_20240106_104155552.MP.jpg'
+                        }
+                    ],
+                    America: [
+                        {
+                            giorni: '1',
+                            titolo: 'Los Angeles, cinema and first emotions',
+                            testo: [
+                                'Between endless deserts, legendary cities and some of the most iconic landscapes of the American West, this itinerary crosses the heart of western America.',
+                                'From the lights of Los Angeles to the casinos of Las Vegas, from giant sequoia forests to canyons carved by time, all the way to the dusty stretches of Route 66 and the red sunsets of Arizona.',
+                                'It is a journey made of long distances, immense panoramas and that unique sense of freedom that only an American road trip can offer.',
+                                'America begins in the evening.',
+                                'After landing in Los Angeles there is just enough time to pick up the car, the real star of the trip, grab a quick sandwich and head straight to Hollywood Boulevard.',
+                                'The stars on the pavement, the glowing signs and the cinematic atmosphere make it clear at once that you have stepped into one of the most iconic places in the world.',
+                                'And then there is the Hollywood sign itself, watched from afar as it dominates the city from the hills: a scene that already feels like a movie.',
+                                'Overnight stay: Los Angeles'
+                            ],
+                            immagine: 'assets/img/usa/Screenshot.png'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Californian glamour and giants of nature',
+                            testo: [
+                                'The next morning the atmosphere changes completely.',
+                                'Beverly Hills is made of tidy avenues, perfect palm trees and villas hidden behind imposing gates.',
+                                'Walking here means stepping for a moment into the Hollywood imagination, among elegant boutiques and streets that seem built for cinema.',
+                                'Then comes one of the sharpest contrasts of the trip: the road toward Sequoia National Park.',
+                                'Everything turns quiet and suddenly very small. Giant sequoias are not simply trees: they are ancient natural monuments capable of distorting your sense of scale.',
+                                'Walking among these giants leaves an almost unreal feeling that is difficult to explain.',
+                                'Overnight stay: Bakersfield'
+                            ],
+                            immagine: 'assets/img/usa/IMG_0833.JPG'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Death Valley and the night of Las Vegas',
+                            testo: [
+                                'From mountain greenery to the most extreme desert.',
+                                'Death Valley feels almost alien, made of endless plains, heat and colours that keep changing. Here nature shows its harshest and most fascinating side.',
+                                'In the afternoon, like a mirage in the void, the lights of Las Vegas appear.',
+                                'Las Vegas is excess, spectacle and pure entertainment. Walking along the Strip means moving from Venice to Paris in a few minutes among giant hotels and impossible stage sets.',
+                                'Among the most iconic hotels to see: the Venetian, Bellagio and Caesars Palace.',
+                                'The night is made for letting yourself be carried away by casinos, shows and that surreal energy that makes the city unlike anywhere else.',
+                                'Overnight stay: Las Vegas'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1006.JPG'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Valley of Fire and entering Utah',
+                            testo: [
+                                'With Vegas behind you, nature takes centre stage again.',
+                                'Valley of Fire seems to belong to another planet. The red and orange rocks ignite under the sun and create striking contrasts.',
+                                'The colours of this park are almost impossible to describe: intense, surreal and alive.',
+                                'In the afternoon the road enters Utah and reaches Zion Canyon, where gigantic rock walls rise vertically above the valley.',
+                                'It is the first great canyon of the trip and the visual impact is immediate.',
+                                'Overnight stay: Zion area'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1251.JPG'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Bryce Canyon at dawn, the most magical moment',
+                            testo: [
+                                'Some places deserve a wake-up call before sunrise. Bryce Canyon is one of them.',
+                                'From Sunrise Point the landscape lights up slowly, revealing thousands of rock pinnacles, the hoodoos, that look carved by an artist.',
+                                'The tones shift from red to orange and then to gold.',
+                                'For many people this is one of the most emotional moments of the entire trip, a nearly unreal place that stays with you far beyond the photographs.',
+                                'After sunrise the journey continues through the spectacular landscapes of Utah.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1466.JPG'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Horseshoe Bend and Monument Valley at sunset',
+                            testo: [
+                                'The day starts with one of the most famous views in the West.',
+                                'Horseshoe Bend appears almost suddenly: a perfect curve of the Colorado River carved into the rock, seen from above.',
+                                'Then the route continues toward Monument Valley. America changes face once again here.',
+                                'The great rock formations rise from the desert and immediately bring back western films and the imagery of the old frontier.',
+                                'Arriving at sunset is something special.',
+                                'A valuable tip is to rely on a local Navajo guide: besides revealing less accessible places and stories of the land, it helps avoid trouble on sandy stretches where getting stuck is easy.',
+                                'Overnight stay: Tuba City'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1735.JPG'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Canyons shaped by time',
+                            testo: [
+                                'The morning opens with vast views over Glen Canyon and the deep blue waters of Lake Powell.',
+                                'The meeting of red rock and water creates one of the most beautiful contrasts in Arizona.',
+                                'In the afternoon comes one of the most surprising places of the trip: Antelope Canyon.',
+                                'Here wind and water have shaped the stone for thousands of years, creating flowing walls and remarkable light effects.',
+                                'Walking inside the canyon feels almost hypnotic: the forms resemble waves frozen inside the rock.',
+                                'A place difficult to describe and impossible to forget.',
+                                'Overnight stay: Page'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1763.JPG'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Grand Canyon and Route 66',
+                            testo: [
+                                'The Grand Canyon needs no introduction, yet no photograph truly prepares you for its scale.',
+                                'Seeing it for the first time means realizing how immense and silent nature can be.',
+                                'After the visit, the mood changes again as the journey enters the American legend of Route 66.',
+                                'Vintage gas stations, retro signs and small towns suspended in time line the road toward Williams.',
+                                'Here it feels as if you have stepped into an older America.',
+                                'Overnight stay: Williams'
+                            ],
+                            immagine: 'assets/img/usa/IMG_2106.JPG'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'A new face of the Grand Canyon and Watson Lake',
+                            testo: [
+                                'The Grand Canyon keeps changing according to the point of view.',
+                                'A second visit lets you see it differently, with new light and lookouts that reveal a landscape never quite identical to itself.',
+                                'Later the road leads toward Watson Lake.',
+                                'The giant granite boulders surrounding the water create an unexpected, almost lunar scene.',
+                                'It is a lesser-known stop, but a surprising one.',
+                                'Overnight stay: Prescott area'
+                            ],
+                            immagine: 'assets/img/usa/IMG_E2241.JPG'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'Prescott and Jerome, between history and western atmosphere',
+                            testo: [
+                                'Prescott still preserves the soul of the old West.',
+                                'Historic saloons, period buildings and quiet streets tell a different side of Arizona.',
+                                'A short distance away lies Jerome, a former mining town perched on the mountainside.',
+                                'It is a place suspended in time, with an almost mysterious charm made of alleys, views and old buildings that still echo the Far West.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_1763.JPG'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Sedona and the red mountains of Arizona',
+                            testo: [
+                                'Sedona is energy and landscape combined.',
+                                'Its red mountains emerge from the desert, creating one of the most photographed scenes in the United States.',
+                                'Many people come for the hikes, others for the spiritual atmosphere that surrounds the place.',
+                                'Either way, Sedona wins you over with its simple and powerful beauty.',
+                                'It is one of those places where stopping, breathing and watching the landscape already becomes part of the experience.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_2339.JPG'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Arrival in Phoenix',
+                            testo: [
+                                'The final stop leads to Phoenix, a large desert city and the natural conclusion of the trip.',
+                                'After days spent among canyons, deserts and endless roads, the road trip closes here with the feeling of having crossed some of the most iconic images of America.',
+                                'Because the West is not only a destination.',
+                                'It is a journey that stays with you long after it has ended.'
+                            ],
+                            immagine: 'assets/img/usa/IMG_2346.JPG'
+                        }
+                    ],
+                    Bolivia: [
+                        {
+                            giorni: '1',
+                            titolo: 'Welcome to Chile: Santiago',
+                            testo: [
+                                'Our adventure begins in Santiago, the vibrant capital of Chile and one of the most dynamic cities in South America. After arrival formalities, we are ready to dive into the local culture.',
+                                'Depending on arrival time, we choose how to start: a walk through the murals and bohemian atmosphere of Bellavista, a visit to one of Pablo Neruda\'s houses, or a climb to Cerro Santa Lucía for our first Chilean sunset.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230812_180205672.MP.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Valparaíso, the city of a thousand colours',
+                            testo: [
+                                'Less than two hours by bus to the Pacific coast and Valparaíso, a UNESCO World Heritage city. A walking tour reveals a city of coloured houses, street art and historic funiculars connecting its famous cerros.',
+                                'We visit La Sebastiana, Pablo Neruda\'s eccentric house-museum, with lunch at ocean-view restaurants or with a typical Chilean empanada. In the afternoon Cerro Concepción and the Parque Cultural de Valparaíso, an arts centre built inside a former prison.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230812_213446424.MP.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'San Pedro de Atacama and the Valley of the Moon',
+                            testo: [
+                                'Internal flight to Calama, then a one-hour transfer to San Pedro de Atacama, gateway to one of the most spectacular deserts on the planet.',
+                                'In the afternoon the Valley of the Moon: giant dunes, canyons and wind-sculpted rock formations. Sunset colours everything pink and gold with a Chilean aperitivo and a glass of Pisco. At night, an astronomical tour with telescopes under the pitch-black desert sky.'
+                            ],
+                            immagine: 'assets/img/cile/IMG-20230814-WA0086.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Dawn at El Tatio Geysers and a swim in Laguna Cejar',
+                            testo: [
+                                'We set off in the middle of the night for El Tatio Geysers, the third largest geothermal field in the world. At over 4,200 metres the dawn spectacle among fumaroles and steam columns is unforgettable. Breakfast in the silence of the desert.',
+                                'In the afternoon Laguna Cejar: extremely salty waters that let you float effortlessly like in the Dead Sea, surrounded by volcanoes, snow-capped mountains and glittering salt flats.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230815_193640955.MP.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'From the Chilean Andes to Bolivia: surreal lagoons and deserts',
+                            testo: [
+                                'We say goodbye to Chile and cross into Bolivia. Our 4x4 jeeps take us into the Eduardo Avaroa National Reserve: Laguna Blanca, Laguna Verde and the Salvador Dalí Desert with its surreal landscapes.',
+                                'We continue to the Polques hot springs above 4,000 metres, the Sol de Mañana geothermal area with its fumaroles and boiling mud, and the spectacular red Laguna Colorada with its Andean flamingos. Night in a lodge in the desert.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230813_200234195.MP.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Flamingos, canyons and the timeless charm of Uyuni',
+                            testo: [
+                                'Rock formations of Italia Perdida, Laguna Vinto and the Catal or Escondida lagoons, home to flamingos, llamas and viscachas. We cross the Valle de las Rocas and the Cañón de la Anaconda.',
+                                'A stop in the village of San Cristóbal, then the Train Cemetery at almost 4,000 metres: 19th-century steam locomotives and wagons, perfect for unforgettable photographs. Tonight we sleep in a hotel built almost entirely of salt.'
+                            ],
+                            immagine: 'assets/img/cile/IMG-20230817-WA0031.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'The Salar de Uyuni: Bolivia\'s greatest spectacle',
+                            testo: [
+                                'After Colchani, a village famous for salt extraction, the whole day is dedicated to the Salar de Uyuni, the largest salt flat on the planet at over 10,000 km². Ojos de Sal, perspective photography and optical illusions.',
+                                'Lunch in the heart of the Salar in near-total silence, then Incahuasi Island with its cacti over ten metres tall. At sunset a local aperitivo while the sky transforms above this infinite white landscape.'
+                            ],
+                            immagine: 'assets/img/cile/IMG-20230818-WA0130.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Potosí: history, mines and memory',
+                            testo: [
+                                'We leave the salt hotel for Potosí, a UNESCO World Heritage site and one of the highest cities in the world at over 4,000 metres. Its fame comes from the silver mines that enriched the Spanish empire.',
+                                'We go inside the Cerro Rico mine, where miners still work following ancient traditions. Then the historic centre with its colonial squares and local bakeries serving the typical chambergos.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230817_232303921.LONG_EXPOSURE-01.COVER.jpg'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Sucre, the White City',
+                            testo: [
+                                'We descend to Sucre, Bolivia\'s first capital and a UNESCO World Heritage city. La Ciudad Blanca preserves the colonial charm of its white buildings. From Plaza 25 de Mayo to the Cathedral of Our Lady of Guadalupe.',
+                                'Sucre is also the capital of Bolivian chocolate: a tasting at the most celebrated chocolatiers. Then the typical fritanga and an evening on a panoramic terrace admiring the lit-up city.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230823_185951625.MP~2.jpg'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'La Paz and the beating heart of Bolivia',
+                            testo: [
+                                'Internal flight to La Paz. We start in the historic centre, the Mercado de las Brujas with its Aymara traditions and medicinal herbs, Plaza San Francisco and Plaza Murillo.',
+                                'In the late afternoon we board the teleférico, the largest urban cable car network in the world, linking La Paz to El Alto with spectacular views over the city. Local salteñas at sunset from above.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230817_224458096.MP.jpg'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Adrenaline or nature? La Paz your way',
+                            testo: [
+                                'A free day to live as we choose. For adrenaline seekers: the legendary Death Road, from La Cumbre at 4,650 metres down to Yolosa, over 3,500 metres lower, by mountain bike through mountains, forests and valleys.',
+                                'For those preferring nature: the Valley of the Moon, Valle de las Ánimas or the Palca Canyon through gorges carved by water and wind. A final dinner together and a toast to the most beautiful memories of the journey.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230822_145535733.MP.jpg'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Farewell Bolivia',
+                            testo: [
+                                'Between endless deserts, colonial cities, coloured lagoons and unforgettable sunsets, this journey has taken us to the most authentic heart of Chile and Bolivia.',
+                                'After breakfast we head to La Paz airport for the return flight. We take home spectacular photographs, but above all stories, encounters and memories destined to stay with us far longer than the trip itself.'
+                            ],
+                            immagine: 'assets/img/cile/PXL_20230821_183504468.MP.jpg'
+                        }
+                    ],
+                    China: [
+                        {
+                            giorni: '1',
+                            titolo: 'Arrival in Beijing and first impact with the city',
+                            testo: [
+                                'Landing in Beijing means being overwhelmed by an energy that is hard to explain. After check-in, we went straight to the Temple of Heaven, a place that conveys an almost unreal calm in contrast with the chaos of the metropolis. In the evening, we got lost among the hutongs, tasting our first local dishes and watching daily life flow through lantern-lit alleys. It was the perfect way to immediately understand how surprising this city can be.'
+                            ],
+                            immagine: 'assets/img/optimized/china/tempio_cielo-768.avif'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Great Wall of China',
+                            testo: [
+                                'Wake-up call at dawn to reach the Simatai section of the Great Wall. Walking on these stones, with towers fading into the mountains, gives you a feeling that is hard to describe: you feel tiny in front of something so immense and full of history. Back in the city, the visit to the Forbidden City was the perfect end to the day, a dive into China\'s imperial heart.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240803_130024-5f3f-768.avif'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Tiananmen Square and night market',
+                            testo: [
+                                'The morning at Tiananmen Square has a solemn and almost suspended atmosphere. Visiting Mao\'s Mausoleum means stepping into one of the symbolic places of Chinese history. In the afternoon, we explored Beijing\'s more modern side, among futuristic districts and skyscrapers, then ended the day at the night market: intense aromas, lights everywhere, and the courage to try street food we probably will never forget.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240804_114816-8049-768.avif'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Wandering around Beijing and departure for Xi an',
+                            testo: [
+                                'We dedicated our last day in Beijing to wandering aimlessly through hutongs and less-traveled alleys, where the city shows its most authentic face. Here you do not find crowds of tourists, but elderly people playing cards and tiny shops that seem frozen in time. In the evening, boarding the night train to Xi an gave the trip that sense of adventure only long journeys in Asia can offer.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240805_132416-2de0-768.avif'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Xi an - Tang Paradise and Muslim Quarter',
+                            testo: [
+                                'Xi an has a completely different charm from Beijing. The Giant Wild Goose Pagoda tells the story of an ancient and spiritual China, while the city walls offer an incredible view, especially at sunset. But the real emotional highlight came in the Muslim Quarter: an overwhelming mix of aromas, colors, and street food that makes it impossible not to stop and taste something.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240805_205002-cddf-768.avif'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Terracotta Army',
+                            testo: [
+                                'Standing in front of the Terracotta Army leaves you speechless. Seeing it in person is completely different from any photo: thousands of warriors, each with unique details, lined up for more than two thousand years. It is one of those places that makes you realize how immense Chinese history is. After this immersion into the past, the journey continued toward Chengdu.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240807_164244-ec41-768.avif'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Chengdu - Leshan and Jinli Street',
+                            testo: [
+                                'The Leshan Giant Buddha truly takes your breath away. Its sheer size in real life is something no photograph can fully capture. Back in Chengdu, Jinli Street welcomed us with glowing lanterns, spicy aromas, and an almost cinematic atmosphere that made the evening unforgettable.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240807_164007-ba68-768.avif'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Excursion to Mount Emei',
+                            testo: [
+                                'Mount Emei is one of those places that reconnects you completely with nature. Among temples hidden in the mist, trails immersed in greenery, and viewpoints that open up unexpectedly, every step feels like entering another dimension. Reaching the summit and seeing the clouds below us was one of the most beautiful moments of the whole trip.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240810_014622-5086-768.avif'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Panda Center and flight to Zhangjiajie, then directly to Furong Village',
+                            testo: [
+                                'Meeting the pandas at Chengdu\'s research center is one of those experiences that makes you feel like a child again. After that, we found ourselves in Furong Village, a surreal place built above a waterfall, lit up at night as if it had come out of a movie.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240807_164310-1d06-768.avif'
+                        },
+                        {
+                            giorni: '10',
+                            titolo: 'Zhangjiajie National Park',
+                            testo: [
+                                'Return from Furong to Zhangjiajie city. From here, visit to the National Park... it is simply unreal. Walking among these rock pillars suspended in the mist truly gives you the feeling of stepping into the world of Avatar. Every viewpoint surpasses the previous one, and no matter how much you try to photograph it, in person it has an impact that leaves you speechless.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240811_224713-46c8-768.avif'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Mount Tianmen',
+                            testo: [
+                                'The very long cable car up Mount Tianmen is already a memorable experience in itself. Flying over the mountain while the road with its 99 bends winds below you is thrilling. Then you reach the top, stand before the Heaven\'s Gate, and understand why this place is considered one of the most spectacular in all of China.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240820_192932-66b9-768.avif'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Wangxian Valley',
+                            testo: [
+                                'Wangxian Valley looks like a movie set. The structures suspended on the mountain, the lights turning on at sunset, and the almost mystical atmosphere make this place unique. It is one of those places still little known outside China, and maybe for that very reason it preserves an authentic magic.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240813_155253-d91a-768.avif'
+                        },
+                        {
+                            giorni: '13',
+                            titolo: 'Arrival in Shanghai',
+                            testo: [
+                                'Shanghai is a direct impact with the future. After days among mountains and historic cities, finding yourself in front of the Bund skyline is almost disorienting. The contrast between Pudong\'s skyscrapers and the classic charm of the waterfront creates a unique scene, especially when the city lights up at night.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240811_224946-81d7-768.avif'
+                        },
+                        {
+                            giorni: '14',
+                            titolo: 'Excursion to Zhujiajiao',
+                            testo: [
+                                'Less than an hour from Shanghai, Zhujiajiao seems to belong to another era. Quiet canals, stone bridges, and small shops make this water village the perfect place to slow down and breathe an atmosphere completely different from the frenzy of the metropolis.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240813_155253-d91a-768.avif'
+                        },
+                        {
+                            giorni: '15',
+                            titolo: 'Return to Italy',
+                            testo: [
+                                'The last hours in Shanghai... Looking at the skyline one final time, we realized how China is one of those countries capable of changing the way you see the world.'
+                            ],
+                            immagine: 'assets/img/optimized/china/20240805_205012-f611-768.avif'
+                        }
+                    ],
+                    Scotland: [
+                        {
+                            giorni: '1',
+                            titolo: 'Edinburgh → Pitlochry and Blair Atholl',
+                            testo: [
+                                'After picking up the car at Edinburgh Airport, we quickly left the city and headed north, gradually entering the Highlands.',
+                                'The road crosses increasingly green and rolling landscapes, where villages grow smaller and traffic gives way to sheep, forests and hills.',
+                                'First stop in Pitlochry, a charming Victorian town with pale stone facades: a stroll along the main street and a stop at a pub or tea room.',
+                                'In the afternoon, Blair Atholl and the picturesque Blair Castle surrounded by gardens and woodland: a relaxed, green and scenic introduction to Scotland.',
+                                'The evening is perfect for a traditional dinner and a first local whisky.'
+                            ],
+                            immagine: 'assets/img/scotland/117098157_3247529865311196_5801436778031535398_n.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Crossing Cairngorms National Park',
+                            testo: [
+                                'Leaving Pitlochry, the road enters Cairngorms National Park, one of the largest national parks in the United Kingdom.',
+                                'The landscape changes visibly: rounded mountains, pine forests, moorland and wide open spaces.',
+                                'Aviemore is the perfect stop for a coffee and mountain views before heading north again.',
+                                'You feel that typically Scottish sensation of space and isolation, with scenic roads that seem to cross endless territory.',
+                                'In the afternoon you reach Inverness, the capital of the Highlands: walk along the River Ness, the historic centre and Inverness Castle from the outside.'
+                            ],
+                            immagine: 'assets/img/scotland/117213345_3247531978644318_838794384861616124_n.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'Loch Ness, Eilean Donan and the arrival at Skye',
+                            testo: [
+                                'Leaving Inverness, the road follows the shores of legendary Loch Ness, long and mysterious, often shrouded in low clouds and cinematic atmosphere.',
+                                'Main stop at Urquhart Castle, perched on the loch: ruins that tell centuries of battles and one of the most famous panoramas in Scotland.',
+                                'Heading west you reach Eilean Donan Castle, set on a tiny island connected to the mainland by a stone bridge: it looks like it came out of a film.',
+                                'Crossing the bridge to Skye you feel like entering a different Scotland: more remote, dramatic, almost Nordic.',
+                                'Arriving in Portree: a walk around the colourful harbour and dinner with a sea view.'
+                            ],
+                            immagine: 'assets/img/scotland/117098137_3247529688644547_698138920925420111_n.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Isle of Skye: Quiraing and Fairy Pools',
+                            testo: [
+                                'One of the most spectacular days of the trip, best enjoyed slowly by starting early for the north of the island.',
+                                'The Quiraing is Skye\'s most surreal landscape: the road climbs among green slopes and rock formations with pinnacles, vast valleys and cliffs dropping to the sea.',
+                                'Along the way: Old Man of Storr, Kilt Rock and panoramas over the Trotternish peninsula.',
+                                'In the afternoon the Fairy Pools, in the south-west of the island: crystal streams, small waterfalls and turquoise natural pools framed by the Cuillin mountains.',
+                                'If time allows: Talisker Bay or Neist Point for an unforgettable sunset.'
+                            ],
+                            immagine: 'assets/img/scotland/20200729_162057.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'From Skye to Glen Coe via Glenfinnan',
+                            testo: [
+                                'Back on the mainland with the first major stop at Glenfinnan, famous for the viaduct crossed by the Jacobite Steam Train, made iconic by the Harry Potter films.',
+                                'Continuing on you reach Fort William, dominated by the outline of Ben Nevis.',
+                                'In the afternoon one of the most powerful moments: Glen Coe, an intense, dramatic and silent valley where the mountains seem to close in around the road.',
+                                'Recommended stops: Three Sisters viewpoint, Lagangarbh Cottage and short panoramic walks.',
+                                'The evening in this area has a special atmosphere, especially if you stay in a small lodge or traditional pub.'
+                            ],
+                            immagine: 'assets/img/scotland/20200731_093809.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'Loch Lomond and arrival in Stirling',
+                            testo: [
+                                'Leaving Glen Coe you cross Rannoch Moor, a wild expanse of peat bogs and hills: one of the most scenic stretches of road in Scotland.',
+                                'Heading south the landscape softens as you reach Loch Lomond & The Trossachs National Park, with lochside villages and walks along the shore.',
+                                'In the afternoon you reach Stirling, a historic city whose castle dominates the skyline and offers magnificent views over the surrounding countryside.',
+                                'A stroll through the medieval centre at sunset is the perfect way to close the road-trip portion of the journey.'
+                            ],
+                            immagine: 'assets/img/scotland/117178313_3247530961977753_1948291222183113686_n.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Stirling → Edinburgh on foot',
+                            testo: [
+                                'After breakfast a relaxed visit to Stirling Castle or the nearby Wallace Monument.',
+                                'Then departure for Edinburgh: before entering the city, drop off the car at the airport, then tram or Airlink Bus takes you quickly into the centre.',
+                                'The afternoon is dedicated to a first encounter with Edinburgh on foot: Royal Mile, Victoria Street, Grassmarket and medieval closes.',
+                                'At sunset climb Calton Hill for one of the best views over the city.'
+                            ],
+                            immagine: 'assets/img/scotland/116711203_3247530158644500_4529323423419914076_n.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Edinburgh: castle and elegant neighbourhoods',
+                            testo: [
+                                'A full day dedicated to the capital: morning at Edinburgh Castle, St Giles\' Cathedral and the Royal Mile.',
+                                'In the afternoon Dean Village, Water of Leith, Stockbridge and the Georgian New Town.',
+                                'The city constantly alternates medieval atmosphere with elegant 18th-century neighbourhoods.',
+                                'For those with energy: a climb up Arthur\'s Seat with panoramic views across all of Edinburgh.',
+                                'Final dinner in a historic pub or Scottish restaurant.'
+                            ],
+                            immagine: 'assets/img/scotland/117120682_3247530418644474_6710467366426574251_n.jpg'
+                        },
+                        {
+                            giorni: '9',
+                            titolo: 'Last hours in Edinburgh and departure',
+                            testo: [
+                                'Final morning without hurry: National Museum of Scotland, shopping, coffee shops, Circus Lane and a last brunch.',
+                                'Then tram to the airport and the flight home.'
+                            ],
+                            immagine: 'assets/img/scotland/117263481_3247532985310884_6242079767007254526_n.jpg'
+                        }
+                    ],
+                    SriLanka: [
+                        {
+                            giorni: '1',
+                            titolo: 'First light between Colombo, Negombo and the east coast',
+                            testo: [
+                                'Arriving in Sri Lanka feels distinctive right away, with humid air, the scent of spices and the gentle chaos of the early morning hours.',
+                                'After landing, the first stop is Negombo, a fishing town far from the traffic of Colombo.',
+                                'The trip begins slowly with some rest and a walk through the famous fish market, where colorful boats and freshly returned nets tell the daily story of the island.',
+                                'In the afternoon the route crosses the country toward Nilaveli on the eastern coast, and the long scenic drive is rewarded by the sea at the end.',
+                                'Overnight stay: Nilaveli'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250825_014654984.MP.jpg'
+                        },
+                        {
+                            giorni: '2',
+                            titolo: 'Pigeon Island and the sea of Sri Lanka',
+                            testo: [
+                                'A full day devoted to the ocean in front of Nilaveli.',
+                                'Pigeon Island is one of the best places in Sri Lanka for snorkeling, with clear water, coral reefs and tropical fish.',
+                                'The day unfolds slowly between swims, sunshine and white sand.',
+                                'It quickly becomes clear why this stretch of Sri Lanka is considered a small tropical paradise.',
+                                'Overnight stay: Nilaveli'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250825_015843462.jpg'
+                        },
+                        {
+                            giorni: '3',
+                            titolo: 'From the sea to the temples of Dambulla',
+                            testo: [
+                                'The last morning on the east coast moves slowly between beach and sea.',
+                                'In the afternoon the ocean is left behind to enter the cultural heart of Sri Lanka by reaching Dambulla.',
+                                'At sunset, the Golden Temple offers the first real encounter with the spiritual side of the island.',
+                                'Golden statues, painted caves and silent views seem suspended in time.',
+                                'Overnight stay: Dambulla'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250827-WA0083.jpg'
+                        },
+                        {
+                            giorni: '4',
+                            titolo: 'Sigiriya, the king rock, and the journey to Kandy',
+                            testo: [
+                                'The wake-up call comes before dawn, but Sigiriya is worth it.',
+                                'The climb to the famous Lion Rock is one of the most memorable moments of the trip, with the jungle lighting up step by step and vast views from the top.',
+                                'An ancient royal fortress and UNESCO site, Sigiriya blends history, legend and remarkable landscapes.',
+                                'After the visit, the rhythm changes with an experience among nearby villages and rice fields, including local cuisine, rural life and traditions.',
+                                'In the afternoon the route continues toward Kandy. Overnight stay: Kandy'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250828-WA0035.jpg'
+                        },
+                        {
+                            giorni: '5',
+                            titolo: 'Kandy, spiritual heart of Sri Lanka',
+                            testo: [
+                                'Kandy has a more intimate, spiritual atmosphere and is deeply connected to tradition.',
+                                'The day begins at the Temple of the Tooth, one of the holiest places in Buddhism, where the sound of drums accompanies religious ceremonies.',
+                                'Then comes a more local moment: a cooking class to learn the flavors of Sri Lanka among spiced curries, fresh coconut and recipes handed down through generations.',
+                                'The evening closes with traditional Kandyan dances and dinner with a view over the city.',
+                                'Overnight stay: Kandy'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250829-WA0129.jpg'
+                        },
+                        {
+                            giorni: '6',
+                            titolo: 'The panoramic train to Ella',
+                            testo: [
+                                'For many travelers, it is the most beautiful train journey in Asia.',
+                                'The Kandy-Ella route crosses mountains, tea plantations and small villages suspended in green landscapes.',
+                                'Open train doors, mist over the hills and the slow pace of the carriages turn the ride into much more than a transfer.',
+                                'Once in Ella, the day continues with Little Adam’s Peak and the Nine Arches Bridge, especially at sunset.',
+                                'Overnight stay: Ella'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250830-WA0223.jpg'
+                        },
+                        {
+                            giorni: '7',
+                            titolo: 'Tea, waterfalls and the road toward wild nature',
+                            testo: [
+                                'The hills around Ella tell the story of Ceylon tea.',
+                                'Among plantations and historic factories, it becomes clear how one of the country most famous exports is produced.',
+                                'The route then reaches spectacular Diyaluma Falls, where water carves natural pools and wide mountain views.',
+                                'In the afternoon the landscape changes again while descending toward Yala, gateway to the wildest side of nature.',
+                                'Overnight stay: Yala'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250828-WA0019.jpg'
+                        },
+                        {
+                            giorni: '8',
+                            titolo: 'Safari in Yala and sunset on the ocean',
+                            testo: [
+                                'The day starts very early in Yala National Park.',
+                                'This is a world of elephants, buffaloes, crocodiles and, with some luck, leopards.',
+                                'The safari offers a completely different perspective on Sri Lanka, far from beaches and cities.',
+                                'After the tropical savannah adventure, the trip continues to Mirissa, where the sound of the ocean replaces the sounds of the jungle.',
+                                'Overnight stay: Mirissa'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG_20250901_183416_332.jpg'
+                        },
+                        {
+                            giorni: '9-10',
+                            titolo: 'Mirissa, surf and slow living',
+                            testo: [
+                                'Mirissa is the moment to slow down.',
+                                'The days do not need a rigid program: surfing, golden beaches, sunsets and small cafes by the sea are enough.',
+                                'It is also an ideal place for whale watching and visiting marine turtle protection centers.',
+                                'These are days devoted to rest, when the trip stops feeling like a race and becomes pure experience.',
+                                'Overnight stay: Mirissa'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250902-WA0053~2.jpg'
+                        },
+                        {
+                            giorni: '11',
+                            titolo: 'Toward Galle, between ocean and colonial history',
+                            testo: [
+                                'After one last day by the sea, the route reaches Galle.',
+                                'The city keeps an atmosphere unlike the rest of Sri Lanka, with colonial walls, Dutch buildings, cobbled streets and an elegant mood.',
+                                'The island mercantile past is still present across the fort.',
+                                'The evening is perfect for walking along the walls while the sun disappears into the ocean.',
+                                'Overnight stay: Galle'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250828_125626642.MP.jpg'
+                        },
+                        {
+                            giorni: '12',
+                            titolo: 'Galle and the last night in Colombo',
+                            testo: [
+                                'The last day is a mix of nostalgia and discovery.',
+                                'The Galle Fort, a UNESCO heritage site, is explored slowly before returning to Colombo for the final evening in Sri Lanka.',
+                                'The trip closes with a special dinner celebrating the east coast sea, the temples, the mountain train and the wild nature of Yala.',
+                                'Each stop brings back the memory of an island able to change face again and again.',
+                                'Overnight stay: Colombo'
+                            ],
+                            immagine: 'assets/img/sri_lanka/PXL_20250904_110607292.jpg'
+                        },
+                        {
+                            giorni: '13',
+                            titolo: 'Goodbye Sri Lanka',
+                            testo: [
+                                'Before dawn it is time to leave for the airport.',
+                                'Sri Lanka stays behind with the feeling of having crossed many countries in one: spiritual, wild, tropical and incredibly welcoming.',
+                                'A small island on the map, but enormous in memory.',
+                                'The journey ends, but the island rhythm keeps lingering on.',
+                                'Final transfer to Colombo airport'
+                            ],
+                            immagine: 'assets/img/sri_lanka/IMG-20250830-WA0167.jpg'
+                        }
+                    ]
+                },
+                maps: {
+                    Thailandia: {
+                        caption: 'Bangkok, Chiang Mai, Chiang Rai, Phuket, Krabi, Railay and Hong Islands',
+                        points: [
+                            { name: 'Bangkok', lat: 13.7563, lng: 100.5018 },
+                            { name: 'Chiang Mai', lat: 18.7883, lng: 98.9853 },
+                            { name: 'Chiang Rai', lat: 19.9105, lng: 99.8406 },
+                            { name: 'Phuket', lat: 7.8804, lng: 98.3923 },
+                            { name: 'Krabi', lat: 8.0863, lng: 98.9063 },
+                            { name: 'Railay Beach', lat: 8.0059, lng: 98.8370 },
+                            { name: 'Hong Islands', lat: 8.0725, lng: 98.7025 }
+                        ]
+                    },
+                    America: {
+                        caption: 'Los Angeles, Sequoia, Death Valley, Las Vegas, Zion, Bryce Canyon, Page, Monument Valley, Grand Canyon, Prescott, Sedona and Phoenix',
+                        points: [
+                            { name: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
+                            { name: 'Sequoia National Park', lat: 36.4864, lng: -118.5658 },
+                            { name: 'Death Valley', lat: 36.5323, lng: -116.9325 },
+                            { name: 'Las Vegas', lat: 36.1699, lng: -115.1398 },
+                            { name: 'Valley of Fire', lat: 36.4247, lng: -114.5176 },
+                            { name: 'Zion Canyon', lat: 37.2982, lng: -113.0263 },
+                            { name: 'Bryce Canyon', lat: 37.5930, lng: -112.1871 },
+                            { name: 'Horseshoe Bend', lat: 36.8790, lng: -111.5103 },
+                            { name: 'Monument Valley', lat: 36.9980, lng: -110.0985 },
+                            { name: 'Page', lat: 36.9147, lng: -111.4558 },
+                            { name: 'Grand Canyon', lat: 36.1069, lng: -112.1129 },
+                            { name: 'Watson Lake', lat: 34.5858, lng: -112.4296 },
+                            { name: 'Prescott', lat: 34.5400, lng: -112.4685 },
+                            { name: 'Jerome', lat: 34.7486, lng: -112.1138 },
+                            { name: 'Sedona', lat: 34.8697, lng: -111.7610 },
+                            { name: 'Phoenix', lat: 33.4484, lng: -112.0740 }
+                        ]
+                    },
+                    Bolivia: {
+                        caption: 'Santiago, Valparaíso, Atacama, Salar de Uyuni, Potosí, Sucre and La Paz',
+                        points: [
+                            { name: 'Santiago', lat: -33.4489, lng: -70.6693 },
+                            { name: 'Valparaíso', lat: -33.0472, lng: -71.6127 },
+                            { name: 'San Pedro de Atacama', lat: -22.9111, lng: -68.2011 },
+                            { name: 'Valley of the Moon', lat: -22.9411, lng: -68.2581 },
+                            { name: 'El Tatio Geysers', lat: -22.3268, lng: -67.9236 },
+                            { name: 'Laguna Colorada', lat: -22.1700, lng: -67.7833 },
+                            { name: 'Uyuni', lat: -20.4633, lng: -66.8268 },
+                            { name: 'Salar de Uyuni', lat: -20.1338, lng: -67.4891 },
+                            { name: 'Potosí', lat: -19.5836, lng: -65.7531 },
+                            { name: 'Sucre', lat: -19.0478, lng: -65.2597 },
+                            { name: 'La Paz', lat: -16.5000, lng: -68.1500 }
+                        ]
+                    },
+                    China: {
+                        caption: 'Beijing and iconic routes across China',
+                        points: [
+                            { name: 'Beijing', lat: 39.9042, lng: 116.4074 },
+                            { name: 'Xi an', lat: 34.3416, lng: 108.9398 },
+                            { name: 'Chengdu', lat: 30.5728, lng: 104.0668 },
+                            { name: 'Zhangjiajie', lat: 29.1171, lng: 110.4792 },
+                            { name: 'Furong Village', lat: 28.6827, lng: 110.9792 },
+                            { name: 'Wangxiangu Scenic Area', lat: 28.6827, lng: 117.8120 },
+                            { name: 'Shanghai', lat: 31.2304, lng: 121.4737 }
+                        ]
+                    },
+                    Scotland: {
+                        caption: 'Edinburgh, Pitlochry, Cairngorms, Inverness, Loch Ness, Skye and Glen Coe',
+                        points: [
+                            { name: 'Edinburgh', lat: 55.9533, lng: -3.1883 },
+                            { name: 'Pitlochry', lat: 56.7066, lng: -3.7348 },
+                            { name: 'Blair Atholl', lat: 56.7685, lng: -3.8430 },
+                            { name: 'Cairngorms', lat: 57.1000, lng: -3.8000 },
+                            { name: 'Inverness', lat: 57.4778, lng: -4.2247 },
+                            { name: 'Loch Ness', lat: 57.2667, lng: -4.5000 },
+                            { name: 'Eilean Donan Castle', lat: 57.2739, lng: -5.5155 },
+                            { name: 'Portree - Isle of Skye', lat: 57.4122, lng: -6.1968 },
+                            { name: 'Quiraing', lat: 57.6410, lng: -6.2908 },
+                            { name: 'Fairy Pools', lat: 57.2542, lng: -6.2981 },
+                            { name: 'Glenfinnan', lat: 56.8724, lng: -5.4394 },
+                            { name: 'Fort William', lat: 56.8198, lng: -5.1052 },
+                            { name: 'Glen Coe', lat: 56.6779, lng: -5.0992 },
+                            { name: 'Loch Lomond', lat: 56.0837, lng: -4.6033 },
+                            { name: 'Stirling', lat: 56.1165, lng: -3.9369 }
+                        ]
+                    },
+                    SriLanka: {
+                        caption: 'Colombo, Negombo, Nilaveli, Dambulla, Sigiriya, Kandy, Ella, Yala, Mirissa and Galle',
+                        points: [
+                            { name: 'Colombo', lat: 6.9271, lng: 79.8612 },
+                            { name: 'Negombo', lat: 7.2083, lng: 79.8358 },
+                            { name: 'Nilaveli', lat: 8.6950, lng: 81.1882 },
+                            { name: 'Dambulla', lat: 7.8567, lng: 80.6517 },
+                            { name: 'Sigiriya', lat: 7.9570, lng: 80.7603 },
+                            { name: 'Kandy', lat: 7.2906, lng: 80.6337 },
+                            { name: 'Ella', lat: 6.8667, lng: 81.0466 },
+                            { name: 'Diyaluma Falls', lat: 6.7358, lng: 81.0307 },
+                            { name: 'Yala', lat: 6.3725, lng: 81.5185 },
+                            { name: 'Mirissa', lat: 5.9483, lng: 80.4716 },
+                            { name: 'Galle', lat: 6.0329, lng: 80.2168 },
+                            { name: 'Colombo', lat: 6.9271, lng: 79.8612 }
+                        ]
+                    }
+                }
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const trip = params.get('trip');
+        const container = document.getElementById('viaggi-container');
+        const mapTitle = document.querySelector('#mappa-trip h2');
+        let tripMap = null;
+
+        function getCurrentLanguage() {
+            return window.localStorage.getItem('travel-language') === 'en' ? 'en' : 'it';
+        }
+
+        function getDictionary(language) {
+            return localizedVlogData[language] || localizedVlogData.it;
+        }
+
+        function buildResponsivePicture(imageSrc, altText) {
+            const optimizedBase = typeof getOptimizedImageBase === 'function' ? getOptimizedImageBase(imageSrc) : '';
+
+            if (!optimizedBase) {
+                return `
+                <img
+                    src="${imageSrc}"
+                    alt="${altText}"
+                    loading="lazy"
+                    decoding="async">
+            `;
+            }
+
+            // Nuova regola: su desktop (oltre 900px) usa 800px
+            const sizes = '(max-width: 900px) 100vw, 800px';
+
+            return `
+                <picture>
+                    <source
+                        srcset="${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w"
+                        sizes="${sizes}"
+                        type="image/avif">
+                    <source
+                        srcset="${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w"
+                        sizes="${sizes}"
+                        type="image/webp">
+                    <img
+                        src="${optimizedBase}-768.jpg"
+                        alt="${altText}"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.onerror=null;this.src='${imageSrc}';">
+                </picture>
+            `;
+        }
+
+        function renderMap(currentTrip, dictionary) {
+            const tripConfig = dictionary.maps[currentTrip];
+            const labels = dictionary.labels;
+            const mapSection = document.getElementById('mappa-trip');
+            const caption = document.getElementById('trip-map-caption');
+            const mapEl = document.getElementById('trip-map');
+
+            if (tripMap) {
+                tripMap.remove();
+                tripMap = null;
+            }
+
+            mapEl.innerHTML = '';
+
+            if (!tripConfig || !tripConfig.points || !tripConfig.points.length || typeof L === 'undefined') {
+                mapSection.hidden = true;
+                return;
+            }
+
+            mapSection.hidden = false;
+            mapTitle.textContent = labels.mapTitle;
+            caption.textContent = tripConfig.caption;
+
+            tripMap = L.map(mapEl, { scrollWheelZoom: false });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(tripMap);
+
+            const latLngs = tripConfig.points.map((point) => {
+                const marker = L.marker([point.lat, point.lng]).addTo(tripMap);
+                marker.bindPopup(point.name);
+                return [point.lat, point.lng];
+            });
+
+            if (latLngs.length > 1) {
+                L.polyline(latLngs, { color: '#ec994b', weight: 4, opacity: 0.85 }).addTo(tripMap);
+            }
+
+            tripMap.fitBounds(latLngs, { padding: [24, 24] });
+        }
+
+        function renderTripPage(language) {
+            const dictionary = getDictionary(language);
+            const labels = dictionary.labels;
+            const contenuti = dictionary.trips[trip];
+            const tripLabel = labels.tripNames[trip] || trip;
+
+            container.innerHTML = '';
+
+            if (!contenuti || !contenuti.length) {
+                container.innerHTML = `
+        <section class="empty-state">
+          <h1>${labels.emptyTitle}</h1>
+          <p>${labels.emptyText}</p>
+        </section>
+      `;
+                renderMap(null, dictionary);
+                return;
+            }
+
+            contenuti.forEach((giorno) => {
+                const sezione = document.createElement('section');
+                sezione.className = 'viaggio';
+                sezione.innerHTML = `
+                ${buildResponsivePicture(giorno.immagine, tripLabel)}
+          <div class="descrizione">
+            <h2>${labels.days} ${giorno.giorni} - ${tripLabel}</h2>
+            <p>${giorno.titolo}</p>
+            <ul>
+              ${giorno.testo.map((riga) => `<li>${riga}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+                container.appendChild(sezione);
+            });
+
+            renderMap(trip, dictionary);
+        }
+
+        document.addEventListener('languagechange', function (event) {
+            renderTripPage(event.detail.language);
+        });
+
+        renderTripPage(getCurrentLanguage());
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti</title>
+  <meta name="description"
+    content="Contatta Andrea Lombardo per domande, consigli di viaggio o collaborazioni tramite il modulo dedicato.">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#d97706">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Travel Blog | Contatti">
+  <meta property="og:description"
+    content="Scrivimi direttamente dal form contatti per richieste e informazioni sui viaggi.">
+  <meta property="og:image" content="assets/img/optimized/usa/IMG_1018-1200.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Travel Blog | Contatti">
+  <meta name="twitter:description"
+    content="Scrivimi direttamente dal form contatti per richieste e informazioni sui viaggi.">
+  <meta name="twitter:image" content="assets/img/optimized/usa/IMG_1018-1200.jpg">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self'; upgrade-insecure-requests">
+  <link rel="stylesheet" href="assets/css/styles_contact.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Travel</a>
+    <div class="menu-btn"></div>
+    <div class="navigation">
+      <div class="navigation-items">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="explore.html">Explore</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+    </div>
+  </header>
+  <section class="Social contact-hero">
+    <h1>Benvenuti nel mio travel blog!</h1>
+    <p>
+      Questo travel blog nasce dalla mia passione per i viaggi e dall'ardente desiderio di condividere le esperienze
+      straordinarie che ho vissuto in giro per il mondo. È come un diario digitale che ho creato per me stesso e per
+      tutti coloro che condividono la mia stessa passione per l'esplorazione e la scoperta.
+    </p>
+    <p>Qui troverai una raccolta di consigli, riflessioni e momenti catturati sul momento durante le mie avventure. Ogni
+      viaggio è un'opportunità unica per immergersi in culture diverse, esplorare luoghi mozzafiato e incontrare persone
+      straordinarie. Attraverso le mie parole, immagini e video, cerco di trasmettere l'emozione e la bellezza di queste
+      esperienze, offrendo uno sguardo personale sul mondo che mi circonda.
+    </p>
+    <p>Le pagine di questo blog sono piene di itinerari dettagliati, recensioni sincere e consigli pratici per aiutarti
+      a pianificare il tuo prossimo viaggio. Oltre a ciò, potrai sbirciare nelle immagini e nei video estratti
+      direttamente dal mio profilo Instagram, dove condivido regolarmente gli highlights delle mie avventure.
+    </p>
+    <p>Mi auguro che questo spazio possa ispirarti, fornirti preziose informazioni e alimentare la tua voglia di
+      esplorare il mondo. E se hai domande, curiosità o desideri semplicemente condividere le tue esperienze di viaggio,
+      non esitare a contattarmi tramite il box sottostante.</p>
+    <p>Sono qui per condividere la mia passione e aiutarti a vivere esperienze indimenticabili in giro per il globo!
+    </p>
+  </section>
+  <section class="contact">
+
+    <div class="contact-in">
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d190049.30004634877!2d12.345797094335932!3d41.903172260082364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f9928ebb%3A0xb90f770693656e38!2sRoma%20RM!5e0!3m2!1sit!2sit!4v1705689684319!5m2!1sit!2sit"
+          width="600" height="420" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="contact-form">
+        <h1>Contattami</h1>
+
+        <form action="/api/contact" method="POST" id="form">
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+          <input type="text" name="name" placeholder="Nome " class="contact-form-txt" required>
+          <input type="email" name="email" placeholder="Email" class="contact-form-txt" required>
+          <textarea name="message" placeholder="Messaggio" class="contact-form-textarea" required></textarea>
+          <input type="submit" value="Invia" class="contact-form-btn">
+        </form>
+        <p id="contact-status" aria-live="polite"></p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <br> <br>
+      <p>&copy; 2024 Viaggiare è la piu potente forma di psicoterapia</p>
+      <nav class="footer-nav">
+        <a href="/chi-siamo">Chi siamo</a> |
+        <a href="/privacy">Privacy Policy</a> |
+        <a href="/contatti">Contatti</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="social-media">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+
+    </div>
+  </footer>
+</body>
+
+</html>

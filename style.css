@@ -1,0 +1,86 @@
+
+  .navigation a {
+    margin-left: 20px;
+    text-decoration: none;
+    
+  }
+  
+  .trip-overview {
+    text-align: center;
+    padding: 50px 20px;
+    margin-bottom: 10px;
+
+
+  }
+  
+  .trip-overview h1 {
+    font-size: 30px;
+  }
+
+  
+  .trip-overview p {
+    font-size: 18px;
+  }
+  
+  .trip-details {
+    padding: 20px;
+  }
+  
+  .day {
+    margin-bottom: 40px;
+  }
+  
+  .day-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .day-content img {
+    width: 50%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+  
+  .day-content .text {
+    width: 50%;
+  }
+  
+  .day-content .text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .day-content .text p {
+    font-size: 16px;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .footer .social-media a {
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+  }
+  
+  /* Media query per schermi più piccoli */
+  @media (max-width: 768px) {
+    .day-content {
+      flex-direction: column;
+    }
+  
+    .day-content img,
+    .day-content .text {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    .day-content img {
+      margin-bottom: 20px;
+    }
+  }

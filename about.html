@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog | About</title>
+    <meta name="description"
+        content="Chi sono: Andrea Lombardo, passione per tecnologia e viaggi, con storie reali, consigli pratici e prossime destinazioni.">
+    <meta name="robots" content="index, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#d97706">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:title" content="Travel Blog | About">
+    <meta property="og:description"
+        content="Scopri il profilo di Andrea Lombardo e la filosofia dietro questo travel blog.">
+    <meta property="og:image" content="assets/img/other/me.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Travel Blog | About">
+    <meta name="twitter:description"
+        content="Scopri il profilo di Andrea Lombardo e la filosofia dietro questo travel blog.">
+    <meta name="twitter:image" content="assets/img/other/me.jpg">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; upgrade-insecure-requests">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles_about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Travel</a>
+        <div class="menu-btn" aria-label="Apri menu"></div>
+        <div class="navigation">
+            <div class="navigation-items">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="explore.html">Explore</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="about-main">
+        <section class="introduction about-hero" data-first-viewport-animate>
+            <p class="hero-kicker">Travel creator · Roma</p>
+            <h3 class="text-center">- Quando la bussola interiore e sballata: prenota un viaggio, ti aiutera a ritrovare
+                la tua strada -</h3>
+            <h1 class="text-center">About me</h1>
+        </section>
+
+        <section class="profilo about-profile-card" data-first-viewport-animate>
+            <div class="profile-visual">
+                <img id="profile-img" src="assets/img/other/me.jpg" alt="Foto profilo di Andrea Lombardo" width="320"
+                    height="320" loading="eager" decoding="async" fetchpriority="high">
+                <p class="profile-caption">Da Roma al mondo, un viaggio alla volta.</p>
+            </div>
+            <div class="descrizione">
+                <h2>Sono Andrea Lombardo, classe '95, romano amante della tecnologia oltre che dei viaggi per scoprire
+                    nuove culture e vivere esperienze uniche.</h2>
+                <p>Ho scelto di combinare queste due grandi passioni <span class="accent">- Tecnologia e Viaggi -</span>
+                    dando vita a questo spazio virtuale.</p>
+
+                <ul class="about-pillars" aria-label="Valori principali">
+                    <li>Itinerari reali e onesti</li>
+                    <li>Consigli pratici sul campo</li>
+                    <li>Foto e video ad alta qualita</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="about-metrics" aria-label="Numeri del progetto">
+            <article>
+                <h4>6+</h4>
+                <p>Destinazioni raccontate</p>
+            </article>
+            <article>
+                <h4>100+</h4>
+                <p>Scatti in galleria</p>
+            </article>
+            <article>
+                <h4>3</h4>
+                <p>Planned trips</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <br><br>
+            <p>&copy; 2024 Viaggiare e la piu potente forma di psicoterapia</p>
+            <nav class="footer-nav">
+                <a href="/chi-siamo">Chi siamo</a> |
+                <a href="/privacy">Privacy Policy</a> |
+                <a href="/contatti">Contatti</a>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-media">
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+    <script>
+        var profileImg = document.getElementById('profile-img');
+        var originalSrc = profileImg.src;
+
+        profileImg.addEventListener('mouseenter', function () {
+            profileImg.src = 'assets/img/other/me2.jpg';
+        });
+
+        profileImg.addEventListener('mouseleave', function () {
+            profileImg.src = originalSrc;
+        });
+
+        // Animate only elements visible in the initial viewport on first load.
+        (function () {
+            var introElements = document.querySelectorAll('[data-first-viewport-animate]');
+            if (!introElements.length) {
+                return;
+            }
+
+            var viewportBottom = window.innerHeight || document.documentElement.clientHeight;
+
+            introElements.forEach(function (element, index) {
+                var rect = element.getBoundingClientRect();
+                var isInitiallyVisible = rect.top < viewportBottom * 0.98 && rect.bottom > 0;
+
+                if (isInitiallyVisible) {
+                    window.setTimeout(function () {
+                        element.classList.add('is-intro-visible');
+                    }, index * 70);
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

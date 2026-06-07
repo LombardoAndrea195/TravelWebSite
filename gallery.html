@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Blog | Gallery</title>
+  <meta name="description"
+    content="Galleria fotografica dei viaggi con immagini ottimizzate e alta risoluzione da diverse destinazioni nel mondo.">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#d97706">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Travel Blog | Gallery">
+  <meta property="og:description" content="Scopri la galleria completa di scatti dai viaggi di Andrea Lombardo.">
+  <meta property="og:image" content="assets/img/optimized/china/20240803_130024-5f3f-1200.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Travel Blog | Gallery">
+  <meta name="twitter:description" content="Scopri la galleria completa di scatti dai viaggi di Andrea Lombardo.">
+  <meta name="twitter:image" content="assets/img/optimized/china/20240803_130024-5f3f-1200.jpg">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com; upgrade-insecure-requests">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles_gallery.css">
+  <script src="assets/js/gallery-images.js" defer></script>
+  <script src="assets/js/mega-links.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Travel</a>
+    <div class="menu-btn"></div>
+    <div class="navigation">
+      <div class="navigation-items">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="explore.html">Explore</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="gallery-intro" aria-label="Introduzione galleria">
+    <h1 class="gallery-heading">Galleria</h1>
+    <p class="gallery-subheading">Una selezione di scatti dai viaggi: apri ogni foto in alta risoluzione.</p>
+  </section>
+  <section class="container" id="gallery-container">
+
+
+    <script>
+      function getGalleryItems() {
+        return Array.isArray(window.travelGalleryImages) ? window.travelGalleryImages : [];
+      }
+
+      const regionLabels = {
+        cile: {
+          it: 'Paesaggi tra Bolivia e Cile',
+          en: 'Landscapes across Bolivia and Chile'
+        },
+        china: {
+          it: 'Scatto urbano e culturale in Cina',
+          en: 'Urban and cultural moment in China'
+        },
+        thailandia: {
+          it: 'Atmosfere e natura in Thailandia',
+          en: 'Atmosphere and nature in Thailand'
+        },
+        usa: {
+          it: 'On the road negli Stati Uniti',
+          en: 'On the road in the United States'
+        },
+        scotland: {
+          it: 'Highlands e castelli in Scozia',
+          en: 'Highlands and castles in Scotland'
+        },
+        sri_lanka: {
+          it: 'Templi e oceano in Sri Lanka',
+          en: 'Temples and ocean in Sri Lanka'
+        }
+      };
+
+      function getCurrentLanguage() {
+        return window.localStorage.getItem('travel-language') === 'en' ? 'en' : 'it';
+      }
+
+      function getFolderFromSrc(src) {
+        const parts = src.split('/');
+        return parts[parts.length - 2];
+      }
+
+      function getDescriptiveLabel(src, index, language) {
+        const folder = getFolderFromSrc(src);
+        const defaultLabel = language === 'it' ? 'Momento di viaggio' : 'Travel moment';
+        const regionLabel = regionLabels[folder] ? regionLabels[folder][language] : defaultLabel;
+        return `${regionLabel} ${index + 1}`;
+      }
+
+      function createDivsFromArray(array, language) {
+        const container = document.querySelector('#gallery-container');
+        container.innerHTML = '';
+
+        array.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.classList.add('grid-item');
+          div.classList.add('box');
+
+          const link = document.createElement('a');
+          const label = getDescriptiveLabel(item.src, index, language);
+          const optimizedBase = typeof getOptimizedImageBase === 'function' ? getOptimizedImageBase(item.src) : '';
+          const megaLink = typeof getMegaLink === 'function' ? getMegaLink(item.src) : '';
+
+          if (!optimizedBase) {
+            return;
+          }
+
+          link.href = megaLink || `${optimizedBase}-1200.jpg`;
+          if (megaLink) {
+            link.target = '_blank';
+            link.rel = 'noopener';
+          }
+          link.title = label;
+          link.setAttribute('aria-label', label);
+
+          const picture = document.createElement('picture');
+
+          const avifSource = document.createElement('source');
+          avifSource.type = 'image/avif';
+          avifSource.srcset = `${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w`;
+          avifSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+
+          const webpSource = document.createElement('source');
+          webpSource.type = 'image/webp';
+          webpSource.srcset = `${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w`;
+          webpSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+
+          const img = document.createElement('img');
+          img.src = `${optimizedBase}-768.jpg`;
+          img.srcset = `${optimizedBase}-480.jpg 480w, ${optimizedBase}-768.jpg 768w, ${optimizedBase}-1200.jpg 1200w`;
+          img.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+          img.alt = label;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+
+          picture.appendChild(avifSource);
+          picture.appendChild(webpSource);
+          picture.appendChild(img);
+          link.appendChild(picture);
+
+          div.appendChild(link);
+          container.appendChild(div);
+
+        });
+      }
+
+      function renderGallery(language) {
+        createDivsFromArray(getGalleryItems(), language);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        renderGallery(getCurrentLanguage());
+      });
+
+      document.addEventListener('languagechange', (event) => {
+        renderGallery(event.detail.language);
+      });
+    </script>
+  </section>
+
+</body>
+
+</html>
