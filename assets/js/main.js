@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setText('.profilo .descrizione p', language === 'it'
       ? 'Ho scelto di combinare queste due grandi passioni - Tecnologia e Viaggi - dando vita a questo spazio virtuale.'
       : 'I chose to combine these two great passions - Technology and Travel - creating this virtual space.');
+    setText('.about-metrics article:nth-child(3) p', 'Planned trips');
     setText('.footer-content p', language === 'it'
       ? '© 2024 Viaggiare e la piu potente forma di psicoterapia'
       : '© 2024 Travelling is the most powerful form of psychotherapy');
@@ -519,10 +520,6 @@ document.addEventListener('DOMContentLoaded', function () {
         el: '.swiper-pagination',
         clickable: true,
       },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
       breakpoints: {
         0: {
           spaceBetween: 16,
@@ -534,6 +531,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     var jumpButtons = document.querySelectorAll('[data-slide]');
+    var prevArrow = document.querySelector('.tranding-slider-control .swiper-button-prev');
+    var nextArrow = document.querySelector('.tranding-slider-control .swiper-button-next');
+
+    var syncExploreJumpButtons = function () {
+      var activeIndex = trandingSlider.realIndex;
+      jumpButtons.forEach(function (button) {
+        var isActive = Number(button.getAttribute('data-slide')) === activeIndex;
+        button.classList.toggle('is-active', isActive);
+      });
+    };
+
+    if (prevArrow) {
+      prevArrow.addEventListener('click', function (event) {
+        event.preventDefault();
+        trandingSlider.slidePrev();
+      });
+    }
+
+    if (nextArrow) {
+      nextArrow.addEventListener('click', function (event) {
+        event.preventDefault();
+        trandingSlider.slideNext();
+      });
+    }
+
     jumpButtons.forEach(function (button) {
       button.addEventListener('click', function () {
         var target = Number(button.getAttribute('data-slide'));
@@ -543,12 +565,103 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+    syncExploreJumpButtons();
+
     trandingSlider.on('slideChange', function () {
-      var activeIndex = trandingSlider.realIndex;
-      jumpButtons.forEach(function (button) {
-        var isActive = Number(button.getAttribute('data-slide')) === activeIndex;
-        button.classList.toggle('is-active', isActive);
-      });
+      syncExploreJumpButtons();
+    });
+  }
+
+  var contactForm = document.getElementById('form');
+  if (contactForm && pageKey === 'contact') {
+    var contactStatus = document.getElementById('contact-status');
+
+    var setContactStatus = function (text, isError) {
+      if (!contactStatus) {
+        return;
+      }
+      contactStatus.textContent = text;
+      contactStatus.classList.toggle('is-error', Boolean(isError));
+      contactStatus.classList.toggle('is-success', !isError && text.length > 0);
+    };
+
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var formData = new FormData(contactForm);
+      var payload = {
+        name: String(formData.get('name') || '').trim(),
+        email: String(formData.get('email') || '').trim(),
+        message: String(formData.get('message') || '').trim(),
+        botcheck: String(formData.get('botcheck') || '').trim()
+      };
+
+      if (!payload.name || !payload.email || !payload.message) {
+        setContactStatus(
+          getStoredLanguage() === 'it'
+            ? 'Compila tutti i campi richiesti prima di inviare.'
+            : 'Please complete all required fields before sending.',
+          true
+        );
+        return;
+      }
+
+      var submitButton = contactForm.querySelector('.contact-form-btn');
+      if (submitButton) {
+        submitButton.disabled = true;
+      }
+
+      setContactStatus(
+        getStoredLanguage() === 'it' ? 'Invio in corso...' : 'Sending...',
+        false
+      );
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(function (response) {
+          return response.json().catch(function () {
+            return { ok: false, message: 'Invalid response' };
+          });
+        })
+        .then(function (result) {
+          if (result && result.ok) {
+            setContactStatus(
+              getStoredLanguage() === 'it'
+                ? 'Messaggio inviato con successo. Ti rispondero il prima possibile.'
+                : 'Message sent successfully. I will reply as soon as possible.',
+              false
+            );
+            contactForm.reset();
+            return;
+          }
+
+          setContactStatus(
+            (result && result.message)
+              ? result.message
+              : (getStoredLanguage() === 'it'
+                ? 'Invio non riuscito. Riprova tra poco.'
+                : 'Unable to send now. Please try again shortly.'),
+            true
+          );
+        })
+        .catch(function () {
+          setContactStatus(
+            getStoredLanguage() === 'it'
+              ? 'Errore di rete. Controlla la connessione e riprova.'
+              : 'Network error. Check your connection and try again.',
+            true
+          );
+        })
+        .finally(function () {
+          if (submitButton) {
+            submitButton.disabled = false;
+          }
+        });
     });
   }
 });

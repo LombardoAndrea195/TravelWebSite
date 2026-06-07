@@ -162,10 +162,13 @@ body {
 
 .tranding-slider-control {
     position: relative;
-    display: flex;
+    z-index: 14;
+    display: grid;
+    grid-template-columns: auto minmax(9rem, 1fr) auto;
     align-items: center;
-    justify-content: center;
-    margin-top: 1.4rem;
+    gap: 1.1rem;
+    width: min(42rem, 92vw);
+    margin: 1.4rem auto 0;
 }
 
 .tranding-slider-control .slider-arrow {
@@ -174,6 +177,9 @@ body {
     height: 4rem;
     border-radius: 50%;
     filter: drop-shadow(0 8px 24px rgba(18, 28, 53, 0.14));
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
 }
 
 .tranding-slider-control .slider-arrow ion-icon {
@@ -186,23 +192,34 @@ body {
 }
 
 .tranding-slider-control .swiper-button-prev {
-    left: 34%;
-    transform: translateX(-34%);
+    position: static;
+    margin: 0;
+    transform: none;
 }
 
 .tranding-slider-control .swiper-button-next {
-    left: 66%;
-    transform: translateX(-66%);
+    position: static;
+    margin: 0;
+    transform: none;
 }
 
 .tranding-slider-control .swiper-pagination {
-    position: relative;
-    width: 14rem;
-    bottom: 0;
+    position: static;
+    width: auto;
+    min-width: 9rem;
+    line-height: 1;
+    text-align: center;
 }
 
 .tranding-slider-control .swiper-pagination-bullet-active {
     background: var(--color-accent);
+}
+
+.tranding-slider-control .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px !important;
+    cursor: pointer;
 }
 
 .explore-help {
@@ -220,14 +237,8 @@ body {
         min-height: 42rem;
     }
 
-    .tranding-slider-control .swiper-button-prev {
-        left: 28%;
-        transform: translateX(-28%);
-    }
-
-    .tranding-slider-control .swiper-button-next {
-        left: 72%;
-        transform: translateX(-72%);
+    .tranding-slider-control {
+        width: min(34rem, 92vw);
     }
 }
 
@@ -245,14 +256,9 @@ body {
         font-size: 1.8rem;
     }
 
-    .tranding-slider-control .swiper-button-prev {
-        left: 22%;
-        transform: translateX(-22%);
-    }
-
-    .tranding-slider-control .swiper-button-next {
-        left: 78%;
-        transform: translateX(-78%);
+    .tranding-slider-control {
+        width: min(30rem, 94vw);
+        gap: 0.8rem;
     }
 
     .tranding-slide-link {
