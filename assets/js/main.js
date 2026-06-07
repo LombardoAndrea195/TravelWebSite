@@ -125,72 +125,72 @@ document.addEventListener('DOMContentLoaded', function () {
         it: {
           title: 'America Westcost:',
           description: 'Tra deserti infiniti, città leggendarie e alcuni dei paesaggi più iconici del West americano.',
-          cta: 'Approfondisci'
+          cta: 'Guarda il viaggio'
         },
         en: {
           title: 'America West Coast:',
           description: 'Between endless deserts, legendary cities and some of the most iconic landscapes of the American West.',
-          cta: 'Discover more'
+          cta: 'Watch the trip'
         }
       },
       {
         it: {
           title: 'Thailandia:',
           description: 'Un sogno thailandese: tra spiagge da sogno, animali esotici, giochi di luci e templi millenari.',
-          cta: 'Approfondisci'
+          cta: 'Guarda il viaggio'
         },
         en: {
           title: 'Thailand:',
           description: 'A Thai dream among postcard beaches, exotic animals, light shows and ancient temples.',
-          cta: 'Discover more'
+          cta: 'Watch the trip'
         }
       },
       {
         it: {
           title: 'Bolivia & Cile:',
           description: 'Salar de Uyuni: Hai mai visto un posto dove cielo e terra si uniscono all orizzonte?',
-          cta: 'Approfondisci'
+          cta: 'Guarda il viaggio'
         },
         en: {
           title: 'Bolivia & Chile:',
           description: 'Salar de Uyuni: have you ever seen a place where sky and earth meet on the horizon?',
-          cta: 'Discover more'
+          cta: 'Watch the trip'
         }
       },
       {
         it: {
           title: 'Cina:',
           description: 'Una cultura lontana dal nostro mondo occidentale ma capace di sorprendere per il suo popolo gentile e le sue bellezze nascoste.',
-          cta: 'Approfondisci'
+          cta: 'Guarda il viaggio'
         },
         en: {
           title: 'China:',
           description: 'A culture far from our Western world yet able to amaze with its kind people and hidden beauty.',
-          cta: 'Discover more'
+          cta: 'Watch the trip'
         }
       },
       {
         it: {
           title: 'Scozia:',
           description: 'Highlands selvagge, castelli avvolti nella nebbia e paesaggi mozzafiato: la Scozia ti aspetta.',
-          cta: 'Approfondisci'
+          cta: 'Guarda il viaggio'
         },
         en: {
           title: 'Scotland:',
           description: 'Wild Highlands, castles wrapped in mist and breathtaking landscapes: Scotland is waiting for you.',
-          cta: 'Discover more'
+          cta: 'Watch the trip'
         }
       },
       {
         it: {
           title: 'Sri Lanka:',
           description: 'Oceano tropicale, templi antichi, treni tra le piantagioni di tè e safari nella natura selvaggia.',
-          cta: 'Approfondisci'
+          cta: 'Guarda il viaggio'
         },
         en: {
           title: 'Sri Lanka:',
           description: 'Tropical ocean, ancient temples, trains through tea plantations and safaris in the wild.',
-          cta: 'Discover more'
+          cta: 'Watch the trip'
         }
       }
     ];
@@ -423,10 +423,34 @@ document.addEventListener('DOMContentLoaded', function () {
   var contents = document.querySelectorAll('.content');
 
   if (slides.length && btns.length && contents.length) {
+    var ensureVideoSourcesLoaded = function (slide) {
+      if (!slide || slide.dataset.sourcesLoaded === 'true') {
+        return;
+      }
+
+      var sources = slide.querySelectorAll('source[data-src]');
+      if (!sources.length) {
+        slide.dataset.sourcesLoaded = 'true';
+        return;
+      }
+
+      sources.forEach(function (source) {
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+      });
+
+      if (typeof slide.load === 'function') {
+        slide.load();
+      }
+
+      slide.dataset.sourcesLoaded = 'true';
+    };
+
     var syncHomeVideos = function (activeIndex) {
       slides.forEach(function (slide, index) {
         if (typeof slide.pause === 'function' && typeof slide.play === 'function') {
           if (index === activeIndex) {
+            ensureVideoSourcesLoaded(slide);
             var playPromise = slide.play();
             if (playPromise && typeof playPromise.catch === 'function') {
               playPromise.catch(function () { });

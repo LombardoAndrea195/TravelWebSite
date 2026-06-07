@@ -7,10 +7,9 @@
   <title>Travel Blog | Gallery</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/styles_gallery.css">
-  <script src="assets/js/gallery-images.js"></script>
-  <script src="assets/js/mega-links.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="assets/js/gallery-images.js" defer></script>
+  <script src="assets/js/mega-links.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
 
@@ -39,7 +38,9 @@
 
 
     <script>
-      const myArray = Array.isArray(window.travelGalleryImages) ? window.travelGalleryImages : [];
+      function getGalleryItems() {
+        return Array.isArray(window.travelGalleryImages) ? window.travelGalleryImages : [];
+      }
 
       const regionLabels = {
         cile: {
@@ -142,10 +143,12 @@
       }
 
       function renderGallery(language) {
-        createDivsFromArray(myArray, language);
+        createDivsFromArray(getGalleryItems(), language);
       }
 
-      renderGallery(getCurrentLanguage());
+      document.addEventListener('DOMContentLoaded', () => {
+        renderGallery(getCurrentLanguage());
+      });
 
       document.addEventListener('languagechange', (event) => {
         renderGallery(event.detail.language);
