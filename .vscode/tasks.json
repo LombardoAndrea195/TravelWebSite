@@ -1,0 +1,44 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "copy-media-to-mega",
+			"type": "shell",
+			"command": "set -e && SRC=\"/Users/andrealombardo/Development/Personal/TravelWebSite/assets\" && DST=\"/Users/andrealombardo/Development/Personal/TravelWebSite/mega_upload/TravelWebsite\" && cp -R \"$SRC/img/thailandia/.\" \"$DST/img-originali/thailandia/\" && cp -R \"$SRC/img/usa/.\" \"$DST/img-originali/usa/\" && cp -R \"$SRC/img/cile/.\" \"$DST/img-originali/cile/\" && cp -R \"$SRC/img/china/.\" \"$DST/img-originali/china/\" && cp -R \"$SRC/img/scotland/.\" \"$DST/img-originali/scotland/\" && cp -R \"$SRC/img/sri_lanka/.\" \"$DST/img-originali/sri_lanka/\" && cp -R \"$SRC/img/other/.\" \"$DST/img-originali/other/\" && find \"$SRC/video\" -maxdepth 1 -type f -name \"*.mp4\" -exec cp {} \"$DST/video-originali/other/\" \\; && echo \"COPY_DONE\""
+		},
+		{
+			"label": "generate-gallery-images-list",
+			"type": "shell",
+			"command": "set -e && ROOT=\"/Users/andrealombardo/Development/Personal/TravelWebSite\" && OUT=\"$ROOT/assets/js/gallery-images.js\" && : > \"$OUT\" && printf \"window.travelGalleryImages = [\\n\" >> \"$OUT\" && for dir in cile china scotland sri_lanka thailandia usa; do find \"$ROOT/assets/img/$dir\" -maxdepth 1 -type f \\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" -o -iname \"*.webp\" -o -iname \"*.avif\" \\) | sort | while IFS= read -r file; do rel=${file#\"$ROOT/\"}; printf \"  { src: '%s' },\\n\" \"$rel\" >> \"$OUT\"; done; done && printf \"];\\n\" >> \"$OUT\" && echo \"GALLERY_IMAGES_DONE\""
+		},
+		{
+			"label": "refresh-mega-media-copy",
+			"type": "shell",
+			"command": "set -e\nROOT=\"/Users/andrealombardo/Development/Personal/TravelWebSite\"\nDST=\"$ROOT/mega_upload/TravelWebsite\"\nmkdir -p \"$DST/img-originali\" \"$DST/video-originali\"\nrsync -a --delete \"$ROOT/assets/img/cile/\" \"$DST/img-originali/cile/\"\nrsync -a --delete \"$ROOT/assets/img/china/\" \"$DST/img-originali/china/\"\nrsync -a --delete \"$ROOT/assets/img/scotland/\" \"$DST/img-originali/scotland/\"\nrsync -a --delete \"$ROOT/assets/img/sri_lanka/\" \"$DST/img-originali/sri_lanka/\"\nrsync -a --delete \"$ROOT/assets/img/thailandia/\" \"$DST/img-originali/thailandia/\"\nrsync -a --delete \"$ROOT/assets/img/usa/\" \"$DST/img-originali/usa/\"\nrsync -a --delete \"$ROOT/assets/img/other/\" \"$DST/img-originali/other/\"\nrsync -a --delete \"$ROOT/assets/video/\" \"$DST/video-originali/\"\necho \"REFRESH_MEGA_MEDIA_DONE\""
+		},
+		{
+			"label": "check-tracked-media",
+			"type": "shell",
+			"command": "git ls-files assets/img/cile assets/img/china assets/img/scotland assets/img/sri_lanka assets/img/thailandia assets/img/usa assets/img/other assets/video/1.mp4 assets/video/2.mp4 assets/video/3.mp4 assets/video/4.mp4 assets/video/5.mp4 assets/video/6.mp4 | sed -n '1,200p'",
+			"isBackground": false
+		},
+		{
+			"label": "untrack-original-media",
+			"type": "shell",
+			"command": "git rm -r --cached assets/img/cile assets/img/china assets/img/scotland assets/img/sri_lanka assets/img/thailandia assets/img/usa assets/img/other assets/video/1.mp4 assets/video/2.mp4 assets/video/3.mp4 assets/video/4.mp4 assets/video/5.mp4 assets/video/6.mp4",
+			"isBackground": false
+		},
+		{
+			"label": "untrack-original-media-safe",
+			"type": "shell",
+			"command": "git ls-files assets/img/cile assets/img/china assets/img/scotland assets/img/sri_lanka assets/img/thailandia assets/img/usa assets/img/other assets/video/1.mp4 assets/video/2.mp4 assets/video/3.mp4 assets/video/4.mp4 assets/video/5.mp4 assets/video/6.mp4 | xargs -r git rm -r --cached --",
+			"isBackground": false
+		},
+		{
+			"label": "verify-untracked-media",
+			"type": "shell",
+			"command": "git status --short | sed -n '1,120p'",
+			"isBackground": false
+		}
+	]
+}

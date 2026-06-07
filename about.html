@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Blog| About</title>
-  <link rel="stylesheet" href="assets/css/styles_vlog.css">
-  <script src="assets/js/main.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+<html lang="it">
 
-  <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog | About</title>
+    <link rel="stylesheet" href="assets/css/styles_vlog.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <style>
+        .introduction {
+            max-width: 100%;
+            text-align: center;
+            margin-top: 110px;
+            padding: 0 20px;
+        }
+
         .profilo {
             display: flex;
             align-items: center;
-            margin: 200px 300px ;
-
+            gap: 24px;
+            margin: 60px auto;
+            width: min(1000px, calc(100% - 40px));
         }
 
-
-
         .profilo img {
-            border-radius: 50%; /* Rende l'immagine circolare */
-            width: 250px; /* Modifica la larghezza dell'immagine */
-            height: 250px; /* Modifica l'altezza dell'immagine */
-            margin-right: 20px;
-            margin-top: -20px;
-            transition: transform 0.3s ease; /* Aggiungi transizione per rendere il movimento più fluido */
-
+            border-radius: 50%;
+            width: 250px;
+            height: 250px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
         .descrizione {
@@ -34,76 +37,93 @@
         }
 
         .profilo:hover img {
-            transform: rotateY(360deg); /* Ruota l'immagine di 360 gradi */
+            transform: rotateY(360deg);
         }
-        @media only screen and (max-width: 600px) {
+
+        @media only screen and (max-width: 900px) {
             .profilo {
                 flex-direction: column;
-                margin: 150px;
-
-            }
-            .descrizione {
                 text-align: center;
-                margin-top: 100px;
+                margin: 40px auto 60px;
             }
 
-        }
-        @media only screen and (max-width: 1200px) {
-            .profilo {
-                flex-direction: column;
-                margin: 150px;
-
+            .profilo img {
+                width: 190px;
+                height: 190px;
             }
-            .descrizione {
-                text-align: center;
-                margin-top: 100px;
+
+            .descrizione h2 {
+                font-size: 1.8rem;
             }
         }
-
-
-
     </style>
 </head>
 
-
-  <header class="header">
-    <a href="#" class="logo">Travel</a>
-    <div class="menu-btn"></div>
-    <div class="navigation">
-        <div class="navigation-items">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="explore.html">Explore</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
-    </div>
-  </header>
-
-</head>
 <body>
-    <div class="profilo">
-        <img id="profile-img" src="assets/img/other/me.jpg" alt="Foto di me">
-        <div class="descrizione">
-            <h2 >Sono Andrea Lombardo, classe ’95, romano doc amante della tecnologia oltre che dei viaggi.</h2>
-            <p>Ho deciso quindi di unire entrambe queste passioni che attualmente fanno parte della mia vita a 360 gradi
-                (tecnologia e viaggi) creando quindi questo spazio virtuale. </p>
-            <h5>Quando la bussola interiore è sballata: prenota un viaggio, ti aiuterà a ritrovare la tua strada.</h5>
-            <p>Viaggiare è la piu potente forma di psicoterapia.</p>
+    <header class="header">
+        <a href="index.html" class="logo">Travel</a>
+        <div class="menu-btn" aria-label="Apri menu"></div>
+        <div class="navigation">
+            <div class="navigation-items">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="explore.html">Explore</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <main>
+        <div class="introduction">
+            <h3 class="text-center">- Quando la bussola interiore e sballata: prenota un viaggio, ti aiutera a ritrovare
+                la tua strada -</h3>
+            <br><br>
+            <h1 class="text-center" style="color: chocolate;">About me</h1>
+        </div>
+
+        <div class="profilo">
+            <img id="profile-img" src="assets/img/other/me.jpg" alt="Myself photo">
+            <div class="descrizione">
+                <h2>Sono Andrea Lombardo, classe '95, romano amante della tecnologia oltre che dei viaggi per scoprire
+                    nuove culture e vivere esperienze uniche.</h2>
+                <br><br>
+                <p>Ho scelto di combinare queste due grandi passioni <br> - Tecnologia e Viaggi - <br> dando vita a
+                    questo spazio virtuale.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <br><br>
+            <p>&copy; 2024 Viaggiare e la piu potente forma di psicoterapia</p>
+            <nav class="footer-nav">
+                <a href="/chi-siamo">Chi siamo</a> |
+                <a href="/privacy">Privacy Policy</a> |
+                <a href="/contatti">Contatti</a>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-media">
+                <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
     <script>
-        var originalSrc = document.getElementById("profile-img").src; // Memorizza la fonte originale dell'immagine
+        var profileImg = document.getElementById('profile-img');
+        var originalSrc = profileImg.src;
 
-
-        document.getElementById("profile-img").addEventListener("mouseenter", function() {
-            this.src = "assets/img/other/me2.jpg"; // Cambia la fonte dell'immagine quando si entra con il mouse
+        profileImg.addEventListener('mouseenter', function () {
+            profileImg.src = 'assets/img/other/me2.jpg';
         });
 
-        document.getElementById("profile-img").addEventListener("mouseleave", function() {
-            this.src = originalSrc; // Ripristina la fonte originale dell'immagine quando si esce con il mouse
+        profileImg.addEventListener('mouseleave', function () {
+            profileImg.src = originalSrc;
         });
     </script>
 </body>
+
 </html>
