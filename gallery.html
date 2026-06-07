@@ -96,46 +96,44 @@
           const link = document.createElement('a');
           const label = getDescriptiveLabel(item.src, index, language);
           const optimizedBase = typeof getOptimizedImageBase === 'function' ? getOptimizedImageBase(item.src) : '';
+          const megaLink = typeof getMegaLink === 'function' ? getMegaLink(item.src) : '';
 
-          link.href = optimizedBase ? `${optimizedBase}-1200.jpg` : item.src;
-          link.target = '_blank';
-          link.rel = 'noopener';
+          if (!optimizedBase) {
+            return;
+          }
+
+          link.href = megaLink || `${optimizedBase}-1200.jpg`;
+          if (megaLink) {
+            link.target = '_blank';
+            link.rel = 'noopener';
+          }
           link.title = label;
           link.setAttribute('aria-label', label);
 
-          if (optimizedBase) {
-            const picture = document.createElement('picture');
+          const picture = document.createElement('picture');
 
-            const avifSource = document.createElement('source');
-            avifSource.type = 'image/avif';
-            avifSource.srcset = `${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w`;
-            avifSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+          const avifSource = document.createElement('source');
+          avifSource.type = 'image/avif';
+          avifSource.srcset = `${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w`;
+          avifSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
 
-            const webpSource = document.createElement('source');
-            webpSource.type = 'image/webp';
-            webpSource.srcset = `${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w`;
-            webpSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+          const webpSource = document.createElement('source');
+          webpSource.type = 'image/webp';
+          webpSource.srcset = `${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w`;
+          webpSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
 
-            const img = document.createElement('img');
-            img.src = `${optimizedBase}-768.jpg`;
-            img.srcset = `${optimizedBase}-480.jpg 480w, ${optimizedBase}-768.jpg 768w, ${optimizedBase}-1200.jpg 1200w`;
-            img.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
-            img.alt = label;
-            img.loading = 'lazy';
-            img.decoding = 'async';
+          const img = document.createElement('img');
+          img.src = `${optimizedBase}-768.jpg`;
+          img.srcset = `${optimizedBase}-480.jpg 480w, ${optimizedBase}-768.jpg 768w, ${optimizedBase}-1200.jpg 1200w`;
+          img.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+          img.alt = label;
+          img.loading = 'lazy';
+          img.decoding = 'async';
 
-            picture.appendChild(avifSource);
-            picture.appendChild(webpSource);
-            picture.appendChild(img);
-            link.appendChild(picture);
-          } else {
-            const img = document.createElement('img');
-            img.src = item.src;
-            img.alt = label;
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            link.appendChild(img);
-          }
+          picture.appendChild(avifSource);
+          picture.appendChild(webpSource);
+          picture.appendChild(img);
+          link.appendChild(picture);
 
           div.appendChild(link);
           container.appendChild(div);
