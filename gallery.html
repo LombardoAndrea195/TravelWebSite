@@ -1,103 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Blog | Gallery</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/styles_gallery.css">
+  <script src="assets/js/gallery-images.js"></script>
+  <script src="assets/js/mega-links.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
+
 <body>
 
   <header class="header">
     <a href="index.html" class="logo">Travel</a>
     <div class="menu-btn"></div>
     <div class="navigation">
-        <div class="navigation-items">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="explore.html">Explore</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="contact.html">Contact</a>
-        </div>
+      <div class="navigation-items">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="explore.html">Explore</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
 
     </div>
   </header>
-  <section class="container">
+
+  <section class="gallery-intro" aria-label="Introduzione galleria">
+    <h1 class="gallery-heading">Galleria</h1>
+    <p class="gallery-subheading">Una selezione di scatti dai viaggi: apri ogni foto in alta risoluzione.</p>
+  </section>
+  <section class="container" id="gallery-container">
 
 
-  <script>
-    // Un esempio di array
-    const myArray = [
-    { element: 'Element 1', src: 'assets/img/cile/IMG-20230814-WA0086.jpg' },
-    { element: 'Element 2', src: 'assets/img/cile/IMG-20230817-WA0078.jpg' },
-    { element: 'Element 3', src: 'assets/img/cile/IMG-20230818-WA0130.jpg' },
-    { element: 'Element 4', src: 'assets/img/cile/IMG-20230818-WA0147.jpg' },
-    { element: 'Element 5', src: 'assets/img/cile/IMG-20230821-WA0023.jpg' },
-    { element: 'Element 6', src: 'assets/img/cile/PXL_20230822_145535733.MP.jpg' },
-    { element: 'Element 7', src: 'assets/img/thailandia/PXL_20231227_052410908.MP.jpg' },
-    { element: 'Element 8', src: 'assets/img/thailandia/PXL_20231227_100553777.MP.jpg' },
-    { element: 'Element 9', src: 'assets/img/thailandia/PXL_20231227_102233805.MP.jpg' },
-    { element: 'Element 10', src: 'assets/img/thailandia/PXL_20240106_173819317.NIGHT.jpg' },
-    { element: 'Element 11', src: 'assets/img/thailandia/PXL_20231228_041044181.MP~2.jpg' },
-    { element: 'Element 12', src: 'assets/img/thailandia/PXL_20231229_100234358.PORTRAIT.jpg' },
-    { element: 'Element 13', src: 'assets/img/thailandia/PXL_20231230_022450915.MP.jpg' },
-    { element: 'Element 14', src: 'assets/img/thailandia/PXL_20231230_030740053.MP.jpg' },
-    { element: 'Element 15', src: 'assets/img/thailandia/PXL_20231230_104316392.LONG_EXPOSURE-02.ORIGINAL.jpg' },
-    { element: 'Element 16', src: 'assets/img/thailandia/PXL_20240103_103529606.MP.jpg' },
-    { element: 'Element 17', src: 'assets/img/thailandia/PXL_20240102_034410501.MP~2.jpg' },
-    { element: 'Element 18', src: 'assets/img/usa/GUDN2770.JPG' },
-    { element: 'Element 19', src: 'assets/img/usa/IMG_0833.JPG' },
-    { element: 'Element 20', src: 'assets/img/usa/IMG_0912.JPG' },
-    { element: 'Element 21', src: 'assets/img/usa/IMG_1018.JPG' },
-    { element: 'Element 22', src: 'assets/img/usa/IMG_1251.JPG' },
-    { element: 'Element 23', src: 'assets/img/usa/IMG_1271.JPG' },
-    { element: 'Element 24', src: 'assets/img/usa/IMG_1466.JPG' },
-    { element: 'Element 25', src: 'assets/img/usa/IMG_1558.JPG' },
-    { element: 'Element 26', src: 'assets/img/usa/IMG_1731.JPG' },
-    { element: 'Element 27', src: 'assets/img/usa/IMG_1735.JPG' },
-    { element: 'Element 28', src: 'assets/img/usa/IMG_1763.JPG' },
-    { element: 'Element 29', src: 'assets/img/usa/IMG_2101.JPG' },
+    <script>
+      const myArray = Array.isArray(window.travelGalleryImages) ? window.travelGalleryImages : [];
 
-    ];
-    // Funzione per creare dinamicamente div in base alla lunghezza dell'array
-    function createDivsFromArray(array) {
-      const container = document.querySelector('.container') // Modifica questo se vuoi aggiungere i div a un altro elemento
+      const regionLabels = {
+        cile: {
+          it: 'Paesaggi tra Bolivia e Cile',
+          en: 'Landscapes across Bolivia and Chile'
+        },
+        china: {
+          it: 'Scatto urbano e culturale in Cina',
+          en: 'Urban and cultural moment in China'
+        },
+        thailandia: {
+          it: 'Atmosfere e natura in Thailandia',
+          en: 'Atmosphere and nature in Thailand'
+        },
+        usa: {
+          it: 'On the road negli Stati Uniti',
+          en: 'On the road in the United States'
+        },
+        scotland: {
+          it: 'Highlands e castelli in Scozia',
+          en: 'Highlands and castles in Scotland'
+        },
+        sri_lanka: {
+          it: 'Templi e oceano in Sri Lanka',
+          en: 'Temples and ocean in Sri Lanka'
+        }
+      };
 
-      array.forEach(item => {
-        const div = document.createElement('div');
-        div.classList.add('grid-item');
-        div.classList.add('box');
+      function getCurrentLanguage() {
+        return window.localStorage.getItem('travel-language') === 'en' ? 'en' : 'it';
+      }
 
-        //div.textContent = `${element} - ${index + 1}`;
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.element;
+      function getFolderFromSrc(src) {
+        const parts = src.split('/');
+        return parts[parts.length - 2];
+      }
 
-        div.appendChild(img);
-        container.appendChild(div);
+      function getDescriptiveLabel(src, index, language) {
+        const folder = getFolderFromSrc(src);
+        const defaultLabel = language === 'it' ? 'Momento di viaggio' : 'Travel moment';
+        const regionLabel = regionLabels[folder] ? regionLabels[folder][language] : defaultLabel;
+        return `${regionLabel} ${index + 1}`;
+      }
 
+      function createDivsFromArray(array, language) {
+        const container = document.querySelector('#gallery-container');
+        container.innerHTML = '';
+
+        array.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.classList.add('grid-item');
+          div.classList.add('box');
+
+          const link = document.createElement('a');
+          const label = getDescriptiveLabel(item.src, index, language);
+          const optimizedBase = typeof getOptimizedImageBase === 'function' ? getOptimizedImageBase(item.src) : '';
+          const megaLink = typeof getMegaLink === 'function' ? getMegaLink(item.src) : '';
+
+          if (!optimizedBase) {
+            return;
+          }
+
+          link.href = megaLink || `${optimizedBase}-1200.jpg`;
+          if (megaLink) {
+            link.target = '_blank';
+            link.rel = 'noopener';
+          }
+          link.title = label;
+          link.setAttribute('aria-label', label);
+
+          const picture = document.createElement('picture');
+
+          const avifSource = document.createElement('source');
+          avifSource.type = 'image/avif';
+          avifSource.srcset = `${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w`;
+          avifSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+
+          const webpSource = document.createElement('source');
+          webpSource.type = 'image/webp';
+          webpSource.srcset = `${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w`;
+          webpSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+
+          const img = document.createElement('img');
+          img.src = `${optimizedBase}-768.jpg`;
+          img.srcset = `${optimizedBase}-480.jpg 480w, ${optimizedBase}-768.jpg 768w, ${optimizedBase}-1200.jpg 1200w`;
+          img.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+          img.alt = label;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+
+          picture.appendChild(avifSource);
+          picture.appendChild(webpSource);
+          picture.appendChild(img);
+          link.appendChild(picture);
+
+          div.appendChild(link);
+          container.appendChild(div);
+
+        });
+      }
+
+      function renderGallery(language) {
+        createDivsFromArray(myArray, language);
+      }
+
+      renderGallery(getCurrentLanguage());
+
+      document.addEventListener('languagechange', (event) => {
+        renderGallery(event.detail.language);
       });
-    }
-
-    // Chiamare la funzione con l'array specifico
-    createDivsFromArray(myArray);
-    myArray.forEach((item, index) => {
-    // Creare un nuovo div
-
-    // Aggiungere un evento di click al div
-    item.addEventListener('click', () => {
-        // Aprire l'immagine in una nuova finestra
-        window.open(item.src);
-    });
-
-    // Aggiungere il div al container
-    document.querySelector('.container').appendChild(newDiv);
-});
-  </script>
-
+    </script>
+  </section>
 
 </body>
+
 </html>
