@@ -3,6 +3,47 @@ window.CLOUDINARY_CONFIG = {
     apiKey: '526181251285373'
 };
 
+window.extractAssetImagePath = function (inputPath) {
+    if (!inputPath || typeof inputPath !== 'string') {
+        return '';
+    }
+
+    var cleaned = inputPath.split('#')[0].split('?')[0].trim();
+    if (!cleaned) {
+        return '';
+    }
+
+    if (cleaned.indexOf('assets/img/') === 0) {
+        return cleaned;
+    }
+
+    var marker = '/assets/img/';
+    var markerIndex = cleaned.indexOf(marker);
+    if (markerIndex !== -1) {
+        return cleaned.slice(markerIndex + 1);
+    }
+
+    return '';
+};
+
+window.localImagePathToPublicId = function (localPath) {
+    var assetPath = window.extractAssetImagePath(localPath);
+    if (!assetPath) {
+        return '';
+    }
+
+    var relative = assetPath.replace(/^assets\/img\//, '');
+    var withoutExt = relative.replace(/\.[^.]+$/, '');
+
+    if (relative.indexOf('optimized/') === 0) {
+        var noOptimizedPrefix = relative.replace(/^optimized\//, '');
+        var noSizeVariant = noOptimizedPrefix.replace(/-(480|768|1200)(\.[^.]+)$/, '$2');
+        withoutExt = noSizeVariant.replace(/\.[^.]+$/, '');
+    }
+
+    return withoutExt;
+};
+
 window.getCloudinaryUrl = function (localPath, options) {
     if (!localPath) return '';
 
@@ -22,10 +63,21 @@ window.getCloudinaryUrl = function (localPath, options) {
         transformation.push('f_' + options.format);
     }
 
-    var transformPath = transformation.length > 0 ? '/' + transformation.join(',') : '';
-    var fileName = localPath.split('/').pop();
+    if (!options.format) {
+        transformation.push('f_auto');
+    }
 
-    return baseUrl + transformPath + '/' + fileName;
+    if (!options.quality) {
+        transformation.push('q_auto');
+    }
+
+    var transformPath = transformation.length > 0 ? '/' + transformation.join(',') : '';
+    var publicId = window.localImagePathToPublicId(localPath);
+    if (!publicId) {
+        return localPath;
+    }
+
+    return baseUrl + transformPath + '/' + publicId;
 };
 
 window.convertAllImageSources = function () {
