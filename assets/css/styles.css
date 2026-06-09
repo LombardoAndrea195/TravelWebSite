@@ -210,6 +210,7 @@ section .content a {
 
 .home-overlay-panel {
   z-index: 888;
+  position: relative;
   width: min(92vw, 68rem);
   display: flex;
   flex-direction: column;
@@ -221,6 +222,7 @@ section .content a {
   z-index: 777;
   content: '';
   position: absolute;
+  pointer-events: none;
   background:
     radial-gradient(circle at 75% 20%, rgba(217, 119, 6, 0.28), transparent 42%),
     linear-gradient(120deg, rgba(15, 23, 32, 0.58), rgba(15, 23, 32, 0.22));
@@ -323,11 +325,12 @@ section .content a {
   position: absolute;
   transition: 0.5s;
   display: flex;
-  z-index: 888;
+  z-index: 1001;
   flex-direction: column;
   top: auto;
   bottom: clamp(96px, 13vh, 156px);
   right: 10px;
+  pointer-events: auto;
 
 }
 

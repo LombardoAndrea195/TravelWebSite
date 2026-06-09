@@ -1,2 +1,7 @@
 # Media originals and upload staging should stay out of git
 mega_upload/
+
+# Local environment secrets
+.env
+.env.*
+!.env.example

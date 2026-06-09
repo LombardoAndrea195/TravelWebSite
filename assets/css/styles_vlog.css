@@ -61,6 +61,15 @@ body {
     margin-bottom: 4px;
 }
 
+.vlog-keyword {
+    display: inline-block;
+    padding: 0 0.34em;
+    border-radius: 6px;
+    background: rgba(217, 119, 6, 0.16);
+    color: #8b4513;
+    font-weight: 700;
+}
+
 .empty-state {
     margin-top: 120px;
     text-align: center;

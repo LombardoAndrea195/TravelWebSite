@@ -1,6 +1,19 @@
 function readJsonBody(req) {
     if (typeof req.body === 'string') {
         try {
+            const params = new URLSearchParams(req.body);
+            if (Array.from(params.keys()).length > 0) {
+                return {
+                    name: params.get('name') || '',
+                    email: params.get('email') || '',
+                    message: params.get('message') || '',
+                    botcheck: params.get('botcheck') || ''
+                };
+            }
+        } catch (error) {
+            // Ignore URLSearchParams parse errors and try JSON parsing below.
+        }
+        try {
             return JSON.parse(req.body);
         } catch (error) {
             return null;
@@ -50,7 +63,10 @@ module.exports = async function handler(req, res) {
 
     const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
-        return res.status(500).json({ ok: false, message: 'Server is not configured' });
+        return res.status(500).json({
+            ok: false,
+            message: 'Web3Forms key missing. Set WEB3FORMS_ACCESS_KEY in environment.'
+        });
     }
 
     const formData = new URLSearchParams();

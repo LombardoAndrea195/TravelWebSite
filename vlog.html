@@ -1003,7 +1003,7 @@
                     mapTitle: 'Trip map',
                     emptyTitle: 'Vlog unavailable',
                     emptyText: 'Choose a destination from the Explore page.',
-                    days: 'Days',
+                    days: 'Day',
                     tripNames: {
                         Thailandia: 'Thailand',
                         America: 'America',
@@ -1959,6 +1959,43 @@
             `;
         }
 
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function escapeRegExp(value) {
+            return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function getHighlightKeywords(language, currentTrip, dictionary) {
+            const baseKeywords = language === 'en'
+                ? ['road trip', 'sunset', 'sunrise', 'street food', 'temple', 'market', 'beach', 'snorkeling', 'safari']
+                : ['road trip', 'tramonto', 'alba', 'street food', 'tempio', 'mercato', 'spiaggia', 'snorkeling', 'safari'];
+
+            const tripKeywords = [dictionary.labels.tripNames[currentTrip] || currentTrip];
+            const mapKeywords = (dictionary.maps[currentTrip]?.points || []).map((point) => point.name);
+
+            return Array.from(new Set([...baseKeywords, ...tripKeywords, ...mapKeywords].filter(Boolean)))
+                .sort((a, b) => b.length - a.length);
+        }
+
+        function highlightKeywords(text, language, currentTrip, dictionary) {
+            const safeText = escapeHtml(text);
+            const keywords = getHighlightKeywords(language, currentTrip, dictionary);
+
+            if (!keywords.length) {
+                return safeText;
+            }
+
+            const pattern = new RegExp(keywords.map(escapeRegExp).join('|'), 'gi');
+            return safeText.replace(pattern, '<span class="vlog-keyword">$&</span>');
+        }
+
         function renderMap(currentTrip, dictionary) {
             const tripConfig = dictionary.maps[currentTrip];
             const labels = dictionary.labels;
@@ -2026,9 +2063,9 @@
                 ${buildResponsivePicture(giorno.immagine, tripLabel)}
           <div class="descrizione">
             <h2>${labels.days} ${giorno.giorni} - ${tripLabel}</h2>
-            <p>${giorno.titolo}</p>
+                        <p>${highlightKeywords(giorno.titolo, language, trip, dictionary)}</p>
             <ul>
-              ${giorno.testo.map((riga) => `<li>${riga}</li>`).join('')}
+                            ${giorno.testo.map((riga) => `<li>${highlightKeywords(riga, language, trip, dictionary)}</li>`).join('')}
             </ul>
           </div>
         `;

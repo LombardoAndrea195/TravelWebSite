@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         it: 'Travel Blog | Contatti',
         en: 'Travel Blog | Contact'
       },
+      privacy: {
+        it: 'Travel Blog | Privacy Policy',
+        en: 'Travel Blog | Privacy Policy'
+      },
       vlog: {
         it: 'Travel Blog | Vlog',
         en: 'Travel Blog | Vlog'
@@ -357,6 +361,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function translatePrivacy(language) {
+    setText('main h1', 'Privacy Policy');
+
+    var paragraphs = document.querySelectorAll('main p');
+    if (paragraphs[0]) {
+      paragraphs[0].textContent = language === 'it'
+        ? 'Questo sito raccoglie solo i dati che inserisci volontariamente nel modulo contatti (nome, email, messaggio) per rispondere alle richieste.'
+        : 'This website collects only the data you voluntarily provide in the contact form (name, email, message) to reply to your requests.';
+    }
+    if (paragraphs[1]) {
+      paragraphs[1].textContent = language === 'it'
+        ? 'I dati vengono inviati tramite Web3Forms e non sono venduti a terzi.'
+        : 'The data is sent via Web3Forms and is not sold to third parties.';
+    }
+    if (paragraphs[2]) {
+      paragraphs[2].innerHTML = language === 'it'
+        ? 'Per richiedere modifica o cancellazione dei dati, contattami dalla pagina <a href="contact.html">Contact</a>.'
+        : 'To request data changes or deletion, contact me through the <a href="contact.html">Contact</a> page.';
+    }
+  }
+
   function applyPageTranslations(language) {
     if (pageKey === 'index') {
       translateIndex(language);
@@ -372,6 +397,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if (pageKey === 'gallery') {
       translateGallery(language);
+    }
+    if (pageKey === 'privacy') {
+      translatePrivacy(language);
     }
   }
 
@@ -463,6 +491,9 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     };
 
+    var currentSlideIndex = 0;
+    var autoSliderTimer = null;
+
     var sliderNav = function (manual) {
       btns.forEach(function (btn) {
         btn.classList.remove('active');
@@ -477,7 +508,19 @@ document.addEventListener('DOMContentLoaded', function () {
       btns[manual].classList.add('active');
       slides[manual].classList.add('active');
       contents[manual].classList.add('active');
+      currentSlideIndex = manual;
       syncHomeVideos(manual);
+    };
+
+    var restartAutoSlider = function () {
+      if (autoSliderTimer) {
+        window.clearInterval(autoSliderTimer);
+      }
+
+      autoSliderTimer = window.setInterval(function () {
+        var nextIndex = (currentSlideIndex + 1) % btns.length;
+        sliderNav(nextIndex);
+      }, 5000);
     };
 
     // Ensure only the active video plays on first load.
@@ -487,11 +530,13 @@ document.addEventListener('DOMContentLoaded', function () {
         firstActiveIndex = index;
       }
     });
-    syncHomeVideos(firstActiveIndex);
+    sliderNav(firstActiveIndex);
+    restartAutoSlider();
 
     btns.forEach(function (btn, i) {
       btn.addEventListener('click', function () {
         sliderNav(i);
+        restartAutoSlider();
       });
     });
   }
@@ -575,6 +620,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var contactForm = document.getElementById('form');
   if (contactForm && pageKey === 'contact') {
     var contactStatus = document.getElementById('contact-status');
+    var WEB3FORMS_DIRECT_KEY = '0528ac46-d207-4bda-9167-58364d0039b7';
 
     var setContactStatus = function (text, isError) {
       if (!contactStatus) {
@@ -616,17 +662,101 @@ document.addEventListener('DOMContentLoaded', function () {
         false
       );
 
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(function (response) {
-          return response.json().catch(function () {
-            return { ok: false, message: 'Invalid response' };
+      var sendThroughBackend = function () {
+        return fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+          .then(function (response) {
+            var contentType = response.headers.get('content-type') || '';
+            if (contentType.indexOf('application/json') !== -1) {
+              return response.json().then(function (json) {
+                return {
+                  ok: Boolean(json && json.ok),
+                  message: (json && json.message) || '',
+                  status: response.status,
+                  source: 'backend'
+                };
+              });
+            }
+
+            return response.text().then(function () {
+              return {
+                ok: false,
+                message: 'Invalid response',
+                status: response.status,
+                source: 'backend',
+                nonJson: true
+              };
+            });
+          })
+          .catch(function () {
+            return {
+              ok: false,
+              message: 'Network error',
+              source: 'backend',
+              networkError: true
+            };
           });
+      };
+
+      var sendDirectToWeb3Forms = function () {
+        return fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_DIRECT_KEY,
+            subject: 'New Request to Andrea Lombardo from Travel Website',
+            from_name: 'Travel Web Site - Andrea Lombardo',
+            name: payload.name,
+            email: payload.email,
+            message: payload.message,
+            botcheck: payload.botcheck
+          })
+        })
+          .then(function (response) {
+            return response.json().catch(function () {
+              return { success: false, message: 'Invalid response' };
+            });
+          })
+          .then(function (result) {
+            return {
+              ok: Boolean(result && result.success),
+              message: (result && result.message) || '',
+              source: 'web3forms'
+            };
+          })
+          .catch(function () {
+            return {
+              ok: false,
+              message: 'Network error',
+              source: 'web3forms',
+              networkError: true
+            };
+          });
+      };
+
+      sendThroughBackend()
+        .then(function (result) {
+          var shouldUseDirectFallback = !result.ok && (
+            result.nonJson ||
+            result.networkError ||
+            result.status === 404 ||
+            result.status === 405 ||
+            (typeof result.message === 'string' && result.message.indexOf('Web3Forms key missing') !== -1)
+          );
+
+          if (!shouldUseDirectFallback) {
+            return result;
+          }
+
+          return sendDirectToWeb3Forms();
         })
         .then(function (result) {
           if (result && result.ok) {
