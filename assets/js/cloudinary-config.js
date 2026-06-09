@@ -86,6 +86,29 @@ window.convertAllImageSources = function () {
         var currentSrc = img.getAttribute('src') || img.getAttribute('data-src');
         if (currentSrc && currentSrc.startsWith('assets/')) {
             var cloudUrl = window.getCloudinaryUrl(currentSrc);
+            var originalSrc = currentSrc;
+
+            img.setAttribute('data-local-src', originalSrc);
+            img.addEventListener('error', function onCloudinaryError() {
+                var localSrc = img.getAttribute('data-local-src');
+                if (!localSrc) {
+                    return;
+                }
+
+                img.removeEventListener('error', onCloudinaryError);
+                img.setAttribute('src', localSrc);
+
+                var picture = img.closest('picture');
+                if (picture) {
+                    picture.querySelectorAll('source').forEach(function (source) {
+                        var localSrcset = source.getAttribute('data-local-srcset');
+                        if (localSrcset) {
+                            source.setAttribute('srcset', localSrcset);
+                        }
+                    });
+                }
+            });
+
             if (img.getAttribute('src')) {
                 img.setAttribute('src', cloudUrl);
             }
@@ -99,6 +122,7 @@ window.convertAllImageSources = function () {
     pictures.forEach(function (source) {
         var currentSrcset = source.getAttribute('srcset') || source.getAttribute('data-srcset');
         if (currentSrcset && currentSrcset.includes('assets/')) {
+            source.setAttribute('data-local-srcset', currentSrcset);
             var urls = currentSrcset.split(',').map(function (item) {
                 var parts = item.trim().split(/\s+/);
                 var path = parts[0];
