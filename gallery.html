@@ -20,12 +20,11 @@
   <meta name="twitter:description" content="Scopri la galleria completa di scatti dai viaggi di Andrea Lombardo.">
   <meta name="twitter:image" content="assets/img/optimized/china/20240803_130024-5f3f-1200.jpg">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https: res.cloudinary.com; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://res.cloudinary.com https://unpkg.com; upgrade-insecure-requests">
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://unpkg.com; upgrade-insecure-requests">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/styles_gallery.css">
-  <script src="assets/js/cloudinary-config.js"></script>
   <script src="assets/js/gallery-images.js" defer></script>
-  <script src="assets/js/mega-links.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
@@ -113,45 +112,17 @@
 
           const link = document.createElement('a');
           const label = getDescriptiveLabel(item.src, index, language);
-          const optimizedBase = typeof getOptimizedImageBase === 'function' ? getOptimizedImageBase(item.src) : '';
-          const megaLink = typeof getMegaLink === 'function' ? getMegaLink(item.src) : '';
-
-          if (!optimizedBase) {
-            return;
-          }
-
-          link.href = megaLink || `${optimizedBase}-1200.jpg`;
-          if (megaLink) {
-            link.target = '_blank';
-            link.rel = 'noopener';
-          }
+          link.href = item.src;
           link.title = label;
           link.setAttribute('aria-label', label);
 
-          const picture = document.createElement('picture');
-
-          const avifSource = document.createElement('source');
-          avifSource.type = 'image/avif';
-          avifSource.srcset = `${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w`;
-          avifSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
-
-          const webpSource = document.createElement('source');
-          webpSource.type = 'image/webp';
-          webpSource.srcset = `${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w`;
-          webpSource.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
-
           const img = document.createElement('img');
-          img.src = `${optimizedBase}-768.jpg`;
-          img.srcset = `${optimizedBase}-480.jpg 480w, ${optimizedBase}-768.jpg 768w, ${optimizedBase}-1200.jpg 1200w`;
-          img.sizes = '(max-width: 768px) 48vw, (max-width: 1200px) 33vw, 25vw';
+          img.src = item.src;
           img.alt = label;
           img.loading = 'lazy';
           img.decoding = 'async';
 
-          picture.appendChild(avifSource);
-          picture.appendChild(webpSource);
-          picture.appendChild(img);
-          link.appendChild(picture);
+          link.appendChild(img);
 
           div.appendChild(link);
           container.appendChild(div);

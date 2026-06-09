@@ -22,14 +22,13 @@
         content="Leggi il diario di viaggio completo con mappa e contenuti multimediali ottimizzati.">
     <meta name="twitter:image" content="assets/img/optimized/thailandia/PXL_20231230_104316392-1200.jpg">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https: res.cloudinary.com; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://res.cloudinary.com https://unpkg.com; upgrade-insecure-requests">
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://unpkg.com; upgrade-insecure-requests">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/styles_vlog.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="assets/js/cloudinary-config.js"></script>
     <script src="assets/js/gallery-images.js" defer></script>
-    <script src="assets/js/mega-links.js" defer></script>
     <script src="assets/js/main.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
@@ -1951,38 +1950,12 @@
         }
 
         function buildResponsivePicture(imageSrc, altText) {
-            const optimizedBase = typeof getOptimizedImageBase === 'function' ? getOptimizedImageBase(imageSrc) : '';
-
-            if (!optimizedBase) {
-                return `
+            return `
                 <img
                     src="${imageSrc}"
                     alt="${altText}"
                     loading="lazy"
                     decoding="async">
-            `;
-            }
-
-            // Nuova regola: su desktop (oltre 900px) usa 800px
-            const sizes = '(max-width: 900px) 100vw, 800px';
-
-            return `
-                <picture>
-                    <source
-                        srcset="${optimizedBase}-480.avif 480w, ${optimizedBase}-768.avif 768w, ${optimizedBase}-1200.avif 1200w"
-                        sizes="${sizes}"
-                        type="image/avif">
-                    <source
-                        srcset="${optimizedBase}-480.webp 480w, ${optimizedBase}-768.webp 768w, ${optimizedBase}-1200.webp 1200w"
-                        sizes="${sizes}"
-                        type="image/webp">
-                    <img
-                        src="${optimizedBase}-768.jpg"
-                        alt="${altText}"
-                        loading="lazy"
-                        decoding="async"
-                        onerror="this.onerror=null;this.src='${imageSrc}';">
-                </picture>
             `;
         }
 

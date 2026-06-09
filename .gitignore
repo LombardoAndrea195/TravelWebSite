@@ -1,10 +1,2 @@
 # Media originals and upload staging should stay out of git
 mega_upload/
-assets/img/cile/
-assets/img/china/
-assets/img/scotland/
-assets/img/sri_lanka/
-assets/img/thailandia/
-assets/img/usa/
-assets/img/optimized/
-assets/video/
