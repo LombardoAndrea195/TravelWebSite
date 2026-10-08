@@ -1,149 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Blog | Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="title.gallery">Galleria | Travel</title>
   <meta name="description"
-    content="Galleria fotografica dei viaggi con immagini ottimizzate e alta risoluzione da diverse destinazioni nel mondo.">
+    content="Galleria fotografica dei viaggi di Andrea Lombardo: USA, Thailandia, Bolivia e Cile, Cina, Scozia e Sri Lanka.">
   <meta name="robots" content="index, follow">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#d97706">
+  <meta name="theme-color" content="#0b1a21">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; img-src 'self' data: https://*.tile.openstreetmap.org; media-src 'self'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:title" content="Travel Blog | Gallery">
-  <meta property="og:description" content="Scopri la galleria completa di scatti dai viaggi di Andrea Lombardo.">
-  <meta property="og:image" content="assets/img/optimized/china/20240803_130024-5f3f-1200.jpg">
+  <meta property="og:title" content="Galleria | Travel">
+  <meta property="og:description" content="Scopri la galleria di scatti dai viaggi di Andrea Lombardo.">
+  <meta property="og:image" content="https://lombardoandrea195.github.io/TravelWebSite/assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Travel Blog | Gallery">
-  <meta name="twitter:description" content="Scopri la galleria completa di scatti dai viaggi di Andrea Lombardo.">
-  <meta name="twitter:image" content="assets/img/optimized/china/20240803_130024-5f3f-1200.jpg">
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://unpkg.com; upgrade-insecure-requests">
+  <link rel="canonical" href="https://lombardoandrea195.github.io/TravelWebSite/gallery.html">
+  <meta property="og:url" content="https://lombardoandrea195.github.io/TravelWebSite/gallery.html">
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/styles_gallery.css">
+  <script src="assets/js/media-manifest.js" defer></script>
   <script src="assets/js/gallery-images.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <script src="assets/js/gallery.js" defer></script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
 
-  <header class="header">
-    <a href="index.html" class="logo">Travel</a>
-    <div class="menu-btn"></div>
-    <div class="navigation">
-      <div class="navigation-items">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="explore.html">Explore</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-      </div>
-
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Travel — Andrea Lombardo, home"><span class="brand-mark">Tra<em>vel</em></span><span class="brand-sub" aria-hidden="true">41.90°N 12.50°E</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="about.html" data-i18n="nav.about">Chi sono</a>
+      <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+      <a href="gallery.html" aria-current="page" data-i18n="nav.gallery">Galleria</a>
+      <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Lingua" data-i18n-attr="aria-label:lang.label">
+      <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano" title="Italiano" lang="it"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg></button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English" title="English" lang="en"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="flag-uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#flag-uk-t)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg></button>
     </div>
+    <button type="button" class="menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Apri menu"><span></span></button>
   </header>
 
-  <section class="gallery-intro" aria-label="Introduzione galleria">
-    <h1 class="gallery-heading">Galleria</h1>
-    <p class="gallery-subheading">Una selezione di scatti dai viaggi: apri ogni foto in alta risoluzione.</p>
-  </section>
-  <section class="container" id="gallery-container">
+  <main id="main" class="page-main">
+    <header class="container gallery-head">
+      <div>
+        <p class="kicker" data-i18n="gallery.kicker">Archivio fotografico</p>
+        <h1 class="display gallery-title" data-i18n-html="gallery.title">La <em>galleria</em></h1>
+      </div>
+      <p class="lede" data-i18n="gallery.lede">Una selezione di scatti dai viaggi. Tocca una foto per aprirla a schermo intero.</p>
+    </header>
 
+    <div class="container gallery-filters" role="group" aria-label="Filtra per destinazione"
+      data-i18n-attr="aria-label:gallery.filter" data-gallery-filters></div>
 
-    <script>
-      function getGalleryItems() {
-        return Array.isArray(window.travelGalleryImages) ? window.travelGalleryImages : [];
-      }
+    <section class="container gallery-grid" id="gallery" aria-labelledby="gallery-title" data-gallery>
+      <h2 class="visually-hidden" id="gallery-title" data-i18n="nav.gallery">Galleria</h2>
+    </section>
+  </main>
 
-      const regionLabels = {
-        cile: {
-          it: 'Paesaggi tra Bolivia e Cile',
-          en: 'Landscapes across Bolivia and Chile'
-        },
-        china: {
-          it: 'Scatto urbano e culturale in Cina',
-          en: 'Urban and cultural moment in China'
-        },
-        thailandia: {
-          it: 'Atmosfere e natura in Thailandia',
-          en: 'Atmosphere and nature in Thailand'
-        },
-        usa: {
-          it: 'On the road negli Stati Uniti',
-          en: 'On the road in the United States'
-        },
-        scotland: {
-          it: 'Highlands e castelli in Scozia',
-          en: 'Highlands and castles in Scotland'
-        },
-        sri_lanka: {
-          it: 'Templi e oceano in Sri Lanka',
-          en: 'Temples and ocean in Sri Lanka'
-        }
-      };
+  <dialog class="lightbox" data-lightbox aria-label="Galleria">
+    <figure class="lb-stage">
+      <img class="lb-img" alt="">
+      <figcaption class="lb-caption"><span class="lb-label"></span><span class="lb-count"></span></figcaption>
+    </figure>
+    <button type="button" class="lb-btn lb-close" data-lb="close" aria-label="Chiudi" data-i18n-attr="aria-label:gallery.close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <button type="button" class="lb-btn lb-prev" data-lb="prev" aria-label="Foto precedente" data-i18n-attr="aria-label:gallery.prev">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+    </button>
+    <button type="button" class="lb-btn lb-next" data-lb="next" aria-label="Foto successiva" data-i18n-attr="aria-label:gallery.next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+  </dialog>
 
-      function getCurrentLanguage() {
-        return window.localStorage.getItem('travel-language') === 'en' ? 'en' : 'it';
-      }
-
-      function getFolderFromSrc(src) {
-        const parts = src.split('/');
-        return parts[parts.length - 2];
-      }
-
-      function getDescriptiveLabel(src, index, language) {
-        const folder = getFolderFromSrc(src);
-        const defaultLabel = language === 'it' ? 'Momento di viaggio' : 'Travel moment';
-        const regionLabel = regionLabels[folder] ? regionLabels[folder][language] : defaultLabel;
-        return `${regionLabel} ${index + 1}`;
-      }
-
-      function createDivsFromArray(array, language) {
-        const container = document.querySelector('#gallery-container');
-        container.innerHTML = '';
-
-        array.forEach((item, index) => {
-          const div = document.createElement('div');
-          div.classList.add('grid-item');
-          div.classList.add('box');
-
-          const link = document.createElement('a');
-          const label = getDescriptiveLabel(item.src, index, language);
-          link.href = item.src;
-          link.title = label;
-          link.setAttribute('aria-label', label);
-
-          const img = document.createElement('img');
-          img.src = item.src;
-          img.alt = label;
-          img.loading = 'lazy';
-          img.decoding = 'async';
-
-          link.appendChild(img);
-
-          div.appendChild(link);
-          container.appendChild(div);
-
-        });
-      }
-
-      function renderGallery(language) {
-        createDivsFromArray(getGalleryItems(), language);
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        renderGallery(getCurrentLanguage());
-      });
-
-      document.addEventListener('languagechange', (event) => {
-        renderGallery(event.detail.language);
-      });
-    </script>
-  </section>
-
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-quote" data-i18n-html="footer.quote">Viaggiare è la più potente forma di <em>psicoterapia</em>.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="about.html" data-i18n="nav.about">Chi sono</a>
+        <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+        <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+        <a href="https://www.instagram.com/lombi95" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+      <div class="footer-bottom">
+        <p class="footer-copy" data-i18n="footer.copy">© Andrea Lombardo — foto e video originali dai miei viaggi.</p>
+        <div class="theme-picker" role="group" aria-label="Tema del sito" data-i18n-attr="aria-label:theme.label">
+          <span class="theme-picker-title" aria-hidden="true" data-i18n="theme.title">Tema</span>
+          <button type="button" class="theme-picker-btn" data-theme-id="mediterraneo" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.mediterraneo">Mediterraneo</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="rivista" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.rivista">Rivista</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="foresta" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.foresta">Foresta</span></button>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

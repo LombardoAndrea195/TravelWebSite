@@ -1,0 +1,13 @@
+{
+  "name": "travel-media-tools",
+  "private": true,
+  "type": "module",
+  "description": "Local-only media pipeline. Not deployed (see .vercelignore).",
+  "scripts": {
+    "images": "node optimize-images.mjs",
+    "media": "bash optimize_media.sh"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

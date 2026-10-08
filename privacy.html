@@ -2,39 +2,71 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Blog | Privacy Policy</title>
-    <meta name="description" content="Informativa privacy del Travel Blog di Andrea Lombardo.">
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="title.privacy">Privacy Policy | Travel</title>
+  <meta name="description" content="Informativa privacy del travel blog di Andrea Lombardo.">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0b1a21">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; img-src 'self' data: https://*.tile.openstreetmap.org; media-src 'self'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com">
+  <link rel="canonical" href="https://lombardoandrea195.github.io/TravelWebSite/privacy.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
-    <header class="header">
-        <a href="index.html" class="logo">Travel</a>
-        <div class="menu-btn" aria-label="Apri menu"></div>
-        <div class="navigation">
-            <div class="navigation-items">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
-            </div>
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Travel — Andrea Lombardo, home"><span class="brand-mark">Tra<em>vel</em></span><span class="brand-sub" aria-hidden="true">41.90°N 12.50°E</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="about.html" data-i18n="nav.about">Chi sono</a>
+      <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+      <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Lingua" data-i18n-attr="aria-label:lang.label">
+      <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano" title="Italiano" lang="it"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg></button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English" title="English" lang="en"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="flag-uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#flag-uk-t)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg></button>
+    </div>
+    <button type="button" class="menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Apri menu"><span></span></button>
+  </header>
+
+  <main id="main" class="page-main">
+    <article class="container prose">
+      <h1 class="display" data-i18n="privacy.title">Privacy Policy</h1>
+      <p data-i18n="privacy.p1">Questo sito raccoglie solo i dati che inserisci volontariamente nel modulo contatti (nome, email, messaggio) per rispondere alle tue richieste.</p>
+      <p data-i18n="privacy.p2">I dati vengono inviati tramite Web3Forms e non sono venduti né ceduti a terzi.</p>
+      <p data-i18n="privacy.p4">La mappa nella pagina Contatti e le mappe dei diari di viaggio vengono caricate da servizi esterni (Google Maps, OpenStreetMap) solo quando le visualizzi.</p>
+      <p data-i18n-html="privacy.p3">Per richiedere la modifica o la cancellazione dei tuoi dati, scrivimi dalla pagina <a href="contact.html">Contatti</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-quote" data-i18n-html="footer.quote">Viaggiare è la più potente forma di <em>psicoterapia</em>.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="about.html" data-i18n="nav.about">Chi sono</a>
+        <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+        <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+        <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+      </nav>
+      <div class="footer-bottom">
+        <p class="footer-copy" data-i18n="footer.copy">© Andrea Lombardo — foto e video originali dai miei viaggi.</p>
+        <div class="theme-picker" role="group" aria-label="Tema del sito" data-i18n-attr="aria-label:theme.label">
+          <span class="theme-picker-title" aria-hidden="true" data-i18n="theme.title">Tema</span>
+          <button type="button" class="theme-picker-btn" data-theme-id="mediterraneo" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.mediterraneo">Mediterraneo</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="rivista" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.rivista">Rivista</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="foresta" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.foresta">Foresta</span></button>
         </div>
-    </header>
-
-    <main style="max-width: 900px; margin: 120px auto 40px; padding: 0 20px;">
-        <h1 style="margin-bottom: 16px;">Privacy Policy</h1>
-        <p style="margin-bottom: 12px;">Questo sito raccoglie solo i dati che inserisci volontariamente nel modulo
-            contatti (nome, email, messaggio) per rispondere alle richieste.</p>
-        <p style="margin-bottom: 12px;">I dati vengono inviati tramite Web3Forms e non sono venduti a terzi.</p>
-        <p style="margin-bottom: 12px;">Per richiedere modifica o cancellazione dei dati, contattami dalla pagina <a
-                href="contact.html">Contact</a>.</p>
-    </main>
-
-    <script src="assets/js/main.js" defer></script>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

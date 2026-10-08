@@ -2,143 +2,124 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Blog | About</title>
-    <meta name="description"
-        content="Chi sono: Andrea Lombardo, passione per tecnologia e viaggi, con storie reali, consigli pratici e prossime destinazioni.">
-    <meta name="robots" content="index, follow">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta name="theme-color" content="#d97706">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="it_IT">
-    <meta property="og:title" content="Travel Blog | About">
-    <meta property="og:description"
-        content="Scopri il profilo di Andrea Lombardo e la filosofia dietro questo travel blog.">
-    <meta property="og:image" content="assets/img/other/me.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Travel Blog | About">
-    <meta name="twitter:description"
-        content="Scopri il profilo di Andrea Lombardo e la filosofia dietro questo travel blog.">
-    <meta name="twitter:image" content="assets/img/other/me.jpg">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://unpkg.com; upgrade-insecure-requests">
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/styles_about.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="title.about">Chi sono | Travel</title>
+  <meta name="description"
+    content="Chi sono: Andrea Lombardo, romano classe ’95, appassionato di tecnologia e viaggi. Storie reali, consigli pratici e prossime destinazioni.">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0b1a21">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; img-src 'self' data: https://*.tile.openstreetmap.org; media-src 'self'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com">
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Chi sono | Travel">
+  <meta property="og:description" content="Il profilo di Andrea Lombardo e la filosofia dietro questo travel blog.">
+  <meta property="og:image" content="https://lombardoandrea195.github.io/TravelWebSite/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://lombardoandrea195.github.io/TravelWebSite/about.html">
+  <meta property="og:url" content="https://lombardoandrea195.github.io/TravelWebSite/about.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles_about.css">
+  <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
-    <header class="header">
-        <a href="index.html" class="logo">Travel</a>
-        <div class="menu-btn" aria-label="Apri menu"></div>
-        <div class="navigation">
-            <div class="navigation-items">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
-            </div>
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Travel — Andrea Lombardo, home"><span class="brand-mark">Tra<em>vel</em></span><span class="brand-sub" aria-hidden="true">41.90°N 12.50°E</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="about.html" aria-current="page" data-i18n="nav.about">Chi sono</a>
+      <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+      <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Lingua" data-i18n-attr="aria-label:lang.label">
+      <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano" title="Italiano" lang="it"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg></button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English" title="English" lang="en"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="flag-uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#flag-uk-t)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg></button>
+    </div>
+    <button type="button" class="menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Apri menu"><span></span></button>
+  </header>
+
+  <main id="main" class="page-main">
+    <section class="container about-hero">
+      <div class="about-copy">
+        <p class="kicker" data-i18n="about.kicker">Travel creator · Roma</p>
+        <h1 class="display about-title" data-i18n-html="about.title">Chi <em>sono</em></h1>
+        <blockquote class="about-quote">
+          <p data-i18n="about.quote">Quando la bussola interiore è sballata, prenota un viaggio: ti aiuterà a ritrovare la tua strada.</p>
+        </blockquote>
+        <p class="about-intro" data-i18n="about.intro">Sono Andrea Lombardo, classe ’95, romano. Amo la tecnologia quanto i viaggi: scoprire nuove culture e vivere esperienze uniche.</p>
+        <p class="lede" data-i18n-html="about.body">Ho scelto di unire queste due passioni — <strong>tecnologia e viaggi</strong> — dando vita a questo spazio: un diario digitale fatto di itinerari reali, foto e video girati sul campo.</p>
+        <ul class="about-pillars">
+          <li data-i18n="about.pillar1">Itinerari reali e onesti</li>
+          <li data-i18n="about.pillar2">Consigli pratici sul campo</li>
+          <li data-i18n="about.pillar3">Foto e video originali</li>
+        </ul>
+        <div class="about-ctas">
+          <a class="btn" href="explore.html"><span data-i18n="about.ctaExplore">Esplora i viaggi</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost" href="contact.html" data-i18n="about.ctaContact">Scrivimi</a>
         </div>
-    </header>
+      </div>
 
-    <main class="about-main">
-        <section class="introduction about-hero" data-first-viewport-animate>
-            <p class="hero-kicker">Travel creator · Roma</p>
-            <h3 class="text-center">- Quando la bussola interiore e sballata: prenota un viaggio, ti aiutera a ritrovare
-                la tua strada -</h3>
-            <h1 class="text-center">About me</h1>
-        </section>
+      <figure class="about-portrait">
+        <!-- Both portraits are tiny WebPs; the second cross-fades in on hover instead of being fetched on hover. -->
+        <span class="portrait-frame media-frame">
+          <img src="assets/img/optimized/other/me-960.webp"
+            srcset="assets/img/optimized/other/me-480.webp 480w, assets/img/optimized/other/me-960.webp 960w"
+            sizes="(max-width: 860px) 80vw, 420px" width="960" height="1280"
+            alt="Ritratto di Andrea Lombardo" loading="eager" fetchpriority="high" decoding="async">
+          <img class="portrait-alt" src="assets/img/optimized/other/me2-960.webp"
+            srcset="assets/img/optimized/other/me2-480.webp 480w, assets/img/optimized/other/me2-960.webp 960w"
+            sizes="(max-width: 860px) 80vw, 420px" width="1200" height="1600" alt="" loading="lazy" decoding="async">
+        </span>
+        <figcaption class="portrait-caption" data-i18n="about.caption">Da Roma al mondo, un viaggio alla volta.</figcaption>
+      </figure>
+    </section>
 
-        <section class="profilo about-profile-card" data-first-viewport-animate>
-            <div class="profile-visual">
-                <img id="profile-img" src="assets/img/other/me.jpg" alt="Foto profilo di Andrea Lombardo" width="320"
-                    height="320" loading="eager" decoding="async" fetchpriority="high">
-                <p class="profile-caption">Da Roma al mondo, un viaggio alla volta.</p>
-            </div>
-            <div class="descrizione">
-                <h2>Sono Andrea Lombardo, classe '95, romano amante della tecnologia oltre che dei viaggi per scoprire
-                    nuove culture e vivere esperienze uniche.</h2>
-                <p>Ho scelto di combinare queste due grandi passioni <span class="accent">- Tecnologia e Viaggi -</span>
-                    dando vita a questo spazio virtuale.</p>
+    <section class="container about-metrics" aria-label="Numeri">
+      <div class="metric">
+        <p class="display metric-n">6</p>
+        <p class="metric-label" data-i18n="about.metric1">Destinazioni raccontate</p>
+      </div>
+      <div class="metric">
+        <p class="display metric-n">120<span>+</span></p>
+        <p class="metric-label" data-i18n="about.metric2">Scatti in galleria</p>
+      </div>
+      <div class="metric">
+        <p class="display metric-n">3</p>
+        <p class="metric-label" data-i18n="about.metric3">Viaggi in programma</p>
+      </div>
+    </section>
+  </main>
 
-                <ul class="about-pillars" aria-label="Valori principali">
-                    <li>Itinerari reali e onesti</li>
-                    <li>Consigli pratici sul campo</li>
-                    <li>Foto e video ad alta qualita</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="about-metrics" aria-label="Numeri del progetto">
-            <article>
-                <h4>6+</h4>
-                <p>Destinazioni raccontate</p>
-            </article>
-            <article>
-                <h4>100+</h4>
-                <p>Scatti in galleria</p>
-            </article>
-            <article>
-                <h4>3</h4>
-                <p>Planned trips</p>
-            </article>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <br><br>
-            <p>&copy; 2024 Viaggiare e la piu potente forma di psicoterapia</p>
-            <nav class="footer-nav">
-                <a href="about.html">Chi siamo</a> |
-                <a href="privacy.html">Privacy Policy</a> |
-                <a href="contact.html">Contatti</a>
-            </nav>
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-quote" data-i18n-html="footer.quote">Viaggiare è la più potente forma di <em>psicoterapia</em>.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+        <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+        <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+        <a href="https://www.instagram.com/lombi95" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+      <div class="footer-bottom">
+        <p class="footer-copy" data-i18n="footer.copy">© Andrea Lombardo — foto e video originali dai miei viaggi.</p>
+        <div class="theme-picker" role="group" aria-label="Tema del sito" data-i18n-attr="aria-label:theme.label">
+          <span class="theme-picker-title" aria-hidden="true" data-i18n="theme.title">Tema</span>
+          <button type="button" class="theme-picker-btn" data-theme-id="mediterraneo" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.mediterraneo">Mediterraneo</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="rivista" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.rivista">Rivista</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="foresta" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.foresta">Foresta</span></button>
         </div>
-        <div class="footer-bottom">
-            <div class="social-media">
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="assets/js/main.js" defer></script>
-    <script>
-        var profileImg = document.getElementById('profile-img');
-        var originalSrc = profileImg.src;
-
-        profileImg.addEventListener('mouseenter', function () {
-            profileImg.src = 'assets/img/other/me2.jpg';
-        });
-
-        profileImg.addEventListener('mouseleave', function () {
-            profileImg.src = originalSrc;
-        });
-
-        // Animate only elements visible in the initial viewport on first load.
-        (function () {
-            var introElements = document.querySelectorAll('[data-first-viewport-animate]');
-            if (!introElements.length) {
-                return;
-            }
-
-            var viewportBottom = window.innerHeight || document.documentElement.clientHeight;
-
-            introElements.forEach(function (element, index) {
-                var rect = element.getBoundingClientRect();
-                var isInitiallyVisible = rect.top < viewportBottom * 0.98 && rect.bottom > 0;
-
-                if (isInitiallyVisible) {
-                    window.setTimeout(function () {
-                        element.classList.add('is-intro-visible');
-                    }, index * 70);
-                }
-            });
-        })();
-    </script>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

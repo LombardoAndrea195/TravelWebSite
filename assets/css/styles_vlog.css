@@ -1,116 +1,488 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Vlog — trip hero, alternating day timeline, lazy map. */
+
+.vlog {
+  padding-top: calc(var(--header-h) + 16px);
 }
 
-body {
-    font-family: var(--font-body);
-    background: var(--color-surface);
+/* ---------- Hero ---------- */
+
+.trip-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(380px, 64svh, 640px);
+  display: flex;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  color: var(--white);
+  background: var(--bg-2);
 }
 
-#viaggi-container {
-    width: min(1180px, calc(100% - 32px));
-    margin: 110px auto 28px;
-    display: grid;
-    gap: 18px;
+.trip-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
 }
 
-.viaggio {
-    display: grid;
-    grid-template-columns: minmax(240px, 360px) 1fr;
-    gap: 18px;
-    align-items: center;
-    padding: 14px;
-    background: var(--color-white);
-    border-radius: 14px;
-    box-shadow: var(--shadow-soft);
-    transition: transform var(--motion-fast) ease;
+.trip-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 15, 20, 0.45) 0%, rgba(5, 15, 20, 0) 30%),
+    linear-gradient(0deg, rgba(5, 15, 20, 0.85) 0%, rgba(5, 15, 20, 0.25) 50%, rgba(5, 15, 20, 0) 72%);
 }
 
-.viaggio:hover {
-    transform: translateY(-2px);
+.trip-hero-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: clamp(18px, 3vw, 32px) clamp(20px, 4vw, 48px) clamp(24px, 4vw, 44px);
 }
 
-.viaggio picture {
-    display: block;
+.back-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(5, 15, 20, 0.32);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--dur-1) ease;
 }
 
-.viaggio picture,
-.viaggio img {
-    width: 100%;
+.back-link svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.trip-hero .kicker {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.trip-coords {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.trip-coords:not(:empty)::before {
+  content: "·";
+  margin-right: 12px;
+}
+
+.trip-title {
+  margin-top: 12px;
+  font-size: calc(clamp(3.4rem, 11vw, 8.5rem) * var(--display-scale));
+  line-height: 0.9;
+}
+
+.trip-facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  margin-top: 18px;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.trip-facts span + span::before {
+  content: "·";
+  margin-right: 20px;
+  opacity: 0.6;
+}
+
+.trip-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 4px;
+}
+
+.trip-map-link svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(90deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .back-link:hover {
+    background: rgba(5, 15, 20, 0.55);
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-3px);
+  }
+}
+
+/* ---------- Days ---------- */
+
+.days {
+  list-style: none;
+  display: grid;
+  gap: clamp(48px, 8vw, 112px);
+  margin-top: clamp(56px, 9vw, 120px);
+  counter-reset: day;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-areas: "num media body";
+  gap: clamp(20px, 3.4vw, 48px);
+  align-items: start;
+}
+
+.day:nth-child(even) {
+  grid-template-columns: 92px minmax(0, 6fr) minmax(0, 5fr);
+  grid-template-areas: "num body media";
+}
+
+.day-num {
+  grid-area: num;
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: grid;
+  gap: 2px;
+  padding-top: 4px;
+  border-top: 2px solid var(--accent);
+}
+
+.day-label {
+  padding-top: 8px;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.day-n {
+  font-size: calc(3.6rem * var(--display-scale));
+  line-height: 1;
+  color: var(--accent);
+}
+
+.day-media {
+  grid-area: media;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-1);
+}
+
+.day-body {
+  grid-area: body;
+  padding-top: 4px;
+}
+
+.day-title {
+  font-size: calc(clamp(2rem, 3.6vw, 3rem) * var(--display-scale));
+  line-height: 1.02;
+  margin-bottom: 20px;
+}
+
+.day-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  max-width: 58ch;
+}
+
+.day-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--fg-2);
+  line-height: 1.65;
+}
+
+.day-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.78em;
+  width: 10px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Highlighter-pen keywords instead of heavy pills. */
+.kw {
+  color: var(--fg);
+  font-weight: 600;
+  background: linear-gradient(transparent 60%, color-mix(in srgb, var(--accent) 26%, transparent) 60%);
+  padding-inline: 1px;
+}
+
+/* One-shot reveal (added only when motion is allowed). */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .day,
+  .day:nth-child(even) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "num" "media" "body";
+    gap: 16px;
+  }
+
+  .day-num {
+    position: static;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .day-n {
+    font-size: calc(2.6rem * var(--display-scale));
+    order: -1;
+  }
+
+  .day-label {
+    padding-top: 0;
+  }
+
+  .day-media {
     aspect-ratio: 4 / 3;
+  }
 }
 
-.viaggio img {
-    object-fit: cover;
-    border-radius: 10px;
+/* ---------- Map ---------- */
+
+.trip-map-section {
+  margin-top: clamp(72px, 10vw, 140px);
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
 }
 
-.descrizione h2 {
-    color: var(--color-accent);
-    margin-bottom: 8px;
+.map-title {
+  font-size: calc(clamp(2.4rem, 5vw, 3.8rem) * var(--display-scale));
+  margin-bottom: 24px;
 }
 
-.descrizione ul {
-    margin-left: 20px;
-    margin-top: 8px;
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(220px, 1fr);
+  gap: 24px;
 }
 
-.descrizione li {
-    margin-bottom: 4px;
+.trip-map {
+  position: relative;
+  min-height: 460px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg-2);
+  z-index: 0;
 }
 
-.vlog-keyword {
-    display: inline-block;
-    padding: 0 0.34em;
-    border-radius: 6px;
-    background: rgba(217, 119, 6, 0.16);
-    color: #8b4513;
-    font-weight: 700;
+.map-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  color: var(--fg-3);
+}
+
+/* Warmer, quieter tiles so the route reads first. */
+/* Night map: invert OSM tiles and rotate hues back so water stays blue. */
+.trip-map .leaflet-tile-pane {
+  filter: var(--map-filter);
+}
+
+.trip-map .leaflet-bar a {
+  background: var(--surface);
+  color: var(--fg);
+  border-bottom-color: var(--line);
+}
+
+.trip-map .leaflet-bar {
+  border: 1px solid var(--line-strong);
+  box-shadow: none;
+}
+
+.trip-map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  color: var(--fg-3);
+}
+
+.trip-map .leaflet-control-attribution a {
+  color: var(--accent-ink);
+}
+
+.trip-map .leaflet-popup-content-wrapper,
+.trip-map .leaflet-popup-tip {
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow-2);
+}
+
+.trip-map .leaflet-popup-content {
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+}
+
+.trip-map a.leaflet-popup-close-button {
+  color: var(--fg-3);
+}
+
+.trip-map .leaflet-container,
+.trip-map.leaflet-container {
+  font-family: var(--font-body);
+  background: var(--bg-2);
+}
+
+/* Scoped so it wins over leaflet.css (loaded later, same specificity). */
+.trip-map .map-pin {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cta);
+  color: var(--cta-fg);
+  font-family: var(--font-label);
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--cta) 18%, transparent), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.stops {
+  list-style: none;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  max-height: 460px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.stop {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: var(--r-sm);
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--fg-2);
+  transition: background-color var(--dur-1) ease, color var(--dur-1) ease;
+}
+
+.stop-n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-label);
+  font-size: 0.74rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stop:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stop:hover {
+    background: var(--surface);
+    color: var(--fg);
+  }
+}
+
+@media (max-width: 860px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-map {
+    min-height: 340px;
+  }
+
+  .stops {
+    max-height: none;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+/* ---------- Next trip / empty ---------- */
+
+.next-trip {
+  margin-top: clamp(64px, 9vw, 120px);
+}
+
+.next-link {
+  display: grid;
+  gap: 10px;
+  padding: clamp(28px, 4vw, 48px) 0;
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.next-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: calc(clamp(2.8rem, 8vw, 6rem) * var(--display-scale));
+  line-height: 1;
+}
+
+.next-name svg {
+  width: 0.6em;
+  height: 0.6em;
+  color: var(--cta);
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .next-link:hover .next-name svg {
+    transform: translateX(12px);
+  }
 }
 
 .empty-state {
-    margin-top: 120px;
-    text-align: center;
-    color: #333;
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  padding-block: clamp(40px, 8vw, 96px);
 }
 
-.trip-map-section {
-    width: min(1180px, calc(100% - 32px));
-    margin: 8px auto 36px;
-    background: var(--color-white);
-    border-radius: 14px;
-    padding: 18px;
-    box-shadow: var(--shadow-soft);
+.empty-state h1 {
+  font-size: calc(clamp(2.8rem, 7vw, 5rem) * var(--display-scale));
 }
 
-.trip-map-section h2 {
-    color: var(--color-accent);
-    margin-bottom: 6px;
+.empty-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
 }
 
-.trip-map-section p {
-    margin-bottom: 12px;
-    color: #3a3a3a;
-}
-
-#trip-map {
-    width: 100%;
-    height: 380px;
-    border-radius: 10px;
-}
-
-@media (max-width: 900px) {
-    #viaggi-container {
-        margin-top: 90px;
-    }
-
-    .viaggio {
-        grid-template-columns: 1fr;
-    }
-
-    #trip-map {
-        height: 300px;
-    }
+.empty-links .chip {
+  text-decoration: none;
 }

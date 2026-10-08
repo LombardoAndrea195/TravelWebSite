@@ -1,59 +1,44 @@
 #!/usr/bin/env bash
+# Local media pipeline (not deployed).
+#   bash scripts/optimize_media.sh            -> images + videos
+#   bash scripts/optimize_media.sh videos     -> videos only
+# Requires: node (+ `npm install` in scripts/), ffmpeg, cwebp.
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-mkdir -p assets/img/optimized assets/video/optimized
+if [[ "${1:-all}" != "videos" ]]; then
+  (cd scripts && node optimize-images.mjs)
+fi
 
-grep -Eho "assets/img/[-A-Za-z0-9_./~ ]+\.(jpg|JPG|jpeg|JPEG|png|PNG)" \
-  explore.html gallery.html vlog.html assets/js/gallery-images.js \
-  | grep -v 'assets/img/optimized/' \
-  | sort -u > /tmp/travel_image_list.txt
+mkdir -p assets/video/optimized
 
-while IFS= read -r src; do
-  [[ -z "$src" ]] && continue
-  if [[ ! -f "$src" ]]; then
-    echo "SKIP missing $src"
-    continue
-  fi
+# 720p (short side), max 10s (slides rotate every ~6.5s), <=30fps, no audio, H.264 high profile, moov atom first
+# so playback starts before the whole file is downloaded.
+SCALE="scale='if(gt(iw,ih),-2,720)':'if(gt(iw,ih),720,-2)'"
 
-  rel="${src#assets/img/}"
-  dir="$(dirname "$rel")"
-  name="$(basename "$rel")"
-  stem="${name%.*}"
-
-  outdir="assets/img/optimized/$dir"
-  mkdir -p "$outdir"
-
-  for w in 480 768 1200; do
-    jpg="$outdir/${stem}-${w}.jpg"
-    webp="$outdir/${stem}-${w}.webp"
-    avif="$outdir/${stem}-${w}.avif"
-
-    ffmpeg -y -loglevel error -i "$src" -vf "scale='min(${w},iw)':-2" -q:v 3 "$jpg"
-    cwebp -quiet -q 78 "$jpg" -o "$webp"
-    avifenc -q 54 --speed 6 "$jpg" "$avif" >/dev/null
-  done
-
-  echo "DONE image $src"
-done < /tmp/travel_image_list.txt
-
-for v in 1 2 3 4; do
+for v in 1 2 3 4 5 6; do
   in="assets/video/${v}.mp4"
   out="assets/video/optimized/${v}-opt.mp4"
-  poster_jpg="assets/video/optimized/${v}-poster.jpg"
+  poster_jpg="/tmp/travel-${v}-poster.jpg"
   poster_webp="assets/video/optimized/${v}-poster.webp"
 
-  ffmpeg -y -loglevel error -i "$in" \
-    -vf "scale='if(gt(iw,ih),min(1280,iw),-2)':'if(gt(iw,ih),-2,min(1280,ih))'" \
-    -c:v libx264 -preset medium -crf 28 -movflags +faststart -an "$out"
+  [[ -f "$in" ]] || { echo "SKIP missing $in"; continue; }
 
-  ffmpeg -y -loglevel error -ss 00:00:02 -i "$in" -frames:v 1 \
-    -vf "scale='if(gt(iw,ih),min(1280,iw),-2)':'if(gt(iw,ih),-2,min(1280,ih))'" "$poster_jpg"
+  if [[ ! -f "$out" || "$in" -nt "$out" || "${FORCE:-0}" == "1" ]]; then
+    ffmpeg -y -loglevel error -i "$in" \
+      -vf "${SCALE}" -fpsmax 30 \
+      -t 10 -c:v libx264 -preset slow -crf 31 -profile:v high -pix_fmt yuv420p \
+      -movflags +faststart -an "$out"
+  fi
 
-  cwebp -quiet -q 80 "$poster_jpg" -o "$poster_webp"
-  echo "DONE video $in"
+  # Poster = first frame, so the swap poster -> video is seamless.
+  ffmpeg -y -loglevel error -i "$in" -frames:v 1 -vf "${SCALE}" -q:v 3 "$poster_jpg"
+  cwebp -quiet -q 72 "$poster_jpg" -o "$poster_webp"
+  rm -f "$poster_jpg"
+
+  echo "DONE video $in -> $(du -h "$out" | cut -f1)"
 done
 
 echo "ALL_CONVERSIONS_DONE"

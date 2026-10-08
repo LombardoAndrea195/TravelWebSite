@@ -1,126 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Blog | Andrea Lombardo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="title.index">Travel | Diario di viaggio di Andrea Lombardo</title>
   <meta name="description"
-    content="Travel blog di Andrea Lombardo con itinerari, vlog, galleria fotografica e consigli pratici per organizzare il tuo prossimo viaggio.">
+    content="Travel blog di Andrea Lombardo: diari di viaggio giorno per giorno, video, galleria fotografica e consigli pratici da USA, Thailandia, Bolivia e Cile, Cina, Scozia e Sri Lanka.">
   <meta name="robots" content="index, follow">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#d97706">
+  <meta name="theme-color" content="#0b1a21">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; img-src 'self' data: https://*.tile.openstreetmap.org; media-src 'self'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:title" content="Travel Blog | Andrea Lombardo">
-  <meta property="og:description"
-    content="Scopri viaggi, itinerari e vlog con foto e video ottimizzati da tutto il mondo.">
-  <meta property="og:image" content="assets/img/optimized/usa/IMG_1018-1200.jpg">
+  <meta property="og:title" content="Travel | Diario di viaggio di Andrea Lombardo">
+  <meta property="og:description" content="Sei viaggi raccontati giorno per giorno con foto, video e mappe.">
+  <meta property="og:image" content="https://lombardoandrea195.github.io/TravelWebSite/assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Travel Blog | Andrea Lombardo">
-  <meta name="twitter:description"
-    content="Scopri viaggi, itinerari e vlog con foto e video ottimizzati da tutto il mondo.">
-  <meta name="twitter:image" content="assets/img/optimized/usa/IMG_1018-1200.jpg">
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://unpkg.com; upgrade-insecure-requests">
+  <link rel="canonical" href="https://lombardoandrea195.github.io/TravelWebSite/">
+  <meta property="og:url" content="https://lombardoandrea195.github.io/TravelWebSite/">
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <!-- LCP: the first poster is what users see first. -->
+  <link rel="preload" href="assets/video/optimized/1-poster.webp" as="image" fetchpriority="high">
+  <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles_home.css">
   <script src="assets/js/main.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <script src="assets/js/home.js" defer></script>
 </head>
 
-<body>
+<body class="page-home">
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
 
-  <header class="header">
-    <a href="#" class="logo">Travel</a>
-    <div class="menu-btn"></div>
-    <div class="navigation">
-      <div class="navigation-items">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="explore.html">Explore</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-      </div>
-
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Travel — Andrea Lombardo, home"><span class="brand-mark">Tra<em>vel</em></span><span class="brand-sub" aria-hidden="true">41.90°N 12.50°E</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" aria-current="page" data-i18n="nav.home">Home</a>
+      <a href="about.html" data-i18n="nav.about">Chi sono</a>
+      <a href="explore.html" data-i18n="nav.explore">Esplora</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+      <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Lingua" data-i18n-attr="aria-label:lang.label">
+      <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano" title="Italiano" lang="it"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg></button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English" title="English" lang="en"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="flag-uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#flag-uk-t)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg></button>
     </div>
+    <button type="button" class="menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Apri menu"><span></span></button>
   </header>
 
-  <section class="home">
-    <video class="video-slide active" autoplay muted loop playsinline preload="auto"
-      poster="assets/video/optimized/1-poster.webp">
-      <source src="assets/video/optimized/1-opt.mp4" type="video/mp4">
-    </video>
-    <video width="320" height="100" class="video-slide" muted loop playsinline preload="none"
-      poster="assets/video/optimized/2-poster.webp">
-      <source data-src="assets/video/optimized/2-opt.mp4" type="video/mp4">
-    </video>
-    <video class="video-slide" muted loop playsinline preload="none" poster="assets/video/optimized/3-poster.webp">
-      <source data-src="assets/video/optimized/3-opt.mp4" type="video/mp4">
-    </video>
-    <video class="video-slide" muted loop playsinline preload="none" poster="assets/video/optimized/4-poster.webp">
-      <source data-src="assets/video/optimized/4-opt.mp4" type="video/mp4">
-    </video>
-    <video class="video-slide" muted loop playsinline preload="none" poster="assets/video/optimized/5-poster.webp">
-      <source data-src="assets/video/optimized/5-opt.mp4" type="video/mp4">
-    </video>
-    <video class="video-slide" muted loop playsinline preload="none">
-      <source data-src="assets/video/6.mp4" type="video/mp4">
-    </video>
+  <main id="main" class="hero" data-hero>
+    <!-- Only the first video is fetched up-front; the others are wired by home.js on demand. -->
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video is-active" muted loop playsinline preload="metadata"
+        poster="assets/video/optimized/1-poster.webp" data-src="assets/video/optimized/1-opt.mp4"></video>
+      <video class="hero-video" muted loop playsinline preload="none"
+        data-poster="assets/video/optimized/2-poster.webp" data-src="assets/video/optimized/2-opt.mp4"></video>
+      <video class="hero-video" muted loop playsinline preload="none"
+        data-poster="assets/video/optimized/3-poster.webp" data-src="assets/video/optimized/3-opt.mp4"></video>
+      <video class="hero-video" muted loop playsinline preload="none"
+        data-poster="assets/video/optimized/4-poster.webp" data-src="assets/video/optimized/4-opt.mp4"></video>
+      <video class="hero-video" muted loop playsinline preload="none"
+        data-poster="assets/video/optimized/5-poster.webp" data-src="assets/video/optimized/5-opt.mp4"></video>
+      <video class="hero-video" muted loop playsinline preload="none"
+        data-poster="assets/video/optimized/6-poster.webp" data-src="assets/video/optimized/6-opt.mp4"></video>
+    </div>
 
-    <div class="home-overlay-panel">
-      <div class="content active">
-        <h2>America Westcost:<br> <span></span></h2>
-        <p> Tra deserti infiniti, città leggendarie e alcuni dei paesaggi più iconici del West americano.</p>
-        <a class="button_read_more" href="vlog.html?trip=America">Watch the trip</a>
-      </div>
-      <div class="content">
-        <h2>Thailandia:<br> <span></span></h2>
-        <p> Un sogno thailandese: tra spiagge da sogno, animali esotici, giochi di luci e templi millenari </p>
-        <a class="button_read_more" href="vlog.html?trip=Thailandia">Watch the trip</a>
-      </div>
-      <div class="content">
-        <h2>Bolivia & Cile:<br><span></span></h2>
-        <p> Salar de Uyuni: Hai mai visto un posto dove cielo e terra si uniscono all'orizzonte?</p>
-        <a class="button_read_more" href="vlog.html?trip=Bolivia">Watch the trip</a>
-      </div>
-      <div class="content">
-        <h2>China:<br><span></span></h2>
-        <p> Una cultura lontana al nostro mondo occidentale ma che sa sorprendere per il suo popolo gentile e le sue
-          bellezze nascoste</p>
-        <a class="button_read_more" href="vlog.html?trip=China">Watch the trip</a>
-      </div>
-      <div class="content">
-        <h2>Scotland:<br><span></span></h2>
-        <p> Highlands selvagge, castelli avvolti nella nebbia e paesaggi mozzafiato: la Scozia ti aspetta</p>
-        <a class="button_read_more" href="vlog.html?trip=Scotland">Watch the trip</a>
-      </div>
-      <div class="content">
-        <h2>Sri Lanka:<br><span></span></h2>
-        <p> Oceano tropicale, templi antichi, treni tra le piantagioni di tè e safari nella natura selvaggia.</p>
-        <a class="button_read_more" href="vlog.html?trip=SriLanka">Watch the trip</a>
+    <div class="hero-inner">
+      <h1 class="visually-hidden">Travel — Andrea Lombardo</h1>
+      <p class="kicker hero-kicker" data-i18n="home.kicker">Diario di viaggio · 6 destinazioni</p>
+
+      <div class="hero-slides" aria-live="polite">
+        <article class="hero-slide is-active">
+          <h2 class="display hero-title" data-i18n-html="home.s1.title">America <em>West Coast</em></h2>
+          <p class="hero-text" data-i18n="home.s1.text">Tra deserti infiniti, città leggendarie e alcuni dei paesaggi più iconici del West americano.</p>
+          <a class="btn hero-cta" href="vlog.html?trip=America"><span data-i18n="home.cta">Guarda il viaggio</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="hero-slide" inert>
+          <h2 class="display hero-title" data-i18n-html="home.s2.title">Thailandia</h2>
+          <p class="hero-text" data-i18n="home.s2.text">Un sogno thailandese: spiagge da cartolina, animali esotici, giochi di luce e templi millenari.</p>
+          <a class="btn hero-cta" href="vlog.html?trip=Thailandia"><span data-i18n="home.cta">Guarda il viaggio</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="hero-slide" inert>
+          <h2 class="display hero-title" data-i18n-html="home.s3.title">Bolivia <em>&amp;</em> Cile</h2>
+          <p class="hero-text" data-i18n="home.s3.text">Salar de Uyuni: hai mai visto un posto dove cielo e terra si uniscono all’orizzonte?</p>
+          <a class="btn hero-cta" href="vlog.html?trip=Bolivia"><span data-i18n="home.cta">Guarda il viaggio</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="hero-slide" inert>
+          <h2 class="display hero-title" data-i18n-html="home.s4.title">Cina</h2>
+          <p class="hero-text" data-i18n="home.s4.text">Una cultura lontana dal nostro mondo occidentale, capace di sorprendere con la gentilezza della sua gente e le sue bellezze nascoste.</p>
+          <a class="btn hero-cta" href="vlog.html?trip=China"><span data-i18n="home.cta">Guarda il viaggio</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="hero-slide" inert>
+          <h2 class="display hero-title" data-i18n-html="home.s5.title">Scozia</h2>
+          <p class="hero-text" data-i18n="home.s5.text">Highlands selvagge, castelli avvolti nella nebbia e paesaggi mozzafiato: la Scozia ti aspetta.</p>
+          <a class="btn hero-cta" href="vlog.html?trip=Scotland"><span data-i18n="home.cta">Guarda il viaggio</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="hero-slide" inert>
+          <h2 class="display hero-title" data-i18n-html="home.s6.title">Sri Lanka</h2>
+          <p class="hero-text" data-i18n="home.s6.text">Oceano tropicale, templi antichi, treni tra le piantagioni di tè e safari nella natura selvaggia.</p>
+          <a class="btn hero-cta" href="vlog.html?trip=SriLanka"><span data-i18n="home.cta">Guarda il viaggio</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
       </div>
 
-      <div class="slider-navigation">
-        <div class="nav-btn"> </div>
-        <div class="nav-btn"></div>
-        <div class="nav-btn"></div>
-        <div class="nav-btn"></div>
-        <div class="nav-btn"></div>
-        <div class="nav-btn"></div>
-
+      <div class="hero-controls">
+        <ol class="chapters" aria-label="Scegli il viaggio" data-i18n-attr="aria-label:home.chapters">
+          <li><button type="button" class="chapter" aria-current="true"><span class="chapter-num">01</span><span class="chapter-name" data-i18n="trip.usa">USA</span><span class="chapter-bar"><i></i></span></button></li>
+          <li><button type="button" class="chapter"><span class="chapter-num">02</span><span class="chapter-name" data-i18n="trip.thailand">Thailandia</span><span class="chapter-bar"><i></i></span></button></li>
+          <li><button type="button" class="chapter"><span class="chapter-num">03</span><span class="chapter-name" data-i18n="trip.bolivia">Bolivia &amp; Cile</span><span class="chapter-bar"><i></i></span></button></li>
+          <li><button type="button" class="chapter"><span class="chapter-num">04</span><span class="chapter-name" data-i18n="trip.china">Cina</span><span class="chapter-bar"><i></i></span></button></li>
+          <li><button type="button" class="chapter"><span class="chapter-num">05</span><span class="chapter-name" data-i18n="trip.scotland">Scozia</span><span class="chapter-bar"><i></i></span></button></li>
+          <li><button type="button" class="chapter"><span class="chapter-num">06</span><span class="chapter-name" data-i18n="trip.srilanka">Sri Lanka</span><span class="chapter-bar"><i></i></span></button></li>
+        </ol>
+        <button type="button" class="hero-toggle" aria-pressed="false" aria-label="Metti in pausa lo slideshow" data-i18n-attr="aria-label:home.pause">
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg>
+        </button>
       </div>
     </div>
 
-    <div class="media-icons">
-      <a href="https://www.instagram.com/lombi95?igsh=MWhieDhlaWRxdnV6Nw=="><i class="fab fa-instagram"></i></a>
-      <a href="https://www.strava.com/athletes/147032805"><i class="fab fa-strava"></i></a>
-      <a href="https://open.spotify.com/user/21egco6ecq3cce2bydnghjyby?si=fc1796875b4c4bc3"><i
-          class="fab fa-spotify"></i></a>
-
-    </div>
-  </section>
-
+    <ul class="socials" aria-label="Social" data-i18n-attr="aria-label:home.social">
+      <li><a href="https://www.instagram.com/lombi95" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+      <li><a href="https://www.strava.com/athletes/147032805" target="_blank" rel="noopener noreferrer" aria-label="Strava">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 15.5 10 3l6.5 12.5M13.5 15.5l3 5.5 3-5.5"/></svg></a></li>
+      <li><a href="https://open.spotify.com/user/21egco6ecq3cce2bydnghjyby" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 9.6c3.2-1 6.6-.7 9.4.9M8 12.7c2.7-.8 5.4-.5 7.7.8M8.6 15.6c2.1-.6 4.1-.4 5.9.6"/></svg></a></li>
+    </ul>
+  </main>
 </body>
 
 </html>

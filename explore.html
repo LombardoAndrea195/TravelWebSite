@@ -2,248 +2,218 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Blog | Explore</title>
-    <meta name="description"
-        content="Esplora le destinazioni del travel blog: USA, Thailandia, Bolivia e Cile, Cina, Scozia e Sri Lanka.">
-    <meta name="robots" content="index, follow">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta name="theme-color" content="#d97706">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="it_IT">
-    <meta property="og:title" content="Travel Blog | Explore">
-    <meta property="og:description"
-        content="Sfoglia i viaggi e apri i vlog per ogni destinazione con foto e contenuti ottimizzati.">
-    <meta property="og:image" content="assets/img/usa/IMG_1018.JPG">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Travel Blog | Explore">
-    <meta name="twitter:description"
-        content="Sfoglia i viaggi e apri i vlog per ogni destinazione con foto e contenuti ottimizzati.">
-    <meta name="twitter:image" content="assets/img/usa/IMG_1018.JPG">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.google.com/maps; img-src 'self' data: https:; media-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://api.web3forms.com https://unpkg.com; upgrade-insecure-requests">
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    <link rel="stylesheet" href="assets/css/styles_explore.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="title.explore">Esplora i viaggi | Travel</title>
+  <meta name="description"
+    content="Esplora le destinazioni del travel blog: USA, Thailandia, Bolivia e Cile, Cina, Scozia e Sri Lanka. Apri ogni diario di viaggio giorno per giorno.">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0b1a21">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; img-src 'self' data: https://*.tile.openstreetmap.org; media-src 'self'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Esplora i viaggi | Travel">
+  <meta property="og:description" content="Sei destinazioni, sei diari di viaggio con foto, video e mappe.">
+  <meta property="og:image" content="https://lombardoandrea195.github.io/TravelWebSite/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://lombardoandrea195.github.io/TravelWebSite/explore.html">
+  <meta property="og:url" content="https://lombardoandrea195.github.io/TravelWebSite/explore.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles_explore.css">
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/explore.js" defer></script>
 </head>
 
 <body>
-    <header class="header">
-        <a href="index.html" class="logo">Travel</a>
-        <div class="menu-btn" aria-label="Apri menu"></div>
-        <div class="navigation">
-            <div class="navigation-items">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </div>
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Travel — Andrea Lombardo, home"><span class="brand-mark">Tra<em>vel</em></span><span class="brand-sub" aria-hidden="true">41.90°N 12.50°E</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-i18n-attr="aria-label:nav.label">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="about.html" data-i18n="nav.about">Chi sono</a>
+      <a href="explore.html" aria-current="page" data-i18n="nav.explore">Esplora</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+      <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Lingua" data-i18n-attr="aria-label:lang.label">
+      <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano" title="Italiano" lang="it"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg></button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English" title="English" lang="en"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="flag-uk-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#flag-uk-t)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg></button>
+    </div>
+    <button type="button" class="menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Apri menu"><span></span></button>
+  </header>
+
+  <main id="main" class="page-main explore">
+    <header class="container explore-head">
+      <div>
+        <p class="kicker" data-i18n="explore.kicker">Sei viaggi, un diario</p>
+        <h1 class="display explore-title" id="explore-title" data-i18n-html="explore.title">I miei <em>viaggi</em></h1>
+      </div>
+      <p class="lede explore-quote" data-i18n="explore.quote">Viaggia per perderti, per ritrovarti, per lasciare qualcosa di te e riportare una parte che non conoscevi.</p>
     </header>
 
-    <main>
-        <section id="tranding">
-            <div class="container">
-                <h3 class="text-center section-subheading">- Viaggia per perderti, per ritrovarti, per lasciare qualcosa
-                    di te e riportare una parte che non conoscevi -</h3>
-                <h1 class="text-center section-heading">I miei viaggi</h1>
+    <div class="container explore-toolbar">
+      <div class="explore-chips" role="group" aria-label="Vai alla destinazione" data-i18n-attr="aria-label:explore.jump">
+        <button type="button" class="chip" data-target="0" aria-pressed="true" data-i18n="trip.usa">USA</button>
+        <button type="button" class="chip" data-target="1" aria-pressed="false" data-i18n="trip.thailand">Thailandia</button>
+        <button type="button" class="chip" data-target="2" aria-pressed="false" data-i18n="trip.bolivia">Bolivia &amp; Cile</button>
+        <button type="button" class="chip" data-target="3" aria-pressed="false" data-i18n="trip.china">Cina</button>
+        <button type="button" class="chip" data-target="4" aria-pressed="false" data-i18n="trip.scotland">Scozia</button>
+        <button type="button" class="chip" data-target="5" aria-pressed="false" data-i18n="trip.srilanka">Sri Lanka</button>
+      </div>
+      <div class="carousel-nav">
+        <p class="carousel-count" aria-hidden="true"><b data-count>01</b> / 06</p>
+        <button type="button" class="round-btn" data-dir="-1" aria-label="Viaggio precedente" data-i18n-attr="aria-label:explore.prev">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="round-btn" data-dir="1" aria-label="Viaggio successivo" data-i18n-attr="aria-label:explore.next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
 
-                <div class="explore-jump" aria-label="Vai a destinazione">
-                    <button class="jump-btn is-active" data-slide="0">USA</button>
-                    <button class="jump-btn" data-slide="1">Thailandia</button>
-                    <button class="jump-btn" data-slide="2">Bolivia & Cile</button>
-                    <button class="jump-btn" data-slide="3">Cina</button>
-                    <button class="jump-btn" data-slide="4">Scotland</button>
-                    <button class="jump-btn" data-slide="5">Sri Lanka</button>
-                </div>
-            </div>
+    <!-- Native scroll-snap carousel: no Swiper, works with touch, trackpad and keyboard. -->
+    <div class="carousel" data-carousel>
+      <ul class="carousel-track" tabindex="0" aria-labelledby="explore-title">
+          <li class="trip-card" id="trip-usa">
+            <a class="trip-link" href="vlog.html?trip=America">
+              <span class="media-frame trip-media">
+                <img src="assets/img/optimized/usa/IMG_1018-960.webp" srcset="assets/img/optimized/usa/IMG_1018-480.webp 480w, assets/img/optimized/usa/IMG_1018-960.webp 960w, assets/img/optimized/usa/IMG_1018-1600.webp 1600w"
+                  sizes="(max-width: 640px) 140vw, 640px" width="4032" height="3024" alt="Las Vegas di notte durante il road trip negli USA" loading="eager" fetchpriority="high" decoding="async">
+              </span>
+              <span class="trip-index">01</span>
+              <span class="trip-body">
+                <span class="trip-meta" data-i18n="explore.meta.usa">Ago 2022 · 12 giorni</span>
+                <h2 class="display trip-name" data-i18n="trip.usa">USA</h2>
+                <span class="trip-foot">
+                  <span class="stars" style="--rating: 4.5" role="img" aria-label="4.5 / 5"></span>
+                  <span class="trip-open"><span data-i18n="explore.open">Apri il diario</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </span>
+              </span>
+            </a>
+          </li>
+          <li class="trip-card" id="trip-thailand">
+            <a class="trip-link" href="vlog.html?trip=Thailandia">
+              <span class="media-frame trip-media">
+                <img src="assets/img/optimized/thailandia/PXL_20231230_104316392-960.webp" srcset="assets/img/optimized/thailandia/PXL_20231230_104316392-480.webp 480w, assets/img/optimized/thailandia/PXL_20231230_104316392-960.webp 960w, assets/img/optimized/thailandia/PXL_20231230_104316392-1600.webp 1600w"
+                  sizes="(max-width: 640px) 78vw, 360px" width="2268" height="4032" alt="Cuoco di street food tra le fiamme in Thailandia" loading="lazy" decoding="async" class="fade-in">
+              </span>
+              <span class="trip-index">02</span>
+              <span class="trip-body">
+                <span class="trip-meta" data-i18n="explore.meta.thailand">Dic 2023 · 15 giorni</span>
+                <h2 class="display trip-name" data-i18n="trip.thailand">Thailandia</h2>
+                <span class="trip-foot">
+                  <span class="stars" style="--rating: 4" role="img" aria-label="4 / 5"></span>
+                  <span class="trip-open"><span data-i18n="explore.open">Apri il diario</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </span>
+              </span>
+            </a>
+          </li>
+          <li class="trip-card" id="trip-bolivia">
+            <a class="trip-link" href="vlog.html?trip=Bolivia">
+              <span class="media-frame trip-media">
+                <img src="assets/img/optimized/cile/IMG-20230817-WA0078-960.webp" srcset="assets/img/optimized/cile/IMG-20230817-WA0078-480.webp 480w, assets/img/optimized/cile/IMG-20230817-WA0078-960.webp 960w, assets/img/optimized/cile/IMG-20230817-WA0078-1600.webp 1536w"
+                  sizes="(max-width: 640px) 78vw, 360px" width="1536" height="2048" alt="Fenicotteri in una laguna andina tra Bolivia e Cile" loading="lazy" decoding="async" class="fade-in">
+              </span>
+              <span class="trip-index">03</span>
+              <span class="trip-body">
+                <span class="trip-meta" data-i18n="explore.meta.bolivia">Ago 2023 · 12 giorni</span>
+                <h2 class="display trip-name" data-i18n="trip.bolivia">Bolivia &amp; Cile</h2>
+                <span class="trip-foot">
+                  <span class="stars" style="--rating: 5" role="img" aria-label="5 / 5"></span>
+                  <span class="trip-open"><span data-i18n="explore.open">Apri il diario</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </span>
+              </span>
+            </a>
+          </li>
+          <li class="trip-card" id="trip-china">
+            <a class="trip-link" href="vlog.html?trip=China">
+              <span class="media-frame trip-media">
+                <img src="assets/img/optimized/china/20240803_130024-5f3f-960.webp" srcset="assets/img/optimized/china/20240803_130024-5f3f-480.webp 480w, assets/img/optimized/china/20240803_130024-5f3f-960.webp 960w, assets/img/optimized/china/20240803_130024-5f3f-1600.webp 1134w"
+                  sizes="(max-width: 640px) 78vw, 360px" width="1134" height="2016" alt="La Grande Muraglia tra le montagne in Cina" loading="lazy" decoding="async" class="fade-in">
+              </span>
+              <span class="trip-index">04</span>
+              <span class="trip-body">
+                <span class="trip-meta" data-i18n="explore.meta.china">Ago 2024 · 15 giorni</span>
+                <h2 class="display trip-name" data-i18n="trip.china">Cina</h2>
+                <span class="trip-foot">
+                  <span class="stars" style="--rating: 5" role="img" aria-label="5 / 5"></span>
+                  <span class="trip-open"><span data-i18n="explore.open">Apri il diario</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </span>
+              </span>
+            </a>
+          </li>
+          <li class="trip-card" id="trip-scotland">
+            <a class="trip-link" href="vlog.html?trip=Scotland">
+              <span class="media-frame trip-media">
+                <img src="assets/img/optimized/scotland/20200731_093809-960.webp" srcset="assets/img/optimized/scotland/20200731_093809-480.webp 480w, assets/img/optimized/scotland/20200731_093809-960.webp 960w, assets/img/optimized/scotland/20200731_093809-1600.webp 1600w"
+                  sizes="(max-width: 640px) 215vw, 990px" width="4032" height="1960" alt="Montagne verdi delle Highlands scozzesi" loading="lazy" decoding="async" class="fade-in">
+              </span>
+              <span class="trip-index">05</span>
+              <span class="trip-body">
+                <span class="trip-meta" data-i18n="explore.meta.scotland">Lug 2020 · 9 giorni</span>
+                <h2 class="display trip-name" data-i18n="trip.scotland">Scozia</h2>
+                <span class="trip-foot">
+                  <span class="stars" style="--rating: 4.5" role="img" aria-label="4.5 / 5"></span>
+                  <span class="trip-open"><span data-i18n="explore.open">Apri il diario</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </span>
+              </span>
+            </a>
+          </li>
+          <li class="trip-card" id="trip-srilanka">
+            <a class="trip-link" href="vlog.html?trip=SriLanka">
+              <span class="media-frame trip-media">
+                <img src="assets/img/optimized/sri_lanka/PXL_20250825_014654984-MP-960.webp" srcset="assets/img/optimized/sri_lanka/PXL_20250825_014654984-MP-480.webp 480w, assets/img/optimized/sri_lanka/PXL_20250825_014654984-MP-960.webp 960w, assets/img/optimized/sri_lanka/PXL_20250825_014654984-MP-1600.webp 1600w"
+                  sizes="(max-width: 640px) 78vw, 360px" width="3072" height="4080" alt="Barche di pescatori colorate sulla costa dello Sri Lanka" loading="lazy" decoding="async" class="fade-in">
+              </span>
+              <span class="trip-index">06</span>
+              <span class="trip-body">
+                <span class="trip-meta" data-i18n="explore.meta.srilanka">Ago 2025 · 12 giorni</span>
+                <h2 class="display trip-name" data-i18n="trip.srilanka">Sri Lanka</h2>
+                <span class="trip-foot">
+                  <span class="stars" style="--rating: 4.8" role="img" aria-label="4.8 / 5"></span>
+                  <span class="trip-open"><span data-i18n="explore.open">Apri il diario</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </span>
+              </span>
+            </a>
+          </li>
+      </ul>
+    </div>
 
-            <div class="container">
-                <div class="swiper tranding-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide tranding-slide">
-                            <a class="tranding-slide-link" href="vlog.html?trip=America">
-                                <div class="tranding-slide-img">
-                                    <img src="assets/img/usa/IMG_1018.JPG" alt="Parco naturale negli USA" width="1200"
-                                        height="1600" loading="eager" decoding="async" fetchpriority="high">
-                                </div>
-                                <div class="tranding-slide-content">
-                                    <div class="tranding-slide-content-bottom">
-                                        <h2 class="destination-name">USA</h2>
-                                        <h3 class="destination-rating">
-                                            <span>4.5</span>
-                                            <span class="rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star-half"></ion-icon>
-                                            </span>
-                                        </h3>
-                                        <span class="slide-cta">Apri vlog <ion-icon
-                                                name="arrow-forward-outline"></ion-icon></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+    <p class="container explore-help" data-i18n="explore.help">Scorri, trascina o usa le frecce per navigare.</p>
+  </main>
 
-                        <div class="swiper-slide tranding-slide">
-                            <a class="tranding-slide-link" href="vlog.html?trip=Thailandia">
-                                <div class="tranding-slide-img">
-                                    <img src="assets/img/thailandia/PXL_20231230_104316392.jpg"
-                                        alt="Scorcio in Thailandia" width="1200" height="1600" loading="lazy"
-                                        decoding="async">
-                                </div>
-                                <div class="tranding-slide-content">
-                                    <div class="tranding-slide-content-bottom">
-                                        <h2 class="destination-name">Thailandia</h2>
-                                        <h3 class="destination-rating">
-                                            <span>4.0</span>
-                                            <span class="rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                            </span>
-                                        </h3>
-                                        <span class="slide-cta">Apri vlog <ion-icon
-                                                name="arrow-forward-outline"></ion-icon></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="swiper-slide tranding-slide">
-                            <a class="tranding-slide-link" href="vlog.html?trip=Bolivia">
-                                <div class="tranding-slide-img">
-                                    <img src="assets/img/cile/IMG-20230817-WA0078.jpg" alt="Panorama in Bolivia e Cile"
-                                        width="1200" height="1600" loading="lazy" decoding="async">
-                                </div>
-                                <div class="tranding-slide-content">
-                                    <div class="tranding-slide-content-bottom">
-                                        <h2 class="destination-name">Bolivia & Cile</h2>
-                                        <h3 class="destination-rating">
-                                            <span>5.0</span>
-                                            <span class="rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                            </span>
-                                        </h3>
-                                        <span class="slide-cta">Apri vlog <ion-icon
-                                                name="arrow-forward-outline"></ion-icon></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="swiper-slide tranding-slide">
-                            <a class="tranding-slide-link" href="vlog.html?trip=China">
-                                <div class="tranding-slide-img">
-                                    <img src="assets/img/china/20240803_130024-5f3f.jpg" alt="Vista urbana in Cina"
-                                        width="1200" height="1600" loading="lazy" decoding="async">
-                                </div>
-                                <div class="tranding-slide-content">
-                                    <div class="tranding-slide-content-bottom">
-                                        <h2 class="destination-name">Cina</h2>
-                                        <h3 class="destination-rating">
-                                            <span>5.0</span>
-                                            <span class="rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                            </span>
-                                        </h3>
-                                        <span class="slide-cta">Apri vlog <ion-icon
-                                                name="arrow-forward-outline"></ion-icon></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="swiper-slide tranding-slide">
-                            <a class="tranding-slide-link" href="vlog.html?trip=Scotland">
-                                <div class="tranding-slide-img">
-                                    <img src="assets/img/scotland/20200731_093809.jpg" alt="Paesaggio in Scozia"
-                                        width="1200" height="1600" loading="lazy" decoding="async">
-                                </div>
-                                <div class="tranding-slide-content">
-                                    <div class="tranding-slide-content-bottom">
-                                        <h2 class="destination-name">Scotland</h2>
-                                        <h3 class="destination-rating">
-                                            <span>4.5</span>
-                                            <span class="rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star-half"></ion-icon>
-                                            </span>
-                                        </h3>
-                                        <span class="slide-cta">Apri vlog <ion-icon
-                                                name="arrow-forward-outline"></ion-icon></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="swiper-slide tranding-slide">
-                            <a class="tranding-slide-link" href="vlog.html?trip=SriLanka">
-                                <div class="tranding-slide-img">
-                                    <img src="assets/img/sri_lanka/PXL_20250825_014654984.MP.jpg"
-                                        alt="Costa tropicale del viaggio in Sri Lanka" width="1200" height="1600"
-                                        loading="lazy" decoding="async">
-                                </div>
-                                <div class="tranding-slide-content">
-                                    <div class="tranding-slide-content-bottom">
-                                        <h2 class="destination-name">Sri Lanka</h2>
-                                        <h3 class="destination-rating">
-                                            <span>4.8</span>
-                                            <span class="rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star-half"></ion-icon>
-                                            </span>
-                                        </h3>
-                                        <span class="slide-cta">Apri vlog <ion-icon
-                                                name="arrow-forward-outline"></ion-icon></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="tranding-slider-control">
-                        <div class="swiper-button-prev slider-arrow">
-                            <ion-icon name="arrow-back-outline"></ion-icon>
-                        </div>
-                        <div class="swiper-button-next slider-arrow">
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-
-                <p class="text-center explore-help">Scorri con il dito, usa i pulsanti sopra o le frecce per navigare.
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-quote" data-i18n-html="footer.quote">Viaggiare è la più potente forma di <em>psicoterapia</em>.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="about.html" data-i18n="nav.about">Chi sono</a>
+        <a href="gallery.html" data-i18n="nav.gallery">Galleria</a>
+        <a href="contact.html" data-i18n="nav.contact">Contatti</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+        <a href="https://www.instagram.com/lombi95" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+      <div class="footer-bottom">
+        <p class="footer-copy" data-i18n="footer.copy">© Andrea Lombardo — foto e video originali dai miei viaggi.</p>
+        <div class="theme-picker" role="group" aria-label="Tema del sito" data-i18n-attr="aria-label:theme.label">
+          <span class="theme-picker-title" aria-hidden="true" data-i18n="theme.title">Tema</span>
+          <button type="button" class="theme-picker-btn" data-theme-id="mediterraneo" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.mediterraneo">Mediterraneo</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="rivista" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.rivista">Rivista</span></button>
+          <button type="button" class="theme-picker-btn" data-theme-id="foresta" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span><span data-i18n="theme.foresta">Foresta</span></button>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

@@ -1,0 +1,23 @@
+# GitHub Pages (Jekyll) build settings.
+# HTML files have no front matter, so Jekyll copies them as-is.
+# `exclude` keeps local-only files out of the published site:
+# originals (~520 MB) and local tooling are never served.
+exclude:
+  - mega_upload/
+  - scripts/
+  - README.md
+  - MEDIA_POLICY.md
+  - .vscode/
+  - assets/img/cile/
+  - assets/img/china/
+  - assets/img/scotland/
+  - assets/img/sri_lanka/
+  - assets/img/thailandia/
+  - assets/img/usa/
+  - assets/img/other/
+  - assets/video/1.mp4
+  - assets/video/2.mp4
+  - assets/video/3.mp4
+  - assets/video/4.mp4
+  - assets/video/5.mp4
+  - assets/video/6.mp4

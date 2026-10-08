@@ -1,0 +1,331 @@
+/* Home — full-bleed video hero with editorial "chapters" navigation. */
+
+.page-home {
+  background: var(--bg);
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--white);
+  background: #071319;
+}
+
+/* ---------- Media ---------- */
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 15, 20, 0.55) 0%, rgba(5, 15, 20, 0) 24%),
+    linear-gradient(0deg, rgba(5, 15, 20, 0.9) 0%, rgba(5, 15, 20, 0.42) 42%, rgba(5, 15, 20, 0) 72%),
+    linear-gradient(90deg, rgba(5, 15, 20, 0.5) 0%, rgba(5, 15, 20, 0) 62%);
+}
+
+/* Cross-fade (compositor-only) instead of animating clip-path on a full-screen layer. */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1100ms var(--ease-in-out);
+}
+
+.hero-video.is-active {
+  opacity: 1;
+}
+
+/* ---------- Copy ---------- */
+
+.hero-inner {
+  width: min(var(--maxw), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  padding: calc(var(--header-h) + 48px) 0 max(clamp(24px, 5vh, 48px), env(safe-area-inset-bottom));
+}
+
+.hero-kicker {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-slides {
+  display: grid;
+  margin-top: 20px;
+}
+
+/* All slides share one grid cell: the block keeps the height of the tallest
+   slide, so switching never shifts the layout. */
+.hero-slide {
+  grid-area: 1 / 1;
+  align-self: end;
+  max-width: 48rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 320ms ease, visibility 0s linear 320ms;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 320ms ease;
+}
+
+.hero-slide.is-active > * {
+  animation: hero-rise 760ms var(--ease-out) both;
+}
+
+.hero-slide.is-active > :nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.hero-slide.is-active > :nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.hero-title {
+  font-size: calc(clamp(3.4rem, 9.5vw, 8rem) * var(--display-scale));
+  text-transform: var(--hero-case);
+}
+
+.hero-title em {
+  color: var(--accent-on-dark);
+}
+
+.hero-text {
+  margin-top: 18px;
+  max-width: 44ch;
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.hero-cta {
+  margin-top: 28px;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* ---------- Chapters (slide navigation + progress) ---------- */
+
+.hero-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 24px);
+  margin-top: clamp(36px, 8vh, 80px);
+}
+
+.chapters {
+  flex: 1;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(8px, 1.4vw, 18px);
+}
+
+.chapter {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 10px;
+  padding: 0 0 4px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.58);
+  transition: color var(--dur-1) ease;
+}
+
+.chapter-bar {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  height: 2px;
+  margin-bottom: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.chapter-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent-on-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.chapter-num {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent-on-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chapter[aria-current="true"] {
+  color: var(--white);
+}
+
+.chapter[aria-current="true"] .chapter-bar i {
+  animation: chapter-progress var(--slide-duration, 7s) linear forwards;
+}
+
+.hero.is-paused .chapter[aria-current="true"] .chapter-bar i {
+  animation-play-state: paused;
+}
+
+/* Manual mode (reduced motion or user pressed pause twice): bar shown full. */
+.hero.is-static .chapter[aria-current="true"] .chapter-bar i {
+  animation: none;
+  transform: none;
+}
+
+@keyframes chapter-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-btn);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: var(--white);
+  transition: background-color var(--dur-1) ease, transform var(--dur-1) var(--ease-out);
+}
+
+.hero-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hero-toggle:active {
+  transform: scale(0.94);
+}
+
+.hero-toggle .icon-play,
+.hero-toggle[aria-pressed="true"] .icon-pause {
+  display: none;
+}
+
+.hero-toggle[aria-pressed="true"] .icon-play {
+  display: block;
+}
+
+/* ---------- Socials ---------- */
+
+.socials {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-btn);
+  color: var(--white);
+  opacity: 0.78;
+  transition: opacity var(--dur-1) ease, transform var(--dur-2) var(--ease-out), background-color var(--dur-1) ease;
+}
+
+.socials svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chapter:hover {
+    color: var(--white);
+  }
+
+  .hero-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .socials a:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(-2px);
+  }
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 760px) {
+  .hero-inner {
+    padding-top: calc(var(--header-h) + 24px);
+  }
+
+  .hero-title {
+    font-size: calc(clamp(3rem, 15vw, 4.4rem) * var(--display-scale));
+  }
+
+  .hero-text {
+    max-width: 34ch;
+  }
+
+  .chapter-name {
+    display: none;
+  }
+
+  .socials {
+    top: calc(var(--header-h) + 12px);
+    transform: none;
+    right: calc(var(--gutter) - 8px);
+    gap: 2px;
+  }
+
+  .socials a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .socials svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero-title {
+    font-size: calc(clamp(2.4rem, 7vw, 3.6rem) * var(--display-scale));
+  }
+
+  .hero-controls {
+    margin-top: 20px;
+  }
+}
