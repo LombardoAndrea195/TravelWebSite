@@ -148,8 +148,7 @@
       'privacy.p1': 'Questo sito raccoglie solo i dati che inserisci volontariamente nel modulo contatti (nome, email, messaggio) per rispondere alle tue richieste.',
       'privacy.p2': 'I dati vengono inviati tramite Web3Forms e non sono venduti né ceduti a terzi.',
       'privacy.p3': 'Per richiedere la modifica o la cancellazione dei tuoi dati, scrivimi dalla pagina <a href="contact.html">Contatti</a>.',
-      'privacy.p4': 'La mappa nella pagina Contatti e le mappe dei diari di viaggio vengono caricate da servizi esterni (Google Maps, OpenStreetMap) solo quando le visualizzi.',
-      'privacy.p5': 'Il sito usa Travelpayouts Drive, un servizio di affiliazione che può trasformare alcuni link di viaggio (voli, hotel, attività) in link affiliati: se prenoti tramite questi link posso ricevere una piccola commissione, senza costi aggiuntivi per te. Lo script di Travelpayouts viene caricato da un server esterno e può raccogliere dati tecnici di navigazione.'
+      'privacy.p4': 'La mappa nella pagina Contatti e le mappe dei diari di viaggio vengono caricate da servizi esterni (Google Maps, OpenStreetMap) solo quando le visualizzi.'
     },
     en: {
       'skip': 'Skip to content',
@@ -285,8 +284,7 @@
       'privacy.p1': 'This website only collects the data you voluntarily enter in the contact form (name, email, message) in order to reply to your requests.',
       'privacy.p2': 'The data is sent through Web3Forms and is never sold or shared with third parties.',
       'privacy.p3': 'To request changes to or deletion of your data, write to me from the <a href="contact.html">Contact</a> page.',
-      'privacy.p4': 'The map on the Contact page and the trip maps are loaded from external services (Google Maps, OpenStreetMap) only when you view them.',
-      'privacy.p5': 'This website uses Travelpayouts Drive, an affiliate service that may turn some travel links (flights, hotels, activities) into affiliate links: if you book through them I may earn a small commission at no extra cost to you. The Travelpayouts script is loaded from an external server and may collect technical browsing data.'
+      'privacy.p4': 'The map on the Contact page and the trip maps are loaded from external services (Google Maps, OpenStreetMap) only when you view them.'
     }
   };
 
